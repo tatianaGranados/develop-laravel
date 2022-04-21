@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\TipoRol;
+use App\Models\Enlace;
 
 class Acceso extends Model
 {
@@ -17,11 +20,11 @@ class Acceso extends Model
 
     protected $hidden = ['id'];
 
-    public function tipoRol() {
-    	return $this->belongsTo('App\Models\TipoRol', 'id_tipo_rol');
+    public function tipoRol():BelongsTo {
+    	return $this->belongsTo(TipoRol::class, 'id_tipo_rol');
     }
 
-    public function enlace() {
-    	return $this->belongsTo('App\Models\Enlace', 'id_enlace');
+    public function enlace():BelongsTo {
+    	return $this->belongsTo(Enlace::class, 'id_enlace');
     }
 }

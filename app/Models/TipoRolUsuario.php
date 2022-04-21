@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+use App\Models\User;
+use App\Models\TipoRol;
 
 class TipoRolUsuario extends Model
 {
@@ -21,11 +25,11 @@ class TipoRolUsuario extends Model
         'activo'
     ];
 
-    public function tipoRol() {
-    	return $this->belongsTo('App\Models\TipoRol', 'id_tipo_rol');
+    public function tipoRol(): BelongsTo {
+    	return $this->belongsTo(TipoRol::class, 'id_tipo_rol');
     }
 
-    public function user() {
-    	return $this->belongsTo('App\Models\User', 'id_usuario');
+    public function user(): BelongsTo {
+    	return $this->belongsTo(User::class, 'id_usuario');
     }
 }

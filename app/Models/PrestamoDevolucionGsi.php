@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\GastoSinImputacion;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PrestamoDevolucionGsi extends Model
 {
@@ -28,7 +30,7 @@ class PrestamoDevolucionGsi extends Model
         'ult_usuario'
     ];
 
-    public function gastoSinImputacion() {
-    	return $this->belongsTo('App\Models\GastoSinImputacion', 'id_gsi');
+    public function gastoSinImputacion():BelongsTo {
+    	return $this->belongsTo(GastoSinImputacion::class, 'id_gsi');
     }
 }

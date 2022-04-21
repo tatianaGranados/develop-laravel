@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\UserUnidad;
+
 
 class Unidad extends Model
 {
@@ -18,7 +21,7 @@ class Unidad extends Model
         'cod_unidad'
     ];
 
-    public function userUnidad() {
-        return $this->hasMany('App\Models\UserUnidad','id_unidad');
+    public function userUnidad():HasMany {
+        return $this->hasMany(UserUnidad::class,'id_unidad');
     }
 }

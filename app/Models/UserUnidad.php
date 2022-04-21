@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
+use App\Models\Unidad;
+
 
 class UserUnidad extends Model
 {
@@ -18,11 +22,11 @@ class UserUnidad extends Model
         'id_unidad'
     ];
 
-    public function user() {
-    	return $this->belongsTo('App\Models\User', 'id_usuario');
+    public function user():BelongsTo {
+    	return $this->belongsTo(User::class, 'id_usuario');
     }
 
-    public function unidad() {
-    	return $this->belongsTo('App\Models\Unidad', 'id_unidad');
+    public function unidad():BelongsTo {
+    	return $this->belongsTo(Unidad::class, 'id_unidad');
     }
 }

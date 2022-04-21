@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\PrestamoDevolucionGsi;
+use App\Models\Gestion;
 
 class GastoSinImputacion extends Model
 {
@@ -35,11 +39,11 @@ class GastoSinImputacion extends Model
         'ult_usuario'
     ];
 
-    public function prestamoDevolucionGsi() {
-        return $this->hasMany('App\Models\PrestamoDevolucionGsi','id_gsi');
+    public function prestamoDevolucionGsi():HasMany {
+        return $this->hasMany(PrestamoDevolucionGsi::class,'id_gsi');
     }
 
-    public function gestion() {
-    	return $this->belongsTo('App\Models\Gestion', 'id_gestion');
+    public function gestion():BelongsTo {
+    	return $this->belongsTo(Gestion::class, 'id_gestion');
     }
 }

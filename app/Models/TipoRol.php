@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Acceso;
+use App\Models\TipoRolUsuario;
 
 class TipoRol extends Model
 {
@@ -19,10 +21,10 @@ class TipoRol extends Model
     ];
 
     public function acceso() {
-        return $this->hasMany('App\Models\Acceso','id_tipo_rol');
+        return $this->hasMany(Acceso::class,'id_tipo_rol');
     }
 
     public function tipoRolUsuario() {
-        return $this->hasMany('App\Models\TipoRolUsuario','id_tipo_rol');
+        return $this->hasMany(TipoRolUsuario::class,'id_tipo_rol');
     }
 }

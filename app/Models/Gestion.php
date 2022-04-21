@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\GastoConImputacion;
+use App\Models\GastoSinImputacion;
+
 
 class Gestion extends Model
 {
@@ -15,11 +19,11 @@ class Gestion extends Model
         'activo'
     ];
 
-    public function gastoConImputacion() {
-        return $this->hasMany('App\Models\GastoConImputacion','id_gestion');
+    public function gastoConImputacion():HasMany {
+        return $this->hasMany(GastoConImputacion::class,'id_gestion');
     }
 
-    public function gastoSinImputacion() {
-        return $this->hasMany('App\Models\GastoSinImputacion','id_gestion');
+    public function gastoSinImputacion():HasMany {
+        return $this->hasMany(GastoSinImputacion::class,'id_gestion');
     }
 }
