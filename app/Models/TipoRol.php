@@ -12,8 +12,6 @@ class TipoRol extends Model
     use HasFactory;
 
     protected  $table = 'tipos_roles';
-
-    protected $hidden = ['id'];
     
     protected  $fillable = [
         'nombre_tipo_usuario',

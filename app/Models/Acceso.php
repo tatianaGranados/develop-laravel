@@ -11,14 +11,13 @@ use App\Models\Enlace;
 class Acceso extends Model
 {
     use HasFactory;
+    
     protected  $table = 'accesos';
 
     protected $fillable = [
         'id_tipo_usuario',
         'id_enlace'
     ];
-
-    protected $hidden = ['id'];
 
     public function tipoRol():BelongsTo {
     	return $this->belongsTo(TipoRol::class, 'id_tipo_rol');

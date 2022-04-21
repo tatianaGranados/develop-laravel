@@ -14,8 +14,6 @@ class UserUnidad extends Model
     use HasFactory;
 
     protected  $table = 'users_unidades';
-
-    protected $hidden = ['id'];
     
     protected  $fillable = [
         'id_usuario',

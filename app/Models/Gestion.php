@@ -12,6 +12,7 @@ use App\Models\GastoSinImputacion;
 class Gestion extends Model
 {
     use HasFactory;
+    
     protected  $table = 'gestiones';
 
     protected  $fillable = [

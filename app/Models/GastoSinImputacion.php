@@ -14,8 +14,6 @@ class GastoSinImputacion extends Model
     use HasFactory;
 
     protected  $table = 'gastos_sin_imputacion';
-    
-    protected $hidden = ['id'];
 
     protected $fillable = [
         'id_unidad',

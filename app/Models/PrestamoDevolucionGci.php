@@ -13,8 +13,6 @@ class PrestamoDevolucionGci extends Model
     use HasFactory;
 
     protected  $table = 'prestamos_devoluciones_gci';
-
-    protected $hidden = ['id'];
     
     protected  $fillable = [
         'id_gci',
