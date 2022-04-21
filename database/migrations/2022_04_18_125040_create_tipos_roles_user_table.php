@@ -12,6 +12,7 @@ class CreateTiposRolesUserTable extends Migration
             $table->increments('id');
             $table->integer('id_usuario')->unsigned();
             $table->integer('id_tipo_rol')->unsigned();
+            $table->enum('activo',['SI','NO'])->default('SI');
             $table->timestamps();
 
             $table->foreign('id_usuario')
