@@ -15,6 +15,8 @@ class Acceso extends Model
         'id_enlace'
     ];
 
+    protected $hidden = ['id'];
+
     public function tipoRol() {
     	return $this->belongsTo('App\Models\TipoRol', 'id_tipo_rol');
     }

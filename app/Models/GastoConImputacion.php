@@ -11,6 +11,8 @@ class GastoConImputacion extends Model
 
     protected  $table = 'gastos_con_imputacion';
 
+    protected $hidden = ['id'];
+
     protected $fillable = [
         'id_unidad',
         'id_gestion',

@@ -18,6 +18,8 @@ class Enlace extends Model
         'descripcion'
     ];
 
+    protected $hidden = ['id'];
+
     public function acceso() {
         return $this->hasMany('App\Models\Acceso','id_enlace');
     }
