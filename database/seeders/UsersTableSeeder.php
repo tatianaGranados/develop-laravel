@@ -1,53 +1,26 @@
 <?php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
-class usersTableSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
-    
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
         DB::table('users')->insert([
-            'nombres'       => 'Administrador',
-            'paterno'       => 'admin',
-            'materno'       => 'Admin',
-            'genero'        => 'M',
-            'username'      =>'admin',
-            'email'         => 'admin@gmail.com',
-            'password'      => bcrypt('admin')
+            'name' => 'Admin Admin',
+            'email' => 'admin@material.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('secret'),
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
-        DB::table('users')->insert([
-            'nombres'       => 'Marco',
-            'paterno'=> 'pinto',
-            'materno'       => '',
-            'genero'        => 'M',
-            'username'      =>'marco',
-			'email'         => 'marco@gmail.com',
-			'password'      => bcrypt('marco')
-        ]);
-
-        DB::table('users')->insert([
-            'nombres'        => 'Angel',
-            'paterno'        => 'gonzales',
-            'materno'        => '',
-            'genero'         => 'M',
-            'username'       =>'angel',
-            'email'          => 'angel@gmail.com',
-            'password'       => bcrypt('angel')
-        ]);
-        DB::table('users')->insert([
-            'nombres'        => 'Gregorio',
-            'paterno'        => 'bejarano',
-            'materno'        => '',
-            'genero'         => 'M',
-            'username'       =>'gregorio',
-            'email'          => 'gregorio@gmail.com',
-            'password'       => bcrypt('gregorio')
-            
-        ]);
-
     }
 }
