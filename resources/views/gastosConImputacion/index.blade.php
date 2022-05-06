@@ -20,8 +20,55 @@
 							</div>
 						</div>
 						{!! form::close() !!}
+
 				</div>
-                
+
+                <div class="card-body" > 
+                    <div class="table-responsive">
+                    <table class="table table-condensed table-bordered table-sm" id="gastosConImp">
+                            <thead>
+                                <tr>
+                                    <th>N° Compr 			</th>
+                                    <th>N° preven   	 	</th>
+                                    <th>Fecha Comp  		</th>
+                                    <th>Sello				</th>
+                                    <th>Hojas				</th>
+                                    <th>N° cheque			</th>
+                                    <th>Fecha Cheque		</th>
+                                    <th>Beneficiario		</th>
+                                    <th>Monto total cheque  </th>
+                                    <th>Detalle				</th>
+                                    <th>Total Autorizado	</th>
+                                    <th>Factura				</th>
+                                    <th>Total retención		</th>
+                                    <th>Total multas		</th>
+                                    <th>Liquido Pagable		</th>
+                                    <th>Pagado 				</th>
+                                    <th>Fecha pago 			</th>
+                                    <th>Unidad				</th>
+                                    <th>Observación			</th>
+                                    <th>Tomo				</th>
+                                    
+                                    <th>Editar detalle		</th>
+                                   
+                                   
+                                    <th>Editar Montos		</th>
+                                   
+                                   
+                                    <th>Editar tomo			</th>
+                                   
+                                    <th>Editar Total		</th>
+                                    
+                                    <th>Eliminar			</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                            </tbody>
+                    </table>
+                    </div>
+                </div>
+
 			</div>
 		</div>
 	</div>
