@@ -21,13 +21,14 @@ class CreateGastosConImputacionTable extends Migration
             $table->string('detalle');
             $table->string('nro_cheque')->nullable();
             $table->date('fecha_cheque')->nullable();
-            $table->decimal('monto_total_cheque')->default(0);
-            $table->enum('emite_factura',['SI','NO'])->default('SI');
-            $table->string('iue')->default(0);
-            $table->string('it')->default(0);
-            $table->string('total_retencion')->default(0);
-            $table->string('total_multas')->default(0);
-            $table->string('liquido_pagable')->default(0);
+            // $table->decimal('monto_total_cheque')->default(0);
+            $table->enum('emite_factura',['SI','NO'])->default('NO');
+            $table->decimal('iue')->default(0);
+            $table->decimal('it')->default(0);
+            $table->decimal('total_retencion')->default(0);
+            $table->decimal('total_multas')->default(0);
+            $table->decimal('liquido_pagable')->default(0);
+            $table->decimal('total_garantia')->default(0);
             $table->string('nro_hojas')->nullable();
             $table->string('nro_tomo')->nullable();
             $table->string('observacion_pago')->nullable();
@@ -35,7 +36,9 @@ class CreateGastosConImputacionTable extends Migration
             $table->enum('enviado_caja',['SI','NO'])->default('NO');
             $table->enum('cheque_listo',['SI','NO'])->default('NO');
             $table->enum('pagado',['SI','NO'])->default('NO');
+            $table->date('fecha_entrega_pago')->nullable();
             $table->enum('archivado',['SI','NO'])->default('NO');
+            $table->date('fecha_archivado')->nullable();
             $table->string('ult_usuario');
             $table->timestamps();
 

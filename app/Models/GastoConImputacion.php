@@ -27,13 +27,14 @@ class GastoConImputacion extends Model
         'detalle',
         'nro_cheque',
         'fecha_cheque',
-        'monto_total_cheque',
+        // 'monto_total_cheque',
         'emite_factura',
         'iue',
         'it',
         'total_retencion',
         'total_multas',
         'liquido_pagable',
+        'total_garantia',
         'nro_hojas',
         'nro_tomo',
         'observacion_pago',
@@ -41,7 +42,9 @@ class GastoConImputacion extends Model
         'enviado_caja',
         'cheque_listo',
         'pagado',
+        'fecha_entrega_pago',
         'archivado',
+        'fecha_archivado',
         'ult_usuario'
     ];
 

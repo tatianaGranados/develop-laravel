@@ -11,8 +11,8 @@ class CreateTiposRolesTable extends Migration
     {
         Schema::create('tipos_roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_tipo_usuario');
-            $table->string('desc_tipo_usuario');
+            $table->string('tipo_rol');
+            $table->string('desc_tipo_rol');
             $table->timestamps();
         });
     }
