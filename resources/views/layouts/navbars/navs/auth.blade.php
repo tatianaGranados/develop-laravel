@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top bg-info " style="background-blend-mode: multiply;
-background-image: url(https://www.umss.edu.bo/wp-content/uploads/2021/11/5650360.png),linear-gradient(154deg,#003770 90%,#e30613 90%)!important;">
+<nav class="navbar navbar-auth navbar-expand-lg navbar-transparent navbar-absolute fixed-top bg-info " style="">
   <div class="container-fluid">
       <img width="60" height="40" src="{{ asset('img') }}/logo_eupg.png">
       {{-- <a class="navbar-brand" href="#">{{ $titlePage }}</a> --}}
@@ -11,7 +10,8 @@ background-image: url(https://www.umss.edu.bo/wp-content/uploads/2021/11/5650360
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" style="color: white" data-toggle="dropdown" href="#0" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">dashboard</i>
+          <a class="nav-link dropdown-toggle" style="color: white" data-toggle="dropdown" href="#0" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons">dashboard</i>
             GASTOS CON IMPUTACION</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ route('gastosConImp.index') }}">GASTOS CON IMPUTACION</a>

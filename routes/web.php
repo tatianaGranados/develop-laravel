@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GastosConImpController;
 
 Route::get('/', function () {
@@ -26,5 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 
 	Route::resource('gastosConImp', 'App\Http\Controllers\GastosConImpController',['except' => ['create']]);
+
+	
 });
 

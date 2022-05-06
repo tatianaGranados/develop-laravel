@@ -1,0 +1,90 @@
+/* ini style page guest */
+/* welcome */
+.title-guest-nav{
+    padding-left: 10px;
+    color: white; 
+}
+
+.title-guest-nav:hover, .title-guest:focus {
+    color: #f9d730;
+    text-decoration: none;
+}
+
+.hr-guest{
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+.lineUp {
+    animation: 3s anim-lineUp ease-out;
+}
+@keyframes anim-lineUp {
+    0% {
+      opacity: 0;
+      transform: translateY(80%);
+    }
+    20% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+}
+
+/* fin  style page guest */
+
+
+
+/* ini style page Auth */
+/* nav */
+
+/* footer */
+.copyright{
+    background-color: #c70511;
+    color: white;
+    text-align: center;
+}
+
+
+
+.navbar-auth{
+    background-blend-mode: multiply;
+    background-image: url('/img/fondo_nav.png'),linear-gradient(173deg,#003770 90%,#e30613 90%)!important;
+}
+/* fin  style page Auth */
+
+
+
+
+
+
+/* general modifie style material */
+
+/* cards */
+.card-header-blue {
+    /* background: linear-gradient(60deg, #3f51b5, #051153) !important; */
+    background: linear-gradient(1deg, #003770, #030613) !important;
+}
+
+.form-control:invalid {
+    background-image: linear-gradient(to top, #2196f3 2px, rgba(244, 67, 54, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px) !important;
+}
+
+.form-control, .is-focused .form-control {
+    background-image: linear-gradient(to top, #00bcd4 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px) !important;
+}
+
+
+
+
+.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus, .dropdown-menu a:hover, .dropdown-menu a:focus, .dropdown-menu a:active {
+    box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(28 22 189 / 40%) !important;
+    background-color: #122798 !important;
+    color: #FFFFFF !important;
+}

@@ -1,11 +1,13 @@
 @extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Comprobantes')])
 
 @section('content')
-  <div class="content">
-    <div class="container-fluid">
-
+  <div class="card-body">
+    <div class=" iframe-container d-none d-lg-block">
+      <iframe>
+        <img src="{{ asset('img') }}/login.jpg">      
+      </iframe>
     </div>
-  </div>
+    </div>
 @endsection
 
 @push('js')
