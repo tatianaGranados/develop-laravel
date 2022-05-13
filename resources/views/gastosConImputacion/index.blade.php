@@ -1,9 +1,8 @@
 @extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Comprobantes')])
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-            	<div class="card-header card-header-info" style="background:linear-gradient(0deg, #2773b9, #003770)">
+   
+        <div class="card">
+            	<div class="card-header-blue  ">
 	                <h5 class="card-title text-center">COMPROBANTE GASTO CON IMPUTACIÓN</h5>
 	            </div>
 				
@@ -27,8 +26,8 @@
                     <div class="table-responsive">
                     <table class="table table-condensed table-bordered table-sm" id="gastosConImp">
                             <thead>
-                                <tr>
-                                    <th>N° Compr 			</th>
+                                <tr><strong>
+                                    <th><strong>N° Compr</strong> 			</th>
                                     <th>N° preven   	 	</th>
                                     <th>Fecha Comp  		</th>
                                     <th>Sello				</th>
@@ -61,7 +60,7 @@
                                     
                                     <th>Eliminar			</th>
                                    
-                                </tr>
+                                    <strong></tr>
                             </thead>
                             <tbody id="myTable">
                             </tbody>

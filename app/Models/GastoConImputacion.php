@@ -43,6 +43,7 @@ class GastoConImputacion extends Model
         'cheque_listo',
         'pagado',
         'fecha_entrega_pago',
+        'nro_agrupado_entrega',
         'archivado',
         'fecha_archivado',
         'ult_usuario'

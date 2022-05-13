@@ -11,14 +11,14 @@
 
       <!--     Fonts and icons     -->
       <link href="{{ asset('material') }}/icon/icon.css" rel="stylesheet" />
-      <link href="{{ asset('material') }}/css/font-awesome.min.css" rel="stylesheet" />
    
       <!-- CSS Files -->
       <link href="{{ asset('css') }}/style.css" rel="stylesheet" />
       <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
-   </head>
+      {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> --}}
+</head>
 
-   <body class="{{ $class ?? '' }}">
+<body class="{{ $class ?? '' }}">
       @auth()
          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
@@ -31,6 +31,9 @@
       @endguest
 
       <!--   Core JS Files   -->
+
+      <script src="{{ asset('js') }}/navbar.js"></script>
+      <script src="{{ asset('js') }}/jquery.min.js"></script>
       <script src="{{ asset('material') }}/js/core/jquery.min.js"></script>
       <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
       <script src="{{ asset('material') }}/js/core/bootstrap-material-design.min.js"></script>
@@ -59,8 +62,6 @@
       <script src="{{ asset('material') }}/js/plugins/jquery-jvectormap.js"></script>
       <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
       <script src="{{ asset('material') }}/js/plugins/nouislider.min.js"></script>
-      <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
       <!-- Library for adding dinamically elements -->
       <script src="{{ asset('material') }}/js/plugins/arrive.min.js"></script>
       <!--  Google Maps Plugin    -->
@@ -72,7 +73,7 @@
       <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
       <script src="{{ asset('material') }}/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
       <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-      <script src="{{ asset('material') }}/demo/demo.js"></script>
+      
       <script src="{{ asset('material') }}/js/settings.js"></script>
       @stack('js')
         
