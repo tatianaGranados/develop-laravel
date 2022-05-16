@@ -13,7 +13,7 @@ class TipoRolUsuario extends Model
 {
     use HasFactory;
 
-    protected  $table = 'tipos_roles_usuario';
+    protected  $table = 'tipos_roles_user';
 
     protected $hidden = ['id'];
 

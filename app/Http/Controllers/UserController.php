@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Models\TipoRol;
 use App\Models\User;
@@ -8,24 +10,64 @@ use App\Models\UserUnidad;
 use App\Models\TipoRolUsuario;
 use App\Models\Unidad;
 
-use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
     public function index(User $model)
     {
-        $users = User::select('users.nombres',
-                            'users.paterno',
-                            'users.materno',
-                            'users.username',
-                            'uni.nombre_unidad',
-                            'roles.tipo_rol')
-                        ->leftjoin('users_unidades as unid','users.id','=','unid.id_usuario')
-                        ->leftjoin('unidades as uni','uni.id','=','unid.id_unidad')
-                        ->leftjoin('tipos_roles_user as tipo','users.id','=','tipo.id_usuario')
-                        ->leftjoin('tipos_roles as roles','tipo.id_tipo_rol','=','roles.id')
-                        ->get();
-        return view('users.index',compact('users') ,['users' => $model->paginate(15)]);
+        $users    = DB::table('view_users_data')->orderBy('paterno','asc')->get();
+        $unidades = Unidad::all()->pluck('nombre_unidad','id');
+
+        return view('users.index',compact('users','unidades') ,['users' => $model->paginate(15)]);
+    }
+    
+    public function store(Request $request)
+    {
+        $user = new User($request->all());
+        $user ->password = bcrypt($request->password);
+        $user->save();
+
+        $user_unid = new UserUnidad($request->all());
+        $user_unid -> id_usuario = $user->id;
+        $user_unid -> id_unidad  = $request->unidad;
+        $user_unid -> save();
+
+        return redirect::route('user.index');
+    }
+
+   
+    public function show($id)
+    {
+        $user = User::find($id); 
+        $rol  = DB::table('view_users_data')->where('id_usuario', $id)->get();
+        return view('users.show',compact('user','rol'));
+    }
+
+    
+    public function edit($id)
+    {
+        //
+    }
+
+   
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    
+    public function destroy($id)
+    {
+        if(Auth::User()->id == $id){
+            return redirect()->back();
+        }else{
+            $user = User::find($id);
+            $user->delete();
+            return redirect()->back();
+        }
     }
 }
