@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header-blue">
-         	<h6 class="card-title text-center">LISTA USUARIOS DEL SISTEMA</h6>
+			<h4 class="card-title text-center">{{ __('LISTA USUARIOS DEL SISTEMA') }}</h4>
       	</div>
       	<div class="card-body">
 			<div class="text-center container">

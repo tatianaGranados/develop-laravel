@@ -25,7 +25,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="material-icons">account_circle</i></span>
                 </div>
-                {!! Form::text('username',null,['class'=>'form-control','placeholder' =>'* Nombre de Usuario...'])!!}
+                {!! Form::text('username',null,['class'=>'form-control','placeholder' =>'* Nombre de Usuario...','required'=>'required'])!!}
             </div>
         </div>
 

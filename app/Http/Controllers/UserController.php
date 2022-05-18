@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
-use App\Models\TipoRol;
 use App\Models\User;
 use App\Models\UserUnidad;
-use App\Models\TipoRolUsuario;
 use App\Models\Unidad;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use function PHPUnit\Framework\isNull;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(User $model)
     {
         $users    = DB::table('view_users_data')->orderBy('paterno','asc')->get();

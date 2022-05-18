@@ -33,6 +33,7 @@
                 </a>
                 <ul class="dropdown-default">
                   <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar sesion') }}</a></li>
+                  <li><a href="{{ route('profile.edit') }}">Cambiar Contraseña</a></li>
                 </ul>
               </li>
             </div>

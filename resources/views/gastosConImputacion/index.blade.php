@@ -3,7 +3,7 @@
    
         <div class="card">
             	<div class="card-header-blue  ">
-	                <h5 class="card-title text-center">COMPROBANTE GASTO CON IMPUTACIÓN</h5>
+                    <h4 class="card-title text-center">{{ __('COMPROBANTE GASTO CON IMPUTACIÓN') }}</h4>
 	            </div>
 				
 				<div class="card-body" > 
