@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
@@ -28,7 +30,7 @@ class UserController extends Controller
         return view('users.index',compact('users','unidades') ,['users' => $model->paginate(15)]);
     }
     
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $user = new User($request->all());
         $user ->password = bcrypt($request->password);

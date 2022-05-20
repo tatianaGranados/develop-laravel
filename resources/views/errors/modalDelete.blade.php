@@ -1,14 +1,16 @@
-<div id="delete{{$valor}}" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-dialog-centered">
+<div wire:ignore.self class="modal fade" id="delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				{!! Form::open(array('route' =>[$ruta,$valor],'method'=>'delete')) !!}
-				<p class="text-center"><i class="fas fa-exclamation-triangle" style="font-size:30px;color:red"></i> ¿ ESTA SEGURO QUE DESEA ELIMINAR AL USUARIO..?</p>
-				<label><small>{{ $nota }}</small></label>
-				{!! Form::button('<i class="fas fa-check"></i> Eliminar', array('type'=> 'submit','class'=>'btn btn-success btn-sm'))!!}
-				<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button> 
-				{!! Form::close() !!}
+				<form wire:submit.prevent="destroy">
+					<p><strong><span class="material-icons" style="color: red">dangerous</span>  ¿ ESTA SEGURO QUE DESEA ELIMINAR EL REGISTRO..?</strong></p>
+
+					<div class="card-footer justify-content-around">
+						<button type="submit" class="btn btn-info btn-social"><span class="material-icons">done</span> {{ __('ELIMINAR') }}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="material-icons">close</span> CANCELAR</button>
+					</div>
+				</form>
 			</div>
 		</div>
-	</div>
+    </div>
 </div>

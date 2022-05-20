@@ -26,7 +26,6 @@
               @endif
             </div>
             
-
             <div class="bmd-form-group{{ $errors->has('paterno') ? ' has-danger' : '' }} mt-3">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -46,6 +45,7 @@
                 </div>
               @endif
             </div>
+            
             <div class="bmd-form-group{{ $errors->has('username') ? ' has-danger' : '' }} mt-3">
               <div class="input-group">
                 <div class="input-group-prepend">

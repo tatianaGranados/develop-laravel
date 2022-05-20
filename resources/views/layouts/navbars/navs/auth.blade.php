@@ -4,7 +4,7 @@
             <li><a href=""><img width="50" height="30" src="{{ asset('img') }}/logo_eupg.png"></a></li>
             <li><a href="{{ route('gastosConImp.index') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
             <li><a href=""><i class="material-icons">grading</i> GASTOS SIN IMPUT(CIERRE)</a></li>
-            <li><a href=""><i class="material-icons">article</i> ADM. GESTIONES</a></li>
+            <li><a href="{{ route('gestiones') }}"><i class="material-icons">article</i> ADM. GESTIONES</a></li>
 
             <li><a href=""><i class="material-icons">widgets</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
               <ul class="dropdown-default">
@@ -32,8 +32,8 @@
                   <p class="d-lg-none d-md-block">{{ __('Cuenta') }}</p>
                 </a>
                 <ul class="dropdown-default">
-                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar sesion') }}</a></li>
                   <li><a href="{{ route('profile.edit') }}">Cambiar Contraseña</a></li>
+                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar sesion') }}</a></li>
                 </ul>
               </li>
             </div>

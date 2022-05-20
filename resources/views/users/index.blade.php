@@ -12,7 +12,9 @@
 				</button>	
 				@include('users.create')
 			</div>
-		
+
+			<button wire:click="crear()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3" >Nuevo</button>
+				@include('users.create')  
 			<br>
          	<div class="table-responsive">
             	<table class="table table-condensed table-bordered">

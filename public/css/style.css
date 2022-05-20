@@ -315,6 +315,7 @@
 .card-header-blue {
     /* background: linear-gradient(60deg, #3f51b5, #051153) !important; */
     background: linear-gradient(1deg, #003770, #030613) !important;
+    box-shadow: 0 0 10px #b0adad;
 }
 
 .form-control:invalid {

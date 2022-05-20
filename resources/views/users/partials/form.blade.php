@@ -1,7 +1,57 @@
 <form class="form" method="POST" action="{{ route('user.store') }}">
     @csrf
     <div class="card-body ">
-        <div class="bmd-form-group mt-3">
+
+        <div class="bmd-form-group{{ $errors->has('nombres') ? ' has-danger' : '' }}">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="material-icons">face</i></span>
+              </div>
+              <input type="text" name="nombres" class="form-control" placeholder="{{ __('Nombres...') }}" value="{{ old('nombres') }}">
+            </div>
+            @if ($errors->has('nombres'))
+              <div id="name-error" class="error text-danger pl-3" for="nombres" style="display: block;">
+                <strong>{{ $errors->first('nombres') }}</strong>
+              </div>
+            @endif
+          </div>
+          
+          <div class="bmd-form-group{{ $errors->has('paterno') ? ' has-danger' : '' }} mt-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="material-icons">face</i></span>
+              </div>
+              <input type="text" name="paterno" class="form-control" placeholder="{{ __('Paterno...') }}" value="{{ old('paterno') }}">
+              <input type="text" name="materno" class="form-control" placeholder="{{ __('Materno...') }}" value="{{ old('materno') }}">
+            </div>
+            @if ($errors->has('paterno'))
+              <div id="name-error" class="error text-danger pl-3" for="nombres" style="display: block;">
+                <strong>{{ $errors->first('paterno') }}</strong>
+              </div>
+            @endif
+            @if ($errors->has('paterno'))
+              <div id="name-error" class="error text-danger pl-3" for="nombres" style="display: block;">
+                <strong>{{ $errors->first('paterno') }}</strong>
+              </div>
+            @endif
+          </div>
+          
+          <div class="bmd-form-group{{ $errors->has('username') ? ' has-danger' : '' }} mt-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="material-icons">face</i></span>
+              </div>
+              <input type="text" name="username" class="form-control" placeholder="{{ __('Nombre de Usuario...') }}" value="{{ old('username') }}">
+            </div>
+            @if ($errors->has('username'))
+              <div id="name-error" class="error text-danger pl-3" for="username" style="display: block;">
+                <strong>{{ $errors->first('username') }}</strong>
+              </div>
+            @endif
+          </div>
+
+
+        {{-- <div class="bmd-form-group mt-3">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="material-icons">face</i></span>
@@ -86,7 +136,7 @@
                     <strong>{{ $errors->first('password_confirmation') }}</strong>
                 </div>
             @endif
-        </div>
+        </div> --}}
     </div>
     <div class="card-footer justify-content-center">
         <button type="submit" class="btn btn-info">{{ __('CREAR USUARIO') }}</button>
