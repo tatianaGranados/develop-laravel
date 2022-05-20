@@ -14,7 +14,7 @@
             </li>
             <li><a href=""><i class="material-icons">group</i> ADM. USUARIOS<span class="arrow-down"></span></a>
               <ul class="dropdown-default">
-                <li><a href="{{ route('user.index') }}">Usuarios</a></li>
+                <li><a href="{{ route('users') }}">Usuarios</a></li>
                 <li><a  href="#0">Permisos</a></li>
               </ul>
             </li>

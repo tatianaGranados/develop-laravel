@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// resource crud
 	Route::get('gestiones',[GestionController::class,'index'])->name('gestiones');
-	Route::resource('user', UserController::class);
+	Route::get('users',[ UserController::class,'index'])->name('users');
 
 });
 
