@@ -8,21 +8,15 @@
       <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
       <title>{{ __('Sistema comprobantes') }}</title>
       <link rel="icon" type="image/png" href="{{ asset('img') }}/eupg.ico">
-
-
       @livewireStyles
-      <!--     Fonts and icons     -->
+
       <link href="{{ asset('material') }}/icon/icon.css" rel="stylesheet" />
-   
-      <!-- CSS Files -->
       <link href="{{ asset('css') }}/style.css" rel="stylesheet" />
       <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+      <link href="{{ asset('css') }}/toastr.min.css" rel="stylesheet" />
+   </head>
 
-     
-      {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> --}}
-</head>
-
-<body class="{{ $class ?? '' }}">
+   <body class="{{ $class ?? '' }}">
       @auth()
          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
@@ -36,7 +30,6 @@
 
 
       <!--   Core JS Files   -->
-
       <script src="{{ asset('js') }}/navbar.js"></script>
       <script src="{{ asset('js') }}/jquery.min.js"></script>
       <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
@@ -52,15 +45,22 @@
       <script src="{{ asset('material') }}/js/plugins/bootstrap-datetimepicker.min.js"></script>
       <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
       <script src="{{ asset('material') }}/js/plugins/jquery.dataTables.min.js"></script>
-
       <!-- Library for adding dinamically elements -->
       <script src="{{ asset('material') }}/js/plugins/arrive.min.js"></script>
       <!--  Notifications Plugin    -->
       <script src="{{ asset('material') }}/js/plugins/bootstrap-notify.js"></script>
-      
-      @stack('js')
+      <script src="{{ asset('js') }}/toastr.min.js"></script>
 
+      @stack('js')
       @livewireScripts
+      <script>
+         window.addEventListener('alert', event => {
+            toastr.success(event.detail.message),
+            toastr.options= {
+               "closeButton": true
+            }
+         });
+      </script>
       @yield('script')
    </body>
 </html>

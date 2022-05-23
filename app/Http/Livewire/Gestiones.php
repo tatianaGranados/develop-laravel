@@ -22,9 +22,9 @@ class Gestiones extends Component
         $validatedData = $this->validate();
 
         Gestion::create($validatedData);
-        session()->flash('message','Getion Added Successfully');
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('alert',['message'=>'gestion creada con exito ...!!!']);
     }
 
     public function edit($id)
@@ -40,17 +40,16 @@ class Gestiones extends Component
 
         Gestion::where('id',$this->id_gestion)
                 ->update(['gestion'=> $validatedData['gestion']]);
-
-        session()->flash('message','Gestión Updated Successfully');
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('alert',['message'=>'gestion actualizada con exito ...!!!']);
     }
 
     public function destroy()
     {
         Gestion::find($this->id_gestion)->delete();
-        session()->flash('message','Gestión Delete Successfully');
         $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('alert',['message'=>'gestion Eliminada con exito ...!!!']);
     }
 
     public function resetInput()

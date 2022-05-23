@@ -4,8 +4,8 @@
     </div>
     @include('gestiones.create')
   
-    @if (session()->has('message'))
-      	<div class="alert alert-success text-center">{{ session('message') }}</div>
+    @if(session()->has('message'))
+      	{{ session('message') }}
     @endif
 
     <div class="table-responsive">

@@ -18,5 +18,6 @@
         $('#delete').modal('hide');
     })
 </script>
+
 @endsection
 
