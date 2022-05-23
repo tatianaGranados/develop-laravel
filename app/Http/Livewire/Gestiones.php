@@ -35,7 +35,7 @@ class Gestiones extends Component
     {
         $gestion = Gestion::findOrFail($id);
         $this->id_gestion = $gestion->id;
-        $this->gestion = $gestion->gestion;
+        $this->gestion    = $gestion->gestion;
     }
 
     public function update()

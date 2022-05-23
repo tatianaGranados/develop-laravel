@@ -4,10 +4,6 @@
     </div>
     @include('gestiones.create')
   
-    @if(session()->has('message'))
-      	{{ session('message') }}
-    @endif
-
     <div class="table-responsive">
 		<table class="table table-condensed table-bordered">
 			<thead class="text-center">
@@ -21,7 +17,7 @@
 			<tbody>
 				@foreach($gestiones as $gestion)
 					<tr class="text-center">
-						<td >{{$loop->iteration}}</td>
+						<td>{{$loop->iteration}} </td>
 						<td>{{$gestion->id}}     </td>
 						<td>{{$gestion->gestion}}</td>
 						<td class="td-actions text-center">
