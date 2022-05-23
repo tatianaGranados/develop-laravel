@@ -28,7 +28,6 @@
          @include('layouts.page_templates.guest')
       @endguest
 
-
       <!--   Core JS Files   -->
       <script src="{{ asset('js') }}/navbar.js"></script>
       <script src="{{ asset('js') }}/jquery.min.js"></script>

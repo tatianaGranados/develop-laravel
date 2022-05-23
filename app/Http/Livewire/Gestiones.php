@@ -12,9 +12,13 @@ class Gestiones extends Component
 
     protected function rules()
     {
-        return [
-            'gestion' => 'required|numeric|min:2000|max:2100|unique:gestiones',
-        ];
+        return ['gestion' => 'required|numeric|min:2000|max:2100|unique:gestiones'];
+    }
+
+    public function render()
+    {
+        $this->gestiones = Gestion::all();
+        return view('gestiones.list');
     }
 
     public function store()
@@ -38,8 +42,7 @@ class Gestiones extends Component
     {
         $validatedData = $this->validate();
 
-        Gestion::where('id',$this->id_gestion)
-                ->update(['gestion'=> $validatedData['gestion']]);
+        Gestion::where('id',$this->id_gestion)->update(['gestion'=> $validatedData['gestion']]);
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
         $this->dispatchBrowserEvent('alert',['message'=>'gestion actualizada con exito ...!!!']);
@@ -52,14 +55,13 @@ class Gestiones extends Component
         $this->dispatchBrowserEvent('alert',['message'=>'gestion Eliminada con exito ...!!!']);
     }
 
+    public function closeModal()
+    {
+        $this->resetInput();
+    }
+
     public function resetInput()
     {
         $this->gestion= '';
-    }
-
-    public function render()
-    {
-        $this->gestiones = Gestion::all();
-        return view('gestiones.list');
     }
 }

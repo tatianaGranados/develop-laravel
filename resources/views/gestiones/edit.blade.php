@@ -21,7 +21,7 @@
 
 					<div class="card-footer justify-content-center">
 						<button type="submit" class="btn btn-info">{{ __('MODIFICAR GESTION') }}</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeModal">Cerrar</button>
 					</div>
 				</form>
 			</div>
