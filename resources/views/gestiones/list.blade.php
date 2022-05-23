@@ -26,16 +26,16 @@
 						<td>{{$gestion->gestion}}</td>
 						<td class="td-actions text-center">
 							<button wire:click="edit({{$gestion->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
-							@include('gestiones.edit')
-			
 							<button wire:click="edit({{$gestion->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
-							@include('errors.modalDelete')
+							
 						</td>
 					</tr>
 				@endforeach
 			</tbody>
 		</table>
     </div>
+	@include('gestiones.edit')
+	@include('errors.modalDelete')
 </div>    
   
   
