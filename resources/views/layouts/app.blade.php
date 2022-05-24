@@ -59,6 +59,13 @@
                "closeButton": true
             }
          });
+
+         window.addEventListener('error', event => {
+            toastr.error(event.detail.message),
+            toastr.options= {
+               "closeButton": true
+            }
+         });
       </script>
       @yield('script')
    </body>

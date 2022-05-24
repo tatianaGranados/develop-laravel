@@ -15,7 +15,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($gestiones as $gestion)
+				@forelse($gestiones as $gestion)
 					<tr class="text-center">
 						<td>{{$loop->iteration}} </td>
 						<td>{{$gestion->id}}     </td>
@@ -25,12 +25,16 @@
 							<button wire:click="edit({{$gestion->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
 						</td>
 					</tr>
-				@endforeach
+				@empty
+					<tr>
+						<td colspan="4" class="text-center">No existe registro de gestiones</td>
+					</tr>
+				@endforelse
 			</tbody>
 		</table>
     </div>
 	@include('gestiones.edit')
-	@include('errors.modalDelete',['nota'=>'GESTIÓN: '.$gestion->gestion])
+	@include('errors.modalDelete',['nota'=>'GESTIÓN: '.$this->gestion])
 </div>    
   
   

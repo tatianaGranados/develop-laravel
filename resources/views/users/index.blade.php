@@ -13,9 +13,10 @@
 @section('script')
 <script>
     window.addEventListener('close-modal', event => {
+        $('#showUser').modal('hide');
         $('#createUser').modal('hide');
         $('#editUser').modal('hide');
-        $('#deleteUser').modal('hide');
+        $('#delete').modal('hide');
     })
 </script>
 @endsection
