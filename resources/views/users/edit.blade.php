@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       	<div class="modal-content">
 			<div class="modal-header card-header-blue text-center">
-				<h5 class="modal-title" id="exampleModalCenterTitle">EDITAR GESTIÓN</h5>
+				<h5 class="modal-title" id="exampleModalCenterTitle">EDITAR USUARIO</h5>
 				<button type="button" class="close btn-simple" data-dismiss="modal" aria-label="Close" wire:click="closeModal">
 					<span class="material-icons btn-danger">close</span>
 				</button>

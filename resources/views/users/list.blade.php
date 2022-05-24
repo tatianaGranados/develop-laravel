@@ -13,7 +13,7 @@
 </div>
 <br>
 <div class="table-responsive">
-    <table class="table table-condensed table-bordered">
+    <table class="table table-condensed table-bordered table table-striped">
         <thead class="text-center">
             <tr class="table-info">
                 <th><strong>N°       </strong></th>

@@ -27,13 +27,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 
 	// Gastos con Imputacion crud
-	Route::resource('gastosConImp', GastosConImpController::class);
-
-	// Gastos sin Imputacion crud
-
 	// resource crud
 	Route::get('gestiones',[GestionController::class,'index'])->name('gestiones');
 	Route::get('users',[ UserController::class,'index'])->name('users');
+
+	Route::get('gastosConImp',[ GastosConImpController::class,'index'])->name('gastosConImp');
 
 });
 

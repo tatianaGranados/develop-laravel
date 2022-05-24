@@ -5,7 +5,7 @@
     @include('gestiones.create')
   
     <div class="table-responsive">
-		<table class="table table-condensed table-bordered">
+		<table class="table table-condensed table-bordered table-striped">
 			<thead class="text-center">
 				<tr class="table-info">
 					<th><strong>N°      </strong></th>

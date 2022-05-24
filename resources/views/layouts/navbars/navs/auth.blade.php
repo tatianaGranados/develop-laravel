@@ -2,7 +2,7 @@
     <div class="nav-fostrap" >
         <ul>
             <li><a href=""><img width="50" height="30" src="{{ asset('img') }}/logo_eupg.png"></a></li>
-            <li><a href="{{ route('gastosConImp.index') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
+            <li><a href="{{ route('gastosConImp') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
             <li><a href=""><i class="material-icons">grading</i> GASTOS SIN IMPUT(CIERRE)</a></li>
             <li><a href="{{ route('gestiones') }}"><i class="material-icons">article</i> ADM. GESTIONES</a></li>
 
