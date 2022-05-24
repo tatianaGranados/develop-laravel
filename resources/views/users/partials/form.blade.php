@@ -81,8 +81,3 @@
 @error('password_confirmation')
     <span class="text-danger">{{$message}}</span>
 @enderror
-
-<div class="card-footer justify-content-center">
-	<button type="submit" class="btn btn-info">{{ __('CREAR GESTION') }}</button>
-	<button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeModal">Cerrar</button>
-</div>

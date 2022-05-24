@@ -14,6 +14,10 @@
                
                     <form wire:submit.prevent="store">
                         @include('users.partials.form')
+						<div class="card-footer justify-content-center">
+							<button type="submit" class="btn btn-info">{{ __('CREAR USUARIO') }}</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeModal">Cerrar</button>
+						</div>
                     </form>
                 </div>
 			</div>
