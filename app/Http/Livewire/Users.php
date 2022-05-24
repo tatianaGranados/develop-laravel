@@ -9,11 +9,17 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Users extends Component
 {
-    public $users, $id_user, $user, $nombres, $materno, $paterno, $username, $genero,$email,$password, $password_confirmation;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    public $id_user, $user, $nombres, $materno, $paterno, $username, $genero,$email,$password, $password_confirmation;
     public $id_unidad,$unidad, $unidades, $tipo_rol;
+
+    public $search = '';
 
     protected function rules()
     {
@@ -30,9 +36,11 @@ class Users extends Component
 
     public function render()
     {
-        $this->users= DB::table('view_users_data')->orderBy('paterno','asc')->get();
+        // $users= DB::table('view_users_data')->orderBy('paterno','asc')->get();
+        $users= DB::table('view_users_data')->where('nombres', 'like', '%'.$this->search.'%')->orderBy('paterno','asc')->paginate(30);
         $this->unidades = Unidad::all()->pluck('nombre_unidad','id');
-        return view('users.list');
+
+        return view('users.list', ['users' => $users]);
     }
 
     public function store()

@@ -6,6 +6,11 @@
     </div>
 @include('users.create')
 
+
+<div class="input-group">
+    <input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
+    <span class="material-icons input-group-btn">search</span>
+</div>
 <br>
 <div class="table-responsive">
     <table class="table table-condensed table-bordered">
@@ -39,6 +44,7 @@
         </tbody>
     </table>
  </div>
+ {{$users->links()}}
  @include('users.show') 
  @include('users.edit')
  @include('errors.modalDelete',['nota'=>'USUARIO: '.$this->paterno.' '.$this->materno.' '.$this->nombres]) 
