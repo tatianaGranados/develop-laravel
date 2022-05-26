@@ -8,85 +8,68 @@ use App\Models\Unidad;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class GastosConImp extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $gestiones,$id_gestion;
+    public $gestiones;
+    public $id_gestion=1;
     public $gastos;
-    public $ult_comp;
 
     public $search = '';
 
     public $id_unidad, $unidad, $unidades; 
-    public $nro_comprobante, $fecha_comprobante, $nro_preventivo, $sello, $beneficiario, $detalle;
-    public $emite_factura = 'NO';
-    public $enviado_caja = 'NO';
-    public $nro_cheque, $fecha_cheque = null;
-    public $total_autorizado ;
-    public $iue;
-    public $it ;
-    public $total_retencion;
-    public $total_multas;
-    public $liquido_pagable;
-    public $total_garantia ;
-    public $nro_hojas, $nro_tomo, $observacion_pago, $observacion_archivado, $cheque_listo, $pagado, $archivado, $fecha_entrega_pago;
+    public $nro_comprobante, $fecha_comprobante, $nro_preventivo, $sello, $beneficiario, $detalle, $nro_cheque, $fecha_cheque;
+    public $emite_factura, $total_autorizado, $iue, $it, $total_retencion, $total_multas, $liquido_pagable, $total_garantia;
+    public $nro_hojas, $nro_tomo, $observacion_pago, $observacion_archivado, $enviado_caja, $cheque_listo, $pagado, $archivado, $fecha_entrega_pago;
     public $nro_agrupado_entrega, $fecha_archivado, $ult_usuario;
+
 
     protected function rules()
     {
-        return ['nro_comprobante' => 'required|max:9000',
-                'nro_preventivo' =>'required|max:8000|integer',
-                'fecha_comprobante' =>'date|required',
-                'sello'=>'required|max:15|regex:/[1-9]/',
-                'nro_hojas'=>'integer|max:500|required',
-                'id_unidad' => 'required',
-                'beneficiario' => 'required|string|max:2000',
-                'detalle' => 'required|string',
-                'nro_cheque' =>[$this->enviado_caja == 'NO' ? 'nullable' : 'required','integer'],
-                'fecha_cheque' =>[$this->enviado_caja == 'NO' ? 'nullable' : 'required','date']
+        return ['nro_comprobante' => 'required',
+                
             ];
     }
 
-    public function mount(){      
-
-        $ult_gestion= $this->id_gestion = Gestion::get()->last()->id;
-        $this->gastos = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $ult_gestion)->get();
-        $compUltimo = GastoConImputacion::where('id_gestion',$this->id_gestion)->orderby('nro_comprobante', 'desc')->get();
-       
-        if($compUltimo->isEmpty()){
-            $this->nro_comprobante =1;
-        }else{
-            $compUltimo= $compUltimo->first()->nro_comprobante;
-            $this->nro_comprobante = 1 + (int)$compUltimo;
-        }
+    public function mount()
+    {                
+        // $this->id_gestion = Gestion::get()->last()->id;
+        $this->gestiones = Gestion::orderby('created_at','desc')->get();
+        $this->database( $this->id_gestion);
+        $this->unidades = Unidad::all()->pluck('nombre_unidad','id');
     }
 
     public function render()
     {
-        $this->gastos = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $this->id_gestion)->get();
-        $this->gestiones  = Gestion::orderby('gestion','desc')->get();
-        $this->unidades = Unidad::all()->pluck('nombre_unidad','id');
-
-        return view('gastosConImputacion.list', compact($this->gastos));
+        return view('gastosConImputacion.list');
     }
 
-    public function changeEvent($id){
-        $this->id_gestion =$id;
-        $this->gastos = DB::table('view_gastos_con_imputacion')->where ('id_gestion', $id)->get();
-        $compUltimo = GastoConImputacion::where('id_gestion',$this->id_gestion)->orderby('nro_comprobante', 'desc')->get();
+    public function database($id)
+    {
+        $this->gastos = GastoConImputacion::where ('id_gestion', $id)
+            ->join('unidades','unidades.id','=','id_unidad')->get();
+
+        $compUltimo = GastoConImputacion::where('id_gestion',$id)->get();
         if($compUltimo->isEmpty()){
             $this->nro_comprobante =1;
         }else{
-            $compUltimo= $compUltimo->first()->nro_comprobante;
+            $compUltimo= $compUltimo->last()->nro_comprobante;
             $this->nro_comprobante = 1 + (int)$compUltimo;
-        }
+        } 
+    }
+
+    public function changeEvent()
+    {
+        $this->gastos = GastoConImputacion::where ('id_gestion', $this->id_gestion)
+            ->join('unidades','unidades.id','=','id_unidad')->get();
+        
     }
 
     public function store(){
+
         $this->validate();
         $compGasto= new GastoConImputacion([
             'id_gestion' => $this->id_gestion,
@@ -112,7 +95,6 @@ class GastosConImp extends Component
         ]);
 
         $compGasto->save();
-
         $this->changeEvent($this->id_gestion);
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
@@ -121,7 +103,9 @@ class GastosConImp extends Component
 
     public function resetInput()
     {
+        // $this->id_gestion            ='';
         $this->id_unidad             ='';
+        // $this->nro_comprobante       ='';
         $this->fecha_comprobante     ='';
         $this->nro_preventivo        ='';
         $this->sello                 ='';
@@ -154,6 +138,5 @@ class GastosConImp extends Component
     public function closeModal()
     {
         $this->resetInput();
-        $this->changeEvent($this->id_gestion);
     }
 }

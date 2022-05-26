@@ -22,13 +22,14 @@ class CreateGastosConImputacionTable extends Migration
             $table->string('nro_cheque')->nullable();
             $table->date('fecha_cheque')->nullable();
             // $table->decimal('monto_total_cheque')->default(0);
+            $table->double('total_autorizado',13,2)->default(0);
             $table->enum('emite_factura',['SI','NO'])->default('NO');
             $table->decimal('iue')->default(0);
             $table->decimal('it')->default(0);
             $table->decimal('total_retencion')->default(0);
             $table->decimal('total_multas')->default(0);
-            $table->decimal('liquido_pagable')->default(0);
-            $table->decimal('total_garantia')->default(0);
+            $table->double('liquido_pagable',12,2)->default(0);
+            $table->double('total_garantia',12,2)->default(0);
             $table->string('nro_hojas')->nullable();
             $table->string('nro_tomo')->nullable();
             $table->string('observacion_pago')->nullable();
