@@ -12,7 +12,7 @@
                 <div class="container">
                     <table class="table table-bordered">
                         <tr class="table-small">
-                            <td><i class="material-icons" style="font-size: 15px; padding: 8px 8px">description</i><strong> Nro comprobante:</strong></td>
+                            <td><i class="material-icons" style="font-size: 15px;">description</i><strong> Nro comprobante:</strong></td>
                             <td>{{$this->nro_comprobante}}</td>
                         </tr>
                         <tr class="table-small">

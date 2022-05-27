@@ -25,7 +25,7 @@
 	</div> --}}
 	<br>
 	<div class="table-responsive">
-		<table class="table table-condensed table-bordered table table-striped">
+		<table class="table table-condensed table-bordered table-striped">
 			<thead class="text-center" style="font-size: 13px;">
 				<tr class="table-info" style="font-size: 13px;">
 					<th style="font-size: 13px;"><strong>N° Compr 		</strong></th>
@@ -42,7 +42,7 @@
 					<th style="font-size: 13px;"><strong>Total Multas 	</strong></th>
 					<th style="font-size: 13px;"><strong>Total Garantia </strong></th>
 					<th style="font-size: 13px;"><strong>Factura		</strong></th>
-					<th style="font-size: 13px;"><strong>Acciones		</strong></th>
+					<th style="font-size: 13px; width: 100px;"><strong>Acciones		</strong></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -65,8 +65,8 @@
 
 						<td class="td-actions text-center">
 							<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#show"><span class="material-icons">insert_drive_file</span></button>
-							{{-- <button wire:click="edit({{$gasto->id_usuario}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editUser"><span class="material-icons">create</span></button>
-							<button wire:click="edit({{$gasto->id_usuario}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button> --}}
+							<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
+							{{-- <button wire:click="edit({{$gasto->id_usuario}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button> --}}
 						</td>
 					</tr>
 				@empty
@@ -78,7 +78,7 @@
 		</table>
 	</div>
  {{-- {{$users->links()}} --}}
- @include('gastosConImputacion..show') 
- {{-- @include('users.edit')
- @include('errors.modalDelete',['nota'=>'USUARIO: '.$this->paterno.' '.$this->materno.' '.$this->nombres])  --}}
+ @include('gastosConImputacion.show') 
+ @include('gastosConImputacion.edit') 
+ {{-- @include('errors.modalDelete',['nota'=>'USUARIO: '.$this->paterno.' '.$this->materno.' '.$this->nombres])  --}}
 </div>

@@ -173,6 +173,43 @@ class GastosConImp extends Component
         $this->unidad                = $gci->nombre_unidad;
     }
 
+    public function edit($id){
+        $gci =  DB::table('view_gastos_con_imputacion')->where('id', $id)->first();
+        $this->nro_comprobante = $gci->nro_comprobante;
+        $this->nro_preventivo        = $gci->nro_preventivo;
+        $this->fecha_comprobante     = $gci->fecha_comprobante;
+        $this->sello                 = $gci->sello;
+        $this->beneficiario          = $gci->beneficiario;
+        $this->detalle               = $gci->detalle;
+        $this->nro_cheque            = $gci->nro_cheque;
+        $this->fecha_cheque          = $gci->fecha_cheque;
+        $this->total_autorizado      = $gci->total_autorizado;
+        $this->iue                   = $gci->iue;
+        $this->it                    = $gci->it;
+        $this->total_retencion       = $gci->total_retencion;
+        $this->total_multas          = $gci->total_multas;
+        $this->liquido_pagable       = $gci->liquido_pagable;
+        $this->total_garantia        = $gci->total_garantia;
+        $this->nro_hojas             = $gci->nro_hojas;
+        $this->nro_tomo              = $gci->nro_tomo;
+        $this->observacion_pago      = $gci->observacion_pago;
+        $this->observacion_archivado = $gci->observacion_archivado;
+        $this->enviado_caja          = $gci->enviado_caja;
+        $this->cheque_listo          = $gci->cheque_listo;
+        $this->pagado                = $gci->pagado;
+        $this->archivado             = $gci->archivado;
+        $this->fecha_entrega_pago    = $gci->fecha_entrega_pago;
+        $this->nro_agrupado_entrega  = $gci->nro_agrupado_entrega;
+        $this->fecha_archivado       = $gci->fecha_archivado;
+        $this->unidad                = $gci->nombre_unidad;
+        $this->emite_factura         = $gci->emite_factura;
+        $this->id_unidad             = $gci->id_unidad;
+    }
+
+    public function updateTesoreria(){
+
+    }
+
     public function resetInput()
     {
         $this->id_unidad             ='';
