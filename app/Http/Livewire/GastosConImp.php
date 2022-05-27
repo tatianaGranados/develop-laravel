@@ -26,13 +26,13 @@ class GastosConImp extends Component
     public $emite_factura = 'NO';
     public $enviado_caja = 'NO';
     public $nro_cheque, $fecha_cheque = null;
-    public $total_autorizado ;
-    public $iue;
-    public $it ;
-    public $total_retencion;
-    public $total_multas;
-    public $liquido_pagable;
-    public $total_garantia ;
+    public $total_autorizado=0 ;
+    public  $iue=0;
+    public $it=0;
+    public $total_retencion=0;
+    public $total_multas=0;
+    public $liquido_pagable=0;
+    public $total_garantia=0 ;
     public $nro_hojas, $nro_tomo, $observacion_pago, $observacion_archivado, $cheque_listo, $pagado, $archivado, $fecha_entrega_pago;
     public $nro_agrupado_entrega, $fecha_archivado, $ult_usuario;
 
@@ -47,7 +47,14 @@ class GastosConImp extends Component
                 'beneficiario' => 'required|string|max:2000',
                 'detalle' => 'required|string',
                 'nro_cheque' =>[$this->enviado_caja == 'NO' ? 'nullable' : 'required','integer'],
-                'fecha_cheque' =>[$this->enviado_caja == 'NO' ? 'nullable' : 'required','date']
+                'fecha_cheque' =>[$this->enviado_caja == 'NO' ? 'nullable' : 'required','date'],
+                'total_autorizado' =>'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+                'iue' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+                'it' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+                'total_retencion' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+                'total_multas' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+                'total_garantia' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+                'liquido_pagable' => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/'
             ];
     }
 
@@ -71,6 +78,22 @@ class GastosConImp extends Component
         $this->gestiones  = Gestion::orderby('gestion','desc')->get();
         $this->unidades = Unidad::all()->pluck('nombre_unidad','id');
 
+        if( $this->total_autorizado>=0){
+            if($this->emite_factura=='SI'){
+                $this->iue = 0;
+                $this->it = 0;
+                $this->total_retencion = 0;
+            }else{
+                $this->iue = round(($this->total_autorizado)* 0.125,2);
+                $this->it  = round(($this->total_autorizado)* 0.03,2);
+                $this->total_retencion = round(($this->iue) + ($this->it),2);
+            }
+
+            if($this->total_retencion>=0 && $this->total_multas>=0 && $this->total_garantia>=0){
+                $this->liquido_pagable = round(($this->total_autorizado) + ($this->total_garantia) - ($this->total_retencion) - ($this->total_multas),2);
+            }
+        }
+
         return view('gastosConImputacion.list', compact($this->gastos));
     }
 
@@ -85,6 +108,7 @@ class GastosConImp extends Component
             $this->nro_comprobante = 1 + (int)$compUltimo;
         }
     }
+
 
     public function store(){
         $this->validate();
@@ -116,7 +140,7 @@ class GastosConImp extends Component
         $this->changeEvent($this->id_gestion);
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
-        $this->dispatchBrowserEvent('alert',['message'=>'Comprobante creado con exito ...!!!']);
+        $this->dispatchBrowserEvent('alert',['message'=>'Comprobante creado con exito!!']);
     }
 
     public function resetInput()
@@ -129,14 +153,14 @@ class GastosConImp extends Component
         $this->detalle               ='';
         $this->nro_cheque            ='';
         $this->fecha_cheque          ='';
-        $this->total_autorizado      ='';
+        $this->total_autorizado      =0;
         $this->emite_factura         ='';
-        $this->iue                   ='';
-        $this->it                    ='';
-        $this->total_retencion       ='';
-        $this->total_multas          ='';
-        $this->liquido_pagable       ='';
-        $this->total_garantia        ='';
+        $this->iue                   =0;
+        $this->it                    =0;
+        $this->total_retencion       =0;
+        $this->total_multas          =0;
+        $this->liquido_pagable       =0;
+        $this->total_garantia        =0;
         $this->nro_hojas             ='';
         $this->nro_tomo              ='';
         $this->observacion_pago      ='';
