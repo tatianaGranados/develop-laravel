@@ -3,7 +3,7 @@
 		<div class="modal-content">
 			<div class="modal-header card-header-blue text-center">
                 <i class="material-icons">person</i>
-				<h5 class="modal-title" id="exampleModalLongTitle">CREAR GASTO CON IMPUTACIÓN GESTIÓN</h5>
+				<h5 class="modal-title" id="exampleModalLongTitle">CREAR GASTO CON IMPUTACIÓN</h5>
 				<button type="button" class="close btn-simple" data-dismiss="modal" aria-label="Close" wire:click="closeModal">
 					<span class="material-icons btn-danger">close</span>
 				</button>

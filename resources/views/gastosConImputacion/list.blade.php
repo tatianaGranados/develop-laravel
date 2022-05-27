@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<br>
-	
+
 	<div class="text-right container">
 		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#create">
 			<span class="material-icons">note_add</span> Crear Nuevo Comprobante
@@ -55,7 +55,7 @@
 						<td>{{ $gasto->nro_cheque}} 	  </td>
 						<td>{{ $gasto->fecha_cheque}} 	  </td>
 						<td>{{ $gasto->beneficiario}} 	  </td>
-						<td>{{ $gasto->nombre_unidad}} 		  </td>
+						<td>{{ $gasto->nombre_unidad}} 	  </td>
 						<td>{{ $gasto->detalle}} 		  </td>
 						<td>{{ $gasto->liquido_pagable}}  </td>
 						<td>{{ $gasto->total_retencion}}  </td>
@@ -64,8 +64,8 @@
 						<td>{{ $gasto->emite_factura}} 	  </td>
 
 						<td class="td-actions text-center">
-							{{-- <button wire:click="show({{$gasto->id_usuario}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showUser"><span class="material-icons">person</span></button>
-							<button wire:click="edit({{$gasto->id_usuario}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editUser"><span class="material-icons">create</span></button>
+							<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#show"><span class="material-icons">insert_drive_file</span></button>
+							{{-- <button wire:click="edit({{$gasto->id_usuario}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editUser"><span class="material-icons">create</span></button>
 							<button wire:click="edit({{$gasto->id_usuario}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button> --}}
 						</td>
 					</tr>
@@ -77,8 +77,8 @@
 			</tbody>
 		</table>
 	</div>
- {{-- {{$users->links()}}
- @include('users.show') 
- @include('users.edit')
+ {{-- {{$users->links()}} --}}
+ @include('gastosConImputacion..show') 
+ {{-- @include('users.edit')
  @include('errors.modalDelete',['nota'=>'USUARIO: '.$this->paterno.' '.$this->materno.' '.$this->nombres])  --}}
 </div>

@@ -370,3 +370,12 @@
   background-color: #8dd9ff75 !important;
 }
 
+
+
+
+
+.table .table-small td{
+  padding: 5px 8px;
+  vertical-align: middle;
+  border-color: #ddd;
+}
