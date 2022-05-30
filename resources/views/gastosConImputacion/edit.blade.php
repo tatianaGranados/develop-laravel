@@ -10,6 +10,9 @@
 			<div class="modal-body">
 				<form wire:submit.prevent="updateTesoreria">
 					@include('gastosConImputacion.partials.tesoreria')
+
+                    {{-- @include('gastosConImputacion.partials.caja') --}}
+    
 					<div class="card-footer justify-content-center">
 						<button type="submit" class="btn btn-info">{{ __('EDITAR COMPROBANTE') }}</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeModal">Cerrar</button>

@@ -42,7 +42,7 @@
 					<th style="font-size: 13px;"><strong>Total Multas 	</strong></th>
 					<th style="font-size: 13px;"><strong>Total Garantia </strong></th>
 					<th style="font-size: 13px;"><strong>Factura		</strong></th>
-					<th style="font-size: 13px; width: 100px;"><strong>Acciones		</strong></th>
+					<th style="font-size: 13px; width: 120px;"><strong>Acciones		</strong></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,11 +62,12 @@
 						<td>{{ $gasto->total_multas}} 	  </td>
 						<td>{{ $gasto->total_garantia}}   </td>
 						<td>{{ $gasto->emite_factura}} 	  </td>
-
 						<td class="td-actions text-center">
 							<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#show"><span class="material-icons">insert_drive_file</span></button>
-							<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
-							{{-- <button wire:click="edit({{$gasto->id_usuario}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button> --}}
+							@if ($gasto->enviado_caja =='NO')
+								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
+								<button wire:click="edit({{$gasto->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
+							@endif
 						</td>
 					</tr>
 				@empty
@@ -80,5 +81,5 @@
  {{-- {{$users->links()}} --}}
  @include('gastosConImputacion.show') 
  @include('gastosConImputacion.edit') 
- {{-- @include('errors.modalDelete',['nota'=>'USUARIO: '.$this->paterno.' '.$this->materno.' '.$this->nombres])  --}}
+ @include('errors.modalDelete',['nota'=>'Comprobante: '.$this->nro_comprobante]) 
 </div>
