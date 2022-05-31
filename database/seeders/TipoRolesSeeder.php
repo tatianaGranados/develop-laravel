@@ -37,5 +37,12 @@ class TipoRolesSeeder extends Seeder
             'created_at'=>now(),
             'updated_at'=>now()
         ]);
+
+        DB::table('tipos_roles')->insert([
+            'tipo_rol'=>'reporte unidad',
+            'desc_tipo_rol'=>'muestra cheques listos segun su unidad',
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
     }
 }

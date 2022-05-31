@@ -1,15 +1,19 @@
 <?php
 
 namespace App\Http\Livewire;
+
+use App\Models\TipoRol;
+use App\Models\TipoRolUsuario;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Models\Unidad;
 use App\Models\UserUnidad;
+use App\Models\Unidad;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Validator;
 
 class Users extends Component
 {
@@ -17,7 +21,7 @@ class Users extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $id_user, $user, $nombres, $materno, $paterno, $username, $genero,$email,$password, $password_confirmation;
-    public $id_unidad,$unidad, $unidades, $tipo_rol;
+    public $id_unidad,$unidad, $unidades, $roles, $id_tipo_rol, $tipo_rol, $id_tipo_user;
 
     public $search = '';
 
@@ -36,11 +40,18 @@ class Users extends Component
 
     public function render()
     {
-        // $users= DB::table('view_users_data')->orderBy('paterno','asc')->get();
-        $users= DB::table('view_users_data')->where('nombres', 'like', '%'.$this->search.'%')->orderBy('paterno','asc')->paginate(30);
-        $this->unidades = Unidad::all()->pluck('nombre_unidad','id');
+        $users = DB::table('view_users_data')->where('nombres', 'like', '%'.$this->search.'%')
+                                            ->orderBy('paterno','asc')
+                                            ->paginate(30);
 
-        return view('users.list', ['users' => $users]);
+        $tipo_roles = TipoRolUsuario::select('tipos_roles_user.id','tipos_roles_user.id_usuario', 'tipos_roles_user.id_tipo_rol','tipos_roles.tipo_rol')
+                                    ->join('tipos_roles', 'tipos_roles.id','=','tipos_roles_user.id_tipo_rol')
+                                    ->get();
+
+        $this->unidades = Unidad::all()->pluck('nombre_unidad','id');
+        $this->roles = TipoRol::all()->pluck('tipo_rol','id');
+
+        return view('users.list', ['users' => $users, 'tipo_roles'=>$tipo_roles]);
     }
 
     public function store()
@@ -63,6 +74,7 @@ class Users extends Component
 
     public function show($id){
         $user =  DB::table('view_users_data')->where('id_usuario', $id)->first();
+        $this->id_user  = $user->id_usuario;
         $this->nombres  = $user->nombres;
         $this->paterno  = $user->paterno;
         $this->materno  = $user->materno;
@@ -70,7 +82,6 @@ class Users extends Component
         $this->genero   = $user->genero;
         $this->email    = $user->email;
         $this->unidad   = $user->nombre_unidad;
-        $this->tipo_rol       = $user->tipo_rol;  
     }
 
     public function edit($id)
@@ -129,6 +140,62 @@ class Users extends Component
             $this->dispatchBrowserEvent('close-modal');
             $this->dispatchBrowserEvent('alert',['message'=>'Usuario Eliminado con exito ...!!!']);    
         }
+    }
+
+    public function showRol($id){
+        $user =  DB::table('view_users_data')->where('id_usuario', $id)->first();
+        $this->id_user = $user->id_usuario;  
+    }
+    public function storeRol()
+    {
+        $role_exists = TipoRolUsuario::where([['id_usuario',$this->id_user],['id_tipo_rol',$this->id_tipo_rol]])->get();
+
+        if( $role_exists->isEmpty()){
+            $userRol =  new TipoRolUsuario();
+            $userRol -> id_usuario =  $this->id_user;
+            $userRol -> id_tipo_rol=  $this->id_tipo_rol;
+            $userRol->save();
+            $this->dispatchBrowserEvent('alert',['message'=>'Rol asignado con exito ...!!!']);
+        }else{
+            $this->dispatchBrowserEvent('error',['message'=>'Usuario ya Asignado a ese rol ...!!!']);
+        }
+        $this->resetInput();
+        $this->dispatchBrowserEvent('close-modal'); 
+    }
+
+    public function editRol($id){
+        $user_rol = TipoRolUsuario::findOrFail($id);
+        $this->id_tipo_user = $user_rol->id;
+        $this->id_tipo_rol  = $user_rol->id_tipo_rol;
+        $this->id_user      = $user_rol->id_usuario;
+    }
+
+    public function updateRol()
+    {
+        $validatedData = $this->validate(
+            ['id_tipo_rol' => 'required']
+        );
+
+        $role_exists = TipoRolUsuario::where([['id_usuario',$this->id_user],['id_tipo_rol',$this->id_tipo_rol]])->get();
+
+        if( $role_exists->isEmpty())
+        {
+            TipoRolUsuario::where('id',$this->id_tipo_user)
+                            ->update(['id_tipo_rol'  => $validatedData['id_tipo_rol']]);
+            
+            $this->dispatchBrowserEvent('alert',['message'=>'Rol modificado con exito ...!!!']);
+
+        }else{
+            $this->dispatchBrowserEvent('error',['message'=>'Usuario ya Asignado a ese rol ...!!!']);
+        }
+        $this->resetInput();
+        $this->dispatchBrowserEvent('close-modal'); 
+    }
+
+    public function deleteRol(){
+        TipoRolUsuario::find($this->id_tipo_user)->delete();
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('alert',['message'=>'Rol Eliminado con exito ...!!!']); 
     }
 
     public function resetInput()

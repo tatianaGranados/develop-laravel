@@ -17,6 +17,10 @@
         $('#createUser').modal('hide');
         $('#editUser').modal('hide');
         $('#delete').modal('hide');
+
+        $('#createRol').modal('hide');
+        $('#editRol').modal('hide');
+        $('#deleteRol').modal('hide');
     })
 </script>
 @endsection

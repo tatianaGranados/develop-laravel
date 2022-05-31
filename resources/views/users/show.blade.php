@@ -28,7 +28,13 @@
                         </tr>
                         <tr>
                             <td class="text-left"><span class="material-icons"><span class="material-icons">engineering</span></span><strong> Tipo rol:</strong></td>
-                            <td>{{$this->tipo_rol}}</td>
+                            <td>
+                                @foreach ($tipo_roles as $rol)
+                                    @if ($rol->id_usuario == $this->id_user)
+                                      {{$rol->tipo_rol}} <br>
+                                    @endif
+                                @endforeach
+                            </td>
                         </tr>
                     </table>
                 </div>
