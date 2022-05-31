@@ -12,69 +12,98 @@ class EnlacesSeeder extends Seeder
     {
     //1 usuarios
         DB::table('enlaces')->insert([
-            'nombre_enlace'  => 'Listar usuarios',
+            'nombre_enlace'  => 'Listar usuarios/ Mostrar Datos',
             'ruta'=>'',
             'icono'=>'groups',
-            'descripcion'=>'Lista de usuarios para el sistema',
-            'tipo_acceso'=>1
+            'descripcion'=>'Lista informacion de usuarios en el sistema',
+            'tipo_acceso'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now()
         ]);
         DB::table('enlaces')->insert([
             'nombre_enlace'  => 'Crear usuarios',
             'ruta'=>'',
             'icono'=>'person_add',
             'descripcion'=>'creacion de usuarios para el sistema',
-            'tipo_acceso'=>1
+            'tipo_acceso'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now()
         ]);
         DB::table('enlaces')->insert([
             'nombre_enlace'  => 'Editar usuarios',
             'ruta'=>'',
             'icono'=>'manage_accounts',
             'descripcion'=>'Editar de usuarios para el sistema',
-            'tipo_acceso'=>1
+            'tipo_acceso'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now()
         ]);
         DB::table('enlaces')->insert([
             'nombre_enlace'  => 'Eliminar usuarios',
             'ruta'=>'',
             'icono'=>'person_remove_alt_1',
             'descripcion'=>'Eliminar de usuarios para el sistema',
-            'tipo_acceso'=>1
+            'tipo_acceso'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now()
         ]);
-    // //2 permisos
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Listar tipos de usuarios con roles',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Lista de permisos para el sistema',
-    //         'tipo_acceso'=>2
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'ver permisos para el tipo de usuario',
-    //         'ruta'=>'permisos.show',
-    //         'icono'=>'fas fa-eye',
-    //         'descripcion'=>'Editar los permisos del tipo de usuario',
-    //         'tipo_acceso'=>2
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'crear nuevo tipo de usuario',
-    //         'ruta'=>'permisos.create',
-    //         'icono'=>'fas fa-user-plus',
-    //         'descripcion'=>'crear nuevo tipo de usuario con sus permisos',
-    //         'tipo_acceso'=>2
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'editar permisos',
-    //         'ruta'=>'permisos.edit',
-    //         'icono'=>'fas fa-user-edit',
-    //         'descripcion'=>'Editar los permisos del tipo de usuario',
-    //         'tipo_acceso'=>7
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'eliminar permisos',
-    //         'ruta'=>'permisos.delete',
-    //         'icono'=>'fas fa-user-minus',
-    //         'descripcion'=>'Eliminar tipo de usuario y permisos',
-    //         'tipo_acceso'=>7
-    //     ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Asignar rol usuario',
+            'ruta'=>'',
+            'icono'=>'manage_accounts',
+            'descripcion'=>'Asignar roles a usuario de sistema',
+            'tipo_acceso'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Editar rol usuario',
+            'ruta'=>'',
+            'icono'=>'note_alt',
+            'descripcion'=>'Editar rol a usuario de sistema',
+            'tipo_acceso'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Eliminar rol usuario',
+            'ruta'=>'',
+            'icono'=>'group_remove',
+            'descripcion'=>'Editar rol a usuario de sistema',
+            'tipo_acceso'=>1,
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+
+    //2 permisos
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Listar Roles Creados',
+            'ruta'=>'',
+            'icono'=>'',
+            'descripcion'=>'Lista los roles para el sistema',
+            'tipo_acceso'=>2
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Crear un nuevo Rol',
+            'ruta'=>'',
+            'icono'=>'',
+            'descripcion'=>'Crear un nuevo tipo de rol con nuevos accesos',
+            'tipo_acceso'=>2
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Editar Permisos del Rol',
+            'ruta'=>'',
+            'icono'=>'',
+            'descripcion'=>'Editar los permisos del tipo de rol',
+            'tipo_acceso'=>2
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'eliminar Rol',
+            'ruta'=>'',
+            'icono'=>'',
+            'descripcion'=>'Eliminar tipo de rol y todos los permisos asignados al mismo',
+            'tipo_acceso'=>2
+        ]);
 
     // //2 gestiones
     //     DB::table('enlaces')->insert([

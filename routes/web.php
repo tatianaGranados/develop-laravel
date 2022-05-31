@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GastosConImpController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\GestionController;
 
 Route::get('/', function () {
@@ -29,7 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
 	// Gastos con Imputacion crud
 	// resource crud
 	Route::get('gestiones',[GestionController::class,'index'])->name('gestiones');
-	Route::get('users',[ UserController::class,'index'])->name('users');
+	Route::get('users',[UserController::class,'index'])->name('users');
+	Route::get('permisos',[PermisoController::class,'index'])->name('permisos');
 
 	Route::get('gastosConImp',[ GastosConImpController::class,'index'])->name('gastosConImp');
 

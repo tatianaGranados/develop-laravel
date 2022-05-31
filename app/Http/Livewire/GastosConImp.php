@@ -47,7 +47,7 @@ class GastosConImp extends Component
                 'nro_preventivo'    => 'required|max:8000|integer',
                 'fecha_comprobante' => 'date|required',
                 'sello'             => 'required|max:15|regex:/[1-9]/',
-                'nro_hojas'         => 'integer|max:500|required',
+                'nro_hojas'         => 'integer|max:900|required',
                 'id_unidad'         => 'required',
                 'beneficiario'      => 'required|string|max:2000',
                 'detalle'           => 'required|string',

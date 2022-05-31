@@ -1,16 +1,19 @@
 <div>
+    @if(in_array(2, $permisos))
     <div class="text-center container">
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createUser">
             <span class="material-icons">person_add</span> Crear Nuevo Usuario
         </button>	
     </div>
-@include('users.create')
+    @endif
+    @include('users.create')
 
-<div class="input-group">
-    <input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
-    <span class="material-icons input-group-btn">search</span>
-</div>
+    <div class="input-group">
+        <input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
+        <span class="material-icons input-group-btn">search</span>
+    </div>
 <br>
+
 <div class="table-responsive">
     <table class="table table-condensed table-bordered table table-striped">
         <thead class="text-center">
@@ -36,19 +39,30 @@
                             @if ($rol->id_usuario == $user->id_usuario)
                                 <td>{{$rol->tipo_rol}}</td>
                                 <td class="td-actions text-center" style="width: 80px;">
-                                    <button wire:click="editRol({{$rol->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editRol"><span class="material-icons">create</span></button>
-                                    <button wire:click="editRol({{$rol->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#deleteRol"><span class="material-icons">close</span></button>
+                                    @if(in_array(6, $permisos))
+                                        <button wire:click="editRol({{$rol->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editRol"><span class="material-icons">create</span></button>
+                                    @endif
+                                    @if(in_array(7, $permisos))
+                                        <button wire:click="editRol({{$rol->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#deleteRol"><span class="material-icons">close</span></button>
+                                    @endif
                                 </td>
                             @endif
-                        
                          </table>
                          @endforeach
                     </td>
                     <td class="td-actions text-center">
-                        <button wire:click="show({{$user->id_usuario}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showUser"><span class="material-icons">person</span></button>
-                        <button wire:click="edit({{$user->id_usuario}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editUser"><span class="material-icons">create</span></button>
-                        <button wire:click="edit({{$user->id_usuario}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
-                        <button wire:click="showRol({{$user->id_usuario}})" class="btn btn-warning" data-toggle="modal" data-target="#createRol"><span class="material-icons">add</span>rol</button>
+                        @if(in_array(1, $permisos))
+                            <button wire:click="show({{$user->id_usuario}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showUser"><span class="material-icons">person</span></button>
+                        @endif
+                        @if(in_array(3, $permisos))
+                            <button wire:click="edit({{$user->id_usuario}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editUser"><span class="material-icons">create</span></button>
+                        @endif
+                        @if(in_array(4, $permisos))
+                            <button wire:click="edit({{$user->id_usuario}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
+                        @endif
+                        @if(in_array(5, $permisos))
+                            <button wire:click="showRol({{$user->id_usuario}})" class="btn btn-warning" data-toggle="modal" data-target="#createRol"><span class="material-icons">add</span>rol</button>
+                        @endif
                     </td>
                 </tr>
             @empty

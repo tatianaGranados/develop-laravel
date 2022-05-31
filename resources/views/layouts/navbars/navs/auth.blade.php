@@ -12,12 +12,23 @@
                 <li><a  href="#0">Gastos Sin Imputación</a></li>
               </ul>
             </li>
-            <li><a href=""><i class="material-icons">group</i> ADM. USUARIOS<span class="arrow-down"></span></a>
-              <ul class="dropdown-default">
-                <li><a href="{{ route('users') }}">Usuarios</a></li>
-                <li><a  href="#0">Permisos</a></li>
-              </ul>
-            </li>
+
+            @switch(Auth::user()->AccesosUserAuth)
+              @case(1||2||3||4||5||6||7||8||9||10||11)
+                <li><a href=""><i class="material-icons">group</i> ADM. USUARIOS<span class="arrow-down"></span></a>
+                  <ul class="dropdown-default">
+                    @if(in_array(1, Auth::user()->AccesosUserAuth) || in_array(2, Auth::user()->AccesosUserAuth) || in_array(3, Auth::user()->AccesosUserAuth) || in_array(4, Auth::user()->AccesosUserAuth) ||
+                        in_array(5, Auth::user()->AccesosUserAuth) || in_array(6, Auth::user()->AccesosUserAuth) || in_array(7, Auth::user()->AccesosUserAuth) )
+                        <li><a href="{{ route('users') }}">Usuarios</a></li>
+                    @endif
+                    @if(in_array(8, Auth::user()->AccesosUserAuth) || in_array(9, Auth::user()->AccesosUserAuth) || in_array(10, Auth::user()->AccesosUserAuth) || in_array(11, Auth::user()->AccesosUserAuth) )
+                      <li><a  href="{{ route('permisos') }}">Permisos</a></li>
+                    @endif
+                  </ul>
+                </li>
+              @break
+            @endswitch
+
             <li><a href=""><i class="material-icons">archive</i> ARCHIVAR</a></li>
             <li><a href="javascript:void(0)" ><i class="material-icons">discount</i>MIGRACIONES <span class="arrow-down"></span></a>
               <ul class="dropdown-default">

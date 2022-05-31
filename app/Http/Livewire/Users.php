@@ -50,8 +50,9 @@ class Users extends Component
 
         $this->unidades = Unidad::all()->pluck('nombre_unidad','id');
         $this->roles = TipoRol::all()->pluck('tipo_rol','id');
+        $permisos = Auth::user()->AccesosUserAuth;
 
-        return view('users.list', ['users' => $users, 'tipo_roles'=>$tipo_roles]);
+        return view('users.list', ['users' => $users, 'tipo_roles'=>$tipo_roles, 'permisos'=>$permisos]);
     }
 
     public function store()
