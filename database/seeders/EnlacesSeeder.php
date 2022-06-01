@@ -79,28 +79,28 @@ class EnlacesSeeder extends Seeder
         DB::table('enlaces')->insert([
             'nombre_enlace'  => 'Listar Roles Creados',
             'ruta'=>'',
-            'icono'=>'',
+            'icono'=>'list',
             'descripcion'=>'Lista los roles para el sistema',
             'tipo_acceso'=>2
         ]);
         DB::table('enlaces')->insert([
             'nombre_enlace'  => 'Crear un nuevo Rol',
             'ruta'=>'',
-            'icono'=>'',
+            'icono'=>'playlist_add_check',
             'descripcion'=>'Crear un nuevo tipo de rol con nuevos accesos',
             'tipo_acceso'=>2
         ]);
         DB::table('enlaces')->insert([
             'nombre_enlace'  => 'Editar Permisos del Rol',
             'ruta'=>'',
-            'icono'=>'',
+            'icono'=>'edit',
             'descripcion'=>'Editar los permisos del tipo de rol',
             'tipo_acceso'=>2
         ]);
         DB::table('enlaces')->insert([
             'nombre_enlace'  => 'eliminar Rol',
             'ruta'=>'',
-            'icono'=>'',
+            'icono'=>'delete_forever',
             'descripcion'=>'Eliminar tipo de rol y todos los permisos asignados al mismo',
             'tipo_acceso'=>2
         ]);

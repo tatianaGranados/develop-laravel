@@ -14,6 +14,7 @@
 <script>
     window.addEventListener('close-modal', event => {
         $('#createPer').modal('hide');
+        $('#showPer').modal('hide');
         $('#editPer').modal('hide');
         $('#delete').modal('hide');
     })
