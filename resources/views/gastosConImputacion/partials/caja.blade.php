@@ -1,32 +1,36 @@
 <div class="container">
-    <table class="table table-bordered">
-        <tr class="table-small">
-            <td><i class="material-icons" style="font-size: 15px;">description</i><strong> Nro comprobante:</strong></td>
-            <td>{{$this->nro_comprobante}}</td>
+    @if(in_array(17, $permisos) &&  in_array(18, $permisos))
+        <hr>
+    @else
+        <table class="table table-bordered">
+            <tr class="table-small">
+                <td><i class="material-icons" style="font-size: 15px;">description</i><strong> Nro comprobante:</strong></td>
+                <td>{{$this->nro_comprobante}}</td>
 
-            <td><i class="material-icons" style="font-size: 15px;">payments</i><strong> Nro Cheque:</strong></td>
-            <td>{{$this->nro_cheque}}</td>
+                <td><i class="material-icons" style="font-size: 15px;">payments</i><strong> Nro Cheque:</strong></td>
+                <td>{{$this->nro_cheque}}</td>
 
-            <td><i class="material-icons" style="font-size: 15px;">event</i><strong> Feche Cheque:</strong></td>
-            <td>{{$this->fecha_cheque}}</td>
+                <td><i class="material-icons" style="font-size: 15px;">event</i><strong> Feche Cheque:</strong></td>
+                <td>{{$this->fecha_cheque}}</td>
 
-        <tr class="table-small">
-            <td><i class="material-icons" style="font-size: 15px;">person</i><strong> Beneficiario:</strong></td>
-            <td colspan="5">{{$this->beneficiario}}</td>
-        </tr>
-        <tr class="table-small">
-            <td><i class="material-icons" style="font-size: 15px;">web_stories</i><strong> Detalle:</strong></td>
-            <td colspan="5">{{$this->detalle}}</td>
-        </tr>
-        <tr class="table-small">
-            <td><i class="material-icons" style="font-size: 15px;">domain</i><strong> Unidad:</strong></td>
-            <td colspan="2">{{$this->unidad}}</td>
+            <tr class="table-small">
+                <td><i class="material-icons" style="font-size: 15px;">person</i><strong> Beneficiario:</strong></td>
+                <td colspan="5">{{$this->beneficiario}}</td>
+            </tr>
+            <tr class="table-small">
+                <td><i class="material-icons" style="font-size: 15px;">web_stories</i><strong> Detalle:</strong></td>
+                <td colspan="5">{{$this->detalle}}</td>
+            </tr>
+            <tr class="table-small">
+                <td><i class="material-icons" style="font-size: 15px;">domain</i><strong> Unidad:</strong></td>
+                <td colspan="2">{{$this->unidad}}</td>
 
-            <td><i class="material-icons" style="font-size: 15px;">monetization_on</i><strong>Liquido Pagable:</strong></td>
-            <td colspan="2"><label style="color: rgb(21, 21, 117) !important; "><strong>= {{$this->liquido_pagable}} </strong></label><br></td>
-        </tr>
-    </table>
-
+                <td><i class="material-icons" style="font-size: 15px;">monetization_on</i><strong>Liquido Pagable:</strong></td>
+                <td colspan="2"><label style="color: rgb(21, 21, 117) !important; "><strong>= {{$this->liquido_pagable}} </strong></label><br></td>
+            </tr>
+        </table>  
+    @endif
+        
     <div class="form_group row form-blue" style="height: 80px;">
         <div class="form-group form-check form-check-inline col-md-12" style="justify-content: center; background-color: #00bcd45e; ">
             <label class="form-check-label">

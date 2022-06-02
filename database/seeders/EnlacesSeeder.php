@@ -105,101 +105,67 @@ class EnlacesSeeder extends Seeder
             'tipo_acceso'=>2
         ]);
 
-    // //2 gestiones
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'listar gestiones',
-    //         'ruta'=>'',
-    //         'icono'=>'reorder',
-    //         'descripcion'=>'Lista de gestiones para el sistema',
-    //         'tipo_acceso'=>2
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'crear Gestión',
-    //         'ruta'=>'',
-    //         'icono'=>'post_add',
-    //         'descripcion'=>'creacion de gestiones para el sistema',
-    //         'tipo_acceso'=>2
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'editar Gestión',
-    //         'ruta'=>'',
-    //         'icono'=>'edit_note',
-    //         'descripcion'=>'Editar  gestiones para el sistema',
-    //         'tipo_acceso'=>2
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'eliminar Gestión',
-    //         'ruta'=>'',
-    //         'icono'=>'delete_forever',
-    //         'descripcion'=>'Eliminar gestiones del sistema',
-    //         'tipo_acceso'=>2
-    //     ]);
+    //3 gestiones
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Crear Gestión',
+            'ruta'=>'',
+            'icono'=>'post_add',
+            'descripcion'=>'creacion de gestiones para el sistema',
+            'tipo_acceso'=>3
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Editar Gestión',
+            'ruta'=>'',
+            'icono'=>'edit_note',
+            'descripcion'=>'Editar  gestiones para el sistema',
+            'tipo_acceso'=>3
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Eliminar Gestión',
+            'ruta'=>'',
+            'icono'=>'delete_forever',
+            'descripcion'=>'Eliminar gestiones del sistema',
+            'tipo_acceso'=>3
+        ]);
 
-    // //3 gastos con imputacion
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Listar gasto con imputación',
-    //         'ruta'=>'',
-    //         'icono'=>'view_list',
-    //         'descripcion'=>'Lista gasto con imputacion presuspuestaria para el sistema',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Crear gasto con imputación',
-    //         'ruta'=>'',
-    //         'icono'=>'note_add',
-    //         'descripcion'=>'Crea gasto con imputacion solo lo básico',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'crear gasto con imputación total',
-    //         'ruta'=>'',
-    //         'icono'=>'note_add',
-    //         'descripcion'=>'Crea gasto con imputacion solo lo básico',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'editar gastos con imputación total',
-    //         'ruta'=>'',
-    //         'icono'=>'edit',
-    //         'descripcion'=>'Edita todos los campos de gasto con imputacion',
-    //         'tipo_acceso'=>3
-    //     ]);
+    //4 gastos con imputacion
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Ver Gastos Con Imputación',
+            'ruta'=>'',
+            'icono'=>'view_list',
+            'descripcion'=>'Lista gasto con imputacion presuspuestaria para el sistema y su detalle',
+            'tipo_acceso'=>4
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Crear Nuevo comprobante con Imputación - Rol tesoreria',
+            'ruta'=>'',
+            'icono'=>'note_add',
+            'descripcion'=>'Crear nuevo gasto con imputacion',
+            'tipo_acceso'=>4
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Editar comprobante con Imputación - Rol tesoreria',
+            'ruta'=>'',
+            'icono'=>'note_add',
+            'descripcion'=>'Editar comprobante con imputacion para el rol tesoreria',
+            'tipo_acceso'=>4
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Editar comprobante con Imputación - Rol Caja',
+            'ruta'=>'',
+            'icono'=>'edit',
+            'descripcion'=>'Editar comprobante con Imputación - Rol Caja',
+            'tipo_acceso'=>4
+        ]);
 
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'editar gastos con imputación tesoreria',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Edita los campos básicos de gasto con imputacion',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Registro Cajero',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Registra montos de gasto con imputacion ',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Archivar comprobante con imputación',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Archiva los gasto con imputación',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Eliminar gasto con imputación',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Lista gasto con imputacion presuspuestaria para el sistema',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Eliminar gasto con imputación todos',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Elimina todos gasto con imputacion presuspuestaria para el sistema',
-    //         'tipo_acceso'=>3
-    //     ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Eliminar Comprobante con Imputación',
+            'ruta'=>'',
+            'icono'=>'delete_forever',
+            'descripcion'=>'Eliminar comprobante con imputacion',
+            'tipo_acceso'=>4
+        ]);
+        
 
     // //4 gastos sin imputacion
     //     DB::table('enlaces')->insert([

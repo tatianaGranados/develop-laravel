@@ -43,7 +43,7 @@
     @if(in_array(8, Auth::user()->AccesosUserAuth))
         @include('permisos.show') 
     @endif
-    @if(in_array(9, Auth::user()->AccesosUserAuth))
+    @if(in_array(10, Auth::user()->AccesosUserAuth))
         @include('permisos.edit') 
     @endif
     @if(in_array(11, Auth::user()->AccesosUserAuth))   

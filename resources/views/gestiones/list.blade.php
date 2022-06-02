@@ -1,9 +1,11 @@
 <div class="container">
-    <div class="text-center">
-      	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#create"><span class="material-icons">add </span>CREAR GESTION</button>
-    </div>
-    @include('gestiones.create')
-  
+    @if(in_array(12, $permisos))
+		<div class="text-center">
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#create"><span class="material-icons">add </span>CREAR GESTION</button>
+		</div>
+		@include('gestiones.create')
+	@endif
+
     <div class="table-responsive">
 		<table class="table table-condensed table-bordered table-striped">
 			<thead class="text-center">
@@ -21,8 +23,12 @@
 						<td>{{$gestion->id}}     </td>
 						<td>{{$gestion->gestion}}</td>
 						<td class="td-actions text-center">
-							<button wire:click="edit({{$gestion->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
-							<button wire:click="edit({{$gestion->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
+							@if(in_array(13, $permisos))
+								<button wire:click="edit({{$gestion->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
+							@endif
+							@if(in_array(14, $permisos))
+								<button wire:click="edit({{$gestion->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
+							@endif
 						</td>
 					</tr>
 				@empty
@@ -33,8 +39,12 @@
 			</tbody>
 		</table>
     </div>
-	@include('gestiones.edit')
-	@include('errors.modalDelete',['nota'=>'GESTIÓN: '.$this->gestion])
+	@if(in_array(13, $permisos))
+		@include('gestiones.edit')
+	@endif
+	@if(in_array(14, $permisos))
+		@include('errors.modalDelete',['nota'=>'GESTIÓN: '.$this->gestion])
+	@endif
 </div>    
   
   

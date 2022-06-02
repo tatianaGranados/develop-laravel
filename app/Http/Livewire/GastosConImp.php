@@ -15,6 +15,8 @@ class GastosConImp extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+    public $permisos;
+
     public $gestiones,$id_gestion;
     public $gastos, $id_gasto;
     public $ult_comp;
@@ -22,7 +24,8 @@ class GastosConImp extends Component
 
     public $id_unidad, $unidad, $unidades; 
     public $nro_comprobante, $fecha_comprobante, $nro_preventivo, $sello,$nro_hojas, $beneficiario, $detalle;
-    public $nro_cheque, $fecha_cheque = null;
+    public $nro_cheque = null;
+    public $fecha_cheque = null;
     public $total_autorizado = 0;
     public $iue = 0;
     public $it = 0;
@@ -43,24 +46,24 @@ class GastosConImp extends Component
 
     protected function rules()
     {
-        return ['nro_comprobante'   => 'required|max:9000',
-                'nro_preventivo'    => 'required|max:8000|integer',
-                'fecha_comprobante' => 'date|required',
-                'sello'             => 'required|max:15|regex:/[1-9]/',
-                'nro_hojas'         => 'integer|max:900|required',
+        return ['nro_comprobante'   => ['required','max:9000'],
+                'nro_preventivo'    => ['required','max:8000','integer'],
+                'fecha_comprobante' => ['date','required'],
+                'sello'             => ['required','max:15','regex:/[1-9]/'],
+                'nro_hojas'         => ['integer','max:900','required'],
                 'id_unidad'         => 'required',
-                'beneficiario'      => 'required|string|max:2000',
-                'detalle'           => 'required|string',
+                'beneficiario'      => ['required','string','max:200'],
+                'detalle'           => ['required','string','max:900'],
                 'emite_factura'     => 'required',
-                'nro_cheque'        => [$this->enviado_caja == 0 ? 'nullable' : 'required','integer'],
-                'fecha_cheque'      => [$this->enviado_caja == 0 ? 'nullable' : 'required','date'],
-                'total_autorizado'  => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
-                'iue'               => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
-                'it'                => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
-                'total_retencion'   => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
-                'total_multas'      => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
-                'total_garantia'    => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
-                'liquido_pagable'   => 'required|numeric|regex:/^[\d]{0,11}(\.[\d]{1,2})?$/',
+                'nro_cheque'        => [$this->enviado_caja == 0 || $this->enviado_caja == '' ? 'nullable' : 'required','integer'],
+                'fecha_cheque'      => [$this->enviado_caja == 0 || $this->enviado_caja == '' ? 'nullable' : 'required','date'],
+                'total_autorizado'  => ['required','numeric','regex:/^[\d]{0,12}(\.[\d]{1,2})?$/'],
+                'iue'               => ['required','numeric','regex:/^[\d]{0,11}(\.[\d]{1,2})?$/'],
+                'it'                => ['required','numeric','regex:/^[\d]{0,8}(\.[\d]{1,2})?$/'],
+                'total_retencion'   => ['required','numeric','regex:/^[\d]{0,8}(\.[\d]{1,2})?$/'],
+                'total_multas'      => ['required','numeric','regex:/^[\d]{0,8}(\.[\d]{1,2})?$/'],
+                'total_garantia'    => ['required','numeric','regex:/^[\d]{0,12}(\.[\d]{1,2})?$/'],
+                'liquido_pagable'   => ['required','numeric','regex:/^[\d]{0,12}(\.[\d]{1,2})?$/'],
                 
                 // validacion caja
                 'fecha_entrega_pago' => [$this->pagado == 0 ? 'nullable' : 'required','date'],
@@ -69,8 +72,10 @@ class GastosConImp extends Component
 
     public function mount()
     {      
+        $this->permisos = Auth::user()->AccesosUserAuth;
         $ult_gestion  = $this->id_gestion = Gestion::get()->last()->id;
         $this->gastos = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $ult_gestion)->get();
+
         $compUltimo   = GastoConImputacion::where('id_gestion',$this->id_gestion)->orderby('nro_comprobante', 'desc')->get();
        
         if($compUltimo->isEmpty()){
@@ -83,7 +88,20 @@ class GastosConImp extends Component
 
     public function render()
     {
-        $this->gastos    = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $this->id_gestion)->get();
+        $this->permisos = Auth::user()->AccesosUserAuth;
+        
+        switch ($this->permisos) {
+            case (in_array(17, $this->permisos)):
+                $this->gastos    = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $this->id_gestion)->get(); 
+                break; 
+            case (in_array(18, $this->permisos)):
+                $this->gastos    = DB::table('view_gastos_con_imputacion')->where([['id_gestion','=', $this->id_gestion],['enviado_caja','=','SI']])->get(); 
+                break;
+            default:
+                $this->gastos    = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $this->id_gestion)->get();
+                break;
+        }
+
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
         $this->unidades  = Unidad::all()->pluck('nombre_unidad','id');
 
@@ -147,8 +165,8 @@ class GastosConImp extends Component
         ]);
         $compGasto->save();
 
-        $this->changeEvent($this->id_gestion);
         $this->resetInput();
+        $this->changeEvent($this->id_gestion);
         $this->dispatchBrowserEvent('close-modal');
         $this->dispatchBrowserEvent('alert',['message'=>'Comprobante creado con exito!!']);
     }
@@ -216,6 +234,7 @@ class GastosConImp extends Component
         $this->unidad                = $gci->nombre_unidad;
         $this->emite_factura         = $gci->emite_factura;
         $this->id_unidad             = $gci->id_unidad;
+
     }
 
     public function updateTesoreria()
@@ -274,24 +293,24 @@ class GastosConImp extends Component
         $this->sello                 ='';
         $this->beneficiario          ='';
         $this->detalle               ='';
-        $this->nro_cheque            ='';
-        $this->fecha_cheque          ='';
-        $this->total_autorizado      =0;
+        $this->nro_cheque            = null;
+        $this->fecha_cheque          = null;
+        $this->total_autorizado      = 0;
         $this->emite_factura         ='NO';
-        $this->iue                   =0;
-        $this->it                    =0;
-        $this->total_retencion       =0;
-        $this->total_multas          =0;
-        $this->liquido_pagable       =0;
-        $this->total_garantia        =0;
+        $this->iue                   = 0;
+        $this->it                    = 0;
+        $this->total_retencion       = 0;
+        $this->total_multas          = 0;
+        $this->liquido_pagable       = 0;
+        $this->total_garantia        = 0;
         $this->nro_hojas             ='';
         $this->nro_tomo              ='';
         $this->observacion_pago      ='';
         $this->observacion_archivado ='';
-        $this->enviado_caja          =0;
-        $this->cheque_listo          ='';
-        $this->pagado                ='';
-        $this->archivado             ='';
+        $this->enviado_caja          = 0;
+        $this->cheque_listo          = 0;
+        $this->pagado                = 0;
+        $this->archivado             = 'NO';
         $this->fecha_entrega_pago    ='';
         $this->nro_agrupado_entrega  ='';
         $this->fecha_archivado       ='';

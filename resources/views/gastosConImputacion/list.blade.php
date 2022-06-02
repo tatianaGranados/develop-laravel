@@ -10,14 +10,14 @@
 		</div>
 	</div>
 	<br>
-
-	<div class="text-right container">
-		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#create">
-			<span class="material-icons">note_add</span> Crear Nuevo Comprobante
-		</button>	
-	</div>
-
-	@include('gastosConImputacion.create')
+	@if(in_array(16, $permisos))
+		<div class="text-right container">
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#create">
+				<span class="material-icons">note_add</span> Crear Nuevo Comprobante
+			</button>	
+		</div>
+		@include('gastosConImputacion.create')
+	@endif
 
 	{{-- <div class="input-group">
 		<input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
@@ -63,9 +63,13 @@
 						<td>{{ $gasto->total_garantia}}   </td>
 						<td>{{ $gasto->emite_factura}} 	  </td>
 						<td class="td-actions text-center">
-							<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#show"><span class="material-icons">insert_drive_file</span></button>
-							@if ($gasto->enviado_caja =='NO')
+							@if( in_array(15, $permisos))
+								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#show"><span class="material-icons">insert_drive_file</span></button>
+							@endif	
+							@if( (in_array(17, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(18, $permisos) && $gasto->enviado_archivo =='NO' ))
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
+							@endif
+							@if (in_array(19, $permisos) && $gasto->enviado_caja =='NO')
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
 							@endif
 						</td>

@@ -45,6 +45,8 @@ class GastoConImputacion extends Model
         'pagado',
         'fecha_entrega_pago',
         'nro_agrupado_entrega',
+        'fecha_entrega_agrupado',
+        'enviado_archivo',
         'archivado',
         'fecha_archivado',
         'ult_usuario'

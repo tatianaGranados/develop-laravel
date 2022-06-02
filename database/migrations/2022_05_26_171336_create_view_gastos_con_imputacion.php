@@ -39,9 +39,11 @@ class CreateViewGastosConImputacion extends Migration
                         gi.enviado_caja,
                         gi.cheque_listo,
                         gi.pagado,
-                        gi.archivado,
                         gi.fecha_entrega_pago,
                         gi.nro_agrupado_entrega,
+                        gi.fecha_entrega_agrupado,
+                        gi.enviado_archivo,
+                        gi.archivado,
                         gi.fecha_archivado,
                         gi.ult_usuario
                 FROM gastos_con_imputacion gi, gestiones g, unidades u

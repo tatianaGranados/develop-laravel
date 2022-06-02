@@ -33,9 +33,11 @@ class GastoSinImputacion extends Model
         'enviado_caja',
         'cheque_listo',
         'pagado',
-        'archivado',
         'fecha_entrega_pago',
         'nro_agrupado_entrega',
+        'enviado_archivo',
+        'fecha_entrega_agrupado',
+        'archivado',
         'fecha_archivado',
         'ult_usuario'
     ];

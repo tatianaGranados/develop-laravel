@@ -4,11 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Gestion;
+use Illuminate\Support\Facades\Auth;
 
 class Gestiones extends Component
 {
 
-    public $gestion, $gestiones, $id_gestion;
+    public $gestion, $gestiones, $id_gestion, $permisos;
 
     protected function rules()
     {
@@ -18,6 +19,8 @@ class Gestiones extends Component
     public function render()
     {
         $this->gestiones = Gestion::all();
+        $this->permisos = Auth::user()->AccesosUserAuth;
+
         return view('gestiones.list');
     }
 

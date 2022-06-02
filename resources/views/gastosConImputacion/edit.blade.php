@@ -9,10 +9,13 @@
 			</div>
 			<div class="modal-body">
 				<form wire:submit.prevent="updateTesoreria">
-					@include('gastosConImputacion.partials.tesoreria')
+					@if(in_array(17, $permisos))
+						@include('gastosConImputacion.partials.tesoreria')
+					@endif
+					@if(in_array(18, $permisos))
+                    	@include('gastosConImputacion.partials.caja')
+					@endif
 
-                    {{-- @include('gastosConImputacion.partials.caja') --}}
-    
 					<div class="card-footer justify-content-center">
 						<button type="submit" class="btn btn-info">{{ __('EDITAR COMPROBANTE') }}</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeModal">Cerrar</button>

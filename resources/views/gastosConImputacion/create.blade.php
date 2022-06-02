@@ -12,7 +12,7 @@
                 <div class="container">
                     <form wire:submit.prevent="store">
                         @include('gastosConImputacion.partials.tesoreria')
-
+						
 						<div class="card-footer justify-content-center">
 							<button type="submit" class="btn btn-info">{{ __('CREAR COMPROBANTE') }}</button>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeModal">Cerrar</button>
