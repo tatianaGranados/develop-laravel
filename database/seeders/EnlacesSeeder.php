@@ -57,7 +57,7 @@ class EnlacesSeeder extends Seeder
             'updated_at'=>now()
         ]);
         DB::table('enlaces')->insert([
-            'nombre_enlace'  => 'Editar rol usuario',
+            'nombre_enlace'  => 'Editar rol asignado al usuario',
             'ruta'=>'',
             'icono'=>'note_alt',
             'descripcion'=>'Editar rol a usuario de sistema',
@@ -66,7 +66,7 @@ class EnlacesSeeder extends Seeder
             'updated_at'=>now()
         ]);
         DB::table('enlaces')->insert([
-            'nombre_enlace'  => 'Eliminar rol usuario',
+            'nombre_enlace'  => 'Eliminar rol asignado al usuario',
             'ruta'=>'',
             'icono'=>'group_remove',
             'descripcion'=>'Editar rol a usuario de sistema',
@@ -84,7 +84,7 @@ class EnlacesSeeder extends Seeder
             'tipo_acceso'=>2
         ]);
         DB::table('enlaces')->insert([
-            'nombre_enlace'  => 'Crear un nuevo Rol',
+            'nombre_enlace'  => 'Crear Nuevo Rol',
             'ruta'=>'',
             'icono'=>'playlist_add_check',
             'descripcion'=>'Crear un nuevo tipo de rol con nuevos accesos',
@@ -98,7 +98,7 @@ class EnlacesSeeder extends Seeder
             'tipo_acceso'=>2
         ]);
         DB::table('enlaces')->insert([
-            'nombre_enlace'  => 'eliminar Rol',
+            'nombre_enlace'  => 'Eliminar Rol',
             'ruta'=>'',
             'icono'=>'delete_forever',
             'descripcion'=>'Eliminar tipo de rol y todos los permisos asignados al mismo',

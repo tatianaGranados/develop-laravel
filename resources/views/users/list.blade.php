@@ -1,12 +1,13 @@
 <div>
     @if(in_array(2, $permisos))
-    <div class="text-center container">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createUser">
-            <span class="material-icons">person_add</span> Crear Nuevo Usuario
-        </button>	
-    </div>
+        <div class="text-center container">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createUser">
+                <span class="material-icons">person_add</span> Crear Nuevo Usuario
+            </button>	
+        </div>
+        @include('users.create')
     @endif
-    @include('users.create')
+    
 
     <div class="input-group">
         <input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
@@ -73,11 +74,24 @@
         </tbody>
     </table>
  </div>
- {{$users->links()}}
- @include('users.show') 
- @include('users.edit')
- @include('errors.modalDelete',['nota'=>'USUARIO: '.$this->paterno.' '.$this->materno.' '.$this->nombres]) 
- @include('users.createRol')
- @include('users.editRol')
- @include('users.deleteRol')
+    {{$users->links()}}
+
+    @if(in_array(1, $permisos))
+        @include('users.show')
+    @endif
+    @if(in_array(3, $permisos)) 
+        @include('users.edit')
+    @endif
+    @if(in_array(4, $permisos)) 
+        @include('errors.modalDelete',['nota'=>'USUARIO: '.$this->paterno.' '.$this->materno.' '.$this->nombres]) 
+    @endif
+    @if(in_array(5, $permisos))    
+        @include('users.createRol')
+    @endif
+    @if(in_array(6, $permisos))
+        @include('users.editRol')
+    @endif
+    @if(in_array(7, $permisos))
+        @include('users.deleteRol')
+    @endif
 </div>

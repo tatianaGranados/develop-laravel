@@ -19,6 +19,7 @@ class Permisos extends Component
     public $accesos;
     
     public $roles;
+    public $enlaces;
     public $enlaceUsuarios;
     public $enlacePermisos;
  
@@ -40,6 +41,7 @@ class Permisos extends Component
     public function render()
     {
         $this->roles = TipoRol::all(); 
+        $this->enlaces  = Enlace::all();
 
         $this->enlaceUsuarios  = Enlace::where('tipo_acceso',1)->get();
         $this->enlacePermisos  = Enlace::where('tipo_acceso',2)->get();
@@ -111,7 +113,7 @@ class Permisos extends Component
                 $acceso->save();
             }
         }
-        
+
         $this->dispatchBrowserEvent('close-modal');
         $this->dispatchBrowserEvent('alert',['message'=>'Rol Modificado con exito ...!!!']);     
     }

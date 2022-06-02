@@ -1,8 +1,10 @@
 <div class="container">
-    <div class="text-center">
-      	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#createPer"><span class="material-icons">add </span>CREAR NUEVO ROL</button>
-    </div>
-    @include('permisos.create')
+    @if(in_array(9, Auth::user()->AccesosUserAuth))
+        <div class="text-center">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createPer"><span class="material-icons">add </span>CREAR NUEVO ROL</button>
+        </div>
+        @include('permisos.create')
+    @endif
 
     <div class="table-responsive">
 		<table class="table table-condensed table-bordered table-striped">
@@ -19,10 +21,16 @@
 						<td>{{$loop->iteration}} </td>
 						<td>{{$rol->tipo_rol}}   </td>
 						<td class="td-actions text-center">
-                            <button wire:click="showPer({{$rol->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showPer"><span class="material-icons">format_list_bulleted</span></button>
-							<button wire:click="editPer({{$rol->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editPer"><span class="material-icons">create</span></button>
-							<button wire:click="editPer({{$rol->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
-						</td>
+                            @if(in_array(8, Auth::user()->AccesosUserAuth))
+                                <button wire:click="showPer({{$rol->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showPer"><span class="material-icons">format_list_bulleted</span></button>
+                            @endif
+                            @if(in_array(10, Auth::user()->AccesosUserAuth))
+                                <button wire:click="editPer({{$rol->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editPer"><span class="material-icons">create</span></button>
+                            @endif
+                            @if(in_array(11, Auth::user()->AccesosUserAuth))
+                                <button wire:click="editPer({{$rol->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
+                            @endif
+                            </td>
 					</tr>
 				@empty
 					<tr>
@@ -32,9 +40,15 @@
 			</tbody>
 		</table>
     </div>
-    @include('permisos.show') 
-    @include('permisos.edit') 
-	@include('errors.modalDelete',['nota'=>'Elimando rol: '.$this->tipo_rol]) 
+    @if(in_array(8, Auth::user()->AccesosUserAuth))
+        @include('permisos.show') 
+    @endif
+    @if(in_array(9, Auth::user()->AccesosUserAuth))
+        @include('permisos.edit') 
+    @endif
+    @if(in_array(11, Auth::user()->AccesosUserAuth))   
+        @include('errors.modalDelete',['nota'=>'Elimando rol: '.$this->tipo_rol]) 
+    @endif
 </div>    
   
   

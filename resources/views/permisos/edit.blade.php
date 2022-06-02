@@ -36,11 +36,11 @@
                                     <th class="no-padding"><strong>NRO               </strong></th>
                                     <th class="no-padding"><strong>NOMBRE DEL ACCESO </strong></th>
                                     <th class="no-padding"><strong>ACCESO ASIGNADO   </strong></th>
-                                    <th class="no-padding"><strong>ASIGNADO          </strong></th>
+                                    <th class="no-padding"><strong>ASIGNAR          </strong></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    @foreach( $enlaceUsuarios as $enlace)
+                                    @foreach( $enlaces as $enlace)
                                         <tr>
                                             <td class="text-center no-padding" >{{ $enlace->id }}</td>
                                             <td class="no-padding">
