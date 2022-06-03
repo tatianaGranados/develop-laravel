@@ -165,51 +165,46 @@ class EnlacesSeeder extends Seeder
             'descripcion'=>'Eliminar comprobante con imputacion',
             'tipo_acceso'=>4
         ]);
+    
+    //5 gastos sin imputacion
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Ver Gastos Sin Imputación/ Cierre',
+            'ruta'=>'',
+            'icono'=>'view_list',
+            'descripcion'=>'Lista gasto sin imputacion presuspuestaria para el sistema y su detalle',
+            'tipo_acceso'=>5
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Crear Nuevo comprobante sin Imputación - Rol tesoreria',
+            'ruta'=>'',
+            'icono'=>'note_add',
+            'descripcion'=>'Crear nuevo gasto si imputacion',
+            'tipo_acceso'=>5
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Editar comprobante sin Imputación - Rol tesoreria',
+            'ruta'=>'',
+            'icono'=>'note_add',
+            'descripcion'=>'Editar comprobante sin imputacion para el rol tesoreria',
+            'tipo_acceso'=>5
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Editar comprobante sin Imputación - Rol Caja',
+            'ruta'=>'',
+            'icono'=>'edit',
+            'descripcion'=>'Editar comprobante sin Imputación - Rol Caja',
+            'tipo_acceso'=>5
+        ]);
+
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Eliminar Comprobante sin Imputación',
+            'ruta'=>'',
+            'icono'=>'delete_forever',
+            'descripcion'=>'Eliminar comprobante sin imputacion',
+            'tipo_acceso'=>5
+        ]);
         
 
-    // //4 gastos sin imputacion
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'listar gasto sin imputación',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Lista gasto sin imputacion presuspuestaria',
-    //         'tipo_acceso'=>4
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'crear gasto sin imputación',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Crea gasto sin imputacion con todo los datos',
-    //         'tipo_acceso'=>4
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'editar gastos sin imputación total',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Edita todos los campos de gasto con imputacion',
-    //         'tipo_acceso'=>4
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'editar gastos base',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Edita todos los campos basico de gasto con imputacion',
-    //         'tipo_acceso'=>4
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Eliminar gasto sin imputación',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Lista gasto sin imputacion presuspuestaria',
-    //         'tipo_acceso'=>4
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Eliminar gasto sin imputación todos',
-    //         'ruta'=>'',
-    //         'icono'=>'',
-    //         'descripcion'=>'Eliminar todos sin imputacion presuspuestaria',
-    //         'tipo_acceso'=>4
-    //     ]);
 
     // //5 prestamos y devoluciones
     //     DB::table('enlaces')->insert([

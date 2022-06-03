@@ -24,7 +24,8 @@ class Permisos extends Component
     public $enlacePermisos;
     public $enlaceGestiones;
     public $enlaceGastosConImp;
- 
+    public $enlaceGastosSinImp;
+
 
     protected function rules()
     {
@@ -49,7 +50,7 @@ class Permisos extends Component
         $this->enlacePermisos  = Enlace::where('tipo_acceso',2)->get();
         $this->enlaceGestiones = Enlace::where('tipo_acceso',3)->get();
         $this->enlaceGastosConImp = Enlace::where('tipo_acceso',4)->get();
-        // $enlaceGastosSinImp = Enlace::where('tipo_acceso',4)->get();
+        $this->enlaceGastosSinImp = Enlace::where('tipo_acceso',5)->get();
         // $enlacePresDev      = Enlace::where('tipo_acceso',5)->get();
         // $enlacePermisos     = Enlace::where('tipo_acceso',7)->get();
 

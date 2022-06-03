@@ -8,9 +8,13 @@
         <ul>
             <li><a href=""><img width="50" height="30" src="{{ asset('img') }}/logo_eupg.png"></a></li>
 
-            <li><a href="{{ route('gastosConImp') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
+            @if(in_array(15, $per) || in_array(16, $per) || in_array(17, $per) || in_array(18, $per) || in_array(19, $per))
+              <li><a href="{{ route('gastosConImp') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
+            @endif
 
-            <li><a href=""><i class="material-icons">grading</i> GASTOS SIN IMPUT(CIERRE)</a></li>
+            @if(in_array(20, $per) || in_array(21, $per) || in_array(22, $per) || in_array(23, $per) || in_array(24, $per))
+              <li><a href="{{ route('gastosSinImp') }}"><i class="material-icons">grading</i> GASTOS SIN IMPUT(CIERRE)</a></li>
+            @endif
 
             @if(in_array(12, $per) || in_array(13, $per) || in_array(14, $per))
               <li><a href="{{ route('gestiones') }}"><i class="material-icons">article</i> ADM. GESTIONES</a></li>

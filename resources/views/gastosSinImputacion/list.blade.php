@@ -10,13 +10,13 @@
 		</div>
 	</div>
 	<br>
-	@if(in_array(16, $permisos))
+	@if(in_array(21, $permisos))
 		<div class="text-right container">
-			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#create">
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#createGsi">
 				<span class="material-icons">note_add</span> Crear Nuevo Comprobante
 			</button>	
 		</div>
-		@include('gastosConImputacion.create')
+		@include('gastosSinImputacion.create')
 	@endif
 
 	<div class="input-group">
@@ -28,9 +28,8 @@
 		<table class="table table-condensed table-bordered table-striped">
 			<thead class="text-center" style="font-size: 13px;">
 				<tr class="table-info" style="font-size: 13px;">
-					<th style="font-size: 13px;"><strong>N° Compr 		</strong></th>
-					<th style="font-size: 13px;"><strong>N° Prev		</strong></th>
-					<th style="font-size: 13px;"><strong>Fecha Comp 	</strong></th>
+					<th style="font-size: 13px;"><strong>N° Dev 		</strong></th>
+                    <th style="font-size: 13px;"><strong>Fecha Devengado</strong></th>
 					<th style="font-size: 13px;"><strong>Sello   		</strong></th>
 					<th style="font-size: 13px;"><strong>Nro Cheque 	</strong></th>
 					<th style="font-size: 13px;"><strong>Fecha Cheque 	</strong></th>
@@ -38,19 +37,14 @@
 					<th style="font-size: 13px;"><strong>Unidad 		</strong></th>
 					<th style="font-size: 13px;"><strong>Detalle 		</strong></th>
 					<th style="font-size: 13px;"><strong>Liquido Pagable</strong></th>
-					<th style="font-size: 13px;"><strong>Total Retención</strong></th>
-					<th style="font-size: 13px;"><strong>Total Multas 	</strong></th>
-					<th style="font-size: 13px;"><strong>Total Garantia </strong></th>
-					<th style="font-size: 13px;"><strong>Factura		</strong></th>
 					<th style="font-size: 13px; width: 120px;"><strong>Acciones		</strong></th>
 				</tr>
 			</thead>
 			<tbody>
 				@forelse ($gastos as $gasto)
 					<tr style="font-size: 13px;">
-						<td>{{ $gasto->nro_comprobante}}  </td>
-						<td>{{ $gasto->nro_preventivo}}   </td>
-						<td>{{ $gasto->fecha_comprobante}}</td>
+						<td>{{ $gasto->nro_devengado}}    </td>
+						<td>{{ $gasto->fecha_devengado}}</td>
 						<td>{{ $gasto->sello}} 			  </td>
 						<td>{{ $gasto->nro_cheque}} 	  </td>
 						<td>{{ $gasto->fecha_cheque}} 	  </td>
@@ -58,18 +52,14 @@
 						<td>{{ $gasto->nombre_unidad}} 	  </td>
 						<td>{{ $gasto->detalle}} 		  </td>
 						<td>{{ $gasto->liquido_pagable}}  </td>
-						<td>{{ $gasto->total_retencion}}  </td>
-						<td>{{ $gasto->total_multas}} 	  </td>
-						<td>{{ $gasto->total_garantia}}   </td>
-						<td>{{ $gasto->emite_factura}} 	  </td>
 						<td class="td-actions text-center">
-							@if( in_array(15, $permisos))
-								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#show"><span class="material-icons">insert_drive_file</span></button>
+							@if( in_array(20, $permisos))
+								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showGsi"><span class="material-icons">insert_drive_file</span></button>
 							@endif	
-							@if( (in_array(17, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(18, $permisos) && $gasto->pagado =='NO' ))
-								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
+							@if( (in_array(22, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(23, $permisos) && $gasto->pagado =='NO' ))
+								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editGsi"><span class="material-icons">create</span></button>
 							@endif
-							@if (in_array(19, $permisos) && $gasto->enviado_caja =='NO')
+							@if (in_array(24, $permisos) && $gasto->enviado_caja =='NO')
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
 							@endif
 						</td>
@@ -83,13 +73,14 @@
 		</table>
 	</div>
  {{$gastos->links()}}
-@if( in_array(15, $permisos))
- 	@include('gastosConImputacion.show') 
+@if( in_array(20, $permisos))
+    @include('gastosSinImputacion.show') 
 @endif	
-@if( (in_array(17, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(18, $permisos) && $gasto->pagado =='NO' ))
- 	@include('gastosConImputacion.edit') 
+@if( (in_array(22, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(23, $permisos) && $gasto->pagado =='NO' ))
+    @include('gastosSinImputacion.edit') 
 @endif
 @if (in_array(19, $permisos) && $gasto->enviado_caja =='NO')
- 	@include('errors.modalDelete',['nota'=>'Comprobante: '.$this->nro_comprobante])
-@endif 
+    @include('errors.modalDelete',['nota'=>'Comprobante: '.$this->nro_devengado]) 
+
+@endif  
 </div>

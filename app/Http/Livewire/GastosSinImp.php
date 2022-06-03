@@ -2,15 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\GastoConImputacion;
-use App\Models\Gestion;
-use App\Models\Unidad;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Gestion;
+use App\Models\Unidad;
+use App\Models\GastoSinImputacion;
 
-class GastosConImp extends Component
+class GastosSinImp extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -23,16 +23,10 @@ class GastosConImp extends Component
     public $search = '';
 
     public $id_unidad, $unidad, $unidades; 
-    public $nro_comprobante, $fecha_comprobante, $nro_preventivo, $sello,$nro_hojas, $beneficiario, $detalle;
+    public $nro_devengado, $fecha_devengado, $sello, $nro_hojas, $beneficiario, $detalle;
     public $nro_cheque = null;
     public $fecha_cheque = null;
-    public $total_autorizado = 0;
-    public $iue = 0;
-    public $it = 0;
-    public $total_retencion = 0;
-    public $total_multas = 0;
     public $liquido_pagable = 0;
-    public $total_garantia = 0;
     public $emite_factura = 'NO';
     public $enviado_caja = 0;
 
@@ -46,9 +40,8 @@ class GastosConImp extends Component
 
     protected function rules()
     {
-        return ['nro_comprobante'   => ['required','max:9000'],
-                'nro_preventivo'    => ['required','max:8000','integer'],
-                'fecha_comprobante' => ['date','required'],
+        return ['nro_devengado'   => ['required','max:9000'],
+                'fecha_devengado' => ['date','required'],
                 'sello'             => ['required','max:15','regex:/[1-9]/'],
                 'nro_hojas'         => ['integer','max:900','required'],
                 'id_unidad'         => 'required',
@@ -57,12 +50,6 @@ class GastosConImp extends Component
                 'emite_factura'     => 'required',
                 'nro_cheque'        => [$this->enviado_caja == 0 || $this->enviado_caja == '' ? 'nullable' : 'required','integer'],
                 'fecha_cheque'      => [$this->enviado_caja == 0 || $this->enviado_caja == '' ? 'nullable' : 'required','date'],
-                'total_autorizado'  => ['required','numeric','regex:/^[\d]{0,12}(\.[\d]{1,2})?$/'],
-                'iue'               => ['required','numeric','regex:/^[\d]{0,11}(\.[\d]{1,2})?$/'],
-                'it'                => ['required','numeric','regex:/^[\d]{0,8}(\.[\d]{1,2})?$/'],
-                'total_retencion'   => ['required','numeric','regex:/^[\d]{0,8}(\.[\d]{1,2})?$/'],
-                'total_multas'      => ['required','numeric','regex:/^[\d]{0,8}(\.[\d]{1,2})?$/'],
-                'total_garantia'    => ['required','numeric','regex:/^[\d]{0,12}(\.[\d]{1,2})?$/'],
                 'liquido_pagable'   => ['required','numeric','regex:/^[\d]{0,12}(\.[\d]{1,2})?$/'],
                 
                 // validacion caja
@@ -81,10 +68,9 @@ class GastosConImp extends Component
     {
         switch ($this->permisos) {
             case (in_array(17, $this->permisos)):
-                $gastos = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $this->id_gestion)
+                $gastos = DB::table('view_gastos_sin_imputacion')->where('id_gestion','=', $this->id_gestion)
                     ->Where(function($sub_query){
-                        $sub_query->Where('nro_comprobante','LIKE', '%' . $this->search. '%')
-                        ->orWhere('nro_preventivo','LIKE', '%' . $this->search. '%')
+                        $sub_query->Where('nro_devengado','LIKE', '%' . $this->search. '%')
                         ->orWhere('sello','LIKE', '%' . $this->search. '%')
                         ->orWhere('beneficiario','LIKE', '%' . $this->search. '%')
                         ->orWhere('detalle','LIKE', '%' . $this->search. '%')
@@ -96,10 +82,9 @@ class GastosConImp extends Component
 
                 break; 
             case (in_array(18, $this->permisos)):
-                $gastos = DB::table('view_gastos_con_imputacion')->where([['id_gestion','=', $this->id_gestion],['enviado_caja','=','SI']])
+                $gastos = DB::table('view_gastos_sin_imputacion')->where([['id_gestion','=', $this->id_gestion],['enviado_caja','=','SI']])
                     ->Where(function($sub_query){
-                        $sub_query->Where('nro_comprobante','LIKE', '%' . $this->search. '%')
-                        ->orWhere('nro_preventivo','LIKE', '%' . $this->search. '%')
+                        $sub_query->Where('nro_devengado','LIKE', '%' . $this->search. '%')
                         ->orWhere('sello','LIKE', '%' . $this->search. '%')
                         ->orWhere('beneficiario','LIKE', '%' . $this->search. '%')
                         ->orWhere('detalle','LIKE', '%' . $this->search. '%')
@@ -111,10 +96,9 @@ class GastosConImp extends Component
 
                 break;
             default:
-                $gastos = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $this->id_gestion)
+                $gastos = DB::table('view_gastos_sin_imputacion')->where('id_gestion','=', $this->id_gestion)
                     ->Where(function($sub_query){
-                        $sub_query->Where('nro_comprobante','LIKE', '%' . $this->search. '%')
-                        ->orWhere('nro_preventivo','LIKE', '%' . $this->search. '%')
+                        $sub_query->Where('nro_devengado','LIKE', '%' . $this->search. '%')
                         ->orWhere('sello','LIKE', '%' . $this->search. '%')
                         ->orWhere('beneficiario','LIKE', '%' . $this->search. '%')
                         ->orWhere('detalle','LIKE', '%' . $this->search. '%')
@@ -129,11 +113,8 @@ class GastosConImp extends Component
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
         $this->unidades  = Unidad::all()->pluck('nombre_unidad','id');
 
-        $this->calcLiquidoPagable();
-
-        return view('gastosConImputacion.list',['gastos'=> $gastos]);
+        return view('gastosSinImputacion.list',['gastos'=> $gastos]);
     }
-
     public function changeEvent($id){
         $this->id_gestion = $id;
         $this->compUtimo($id);
@@ -141,56 +122,31 @@ class GastosConImp extends Component
 
     public function compUtimo($id)
     {
-        $compUltimo   = GastoConImputacion::where('id_gestion',$id)->orderby('nro_comprobante', 'desc')->get();
+        $compUltimo   = GastoSinImputacion::where('id_gestion',$id)->orderby('nro_devengado', 'desc')->get();
         if($compUltimo->isEmpty())
         {
-            $this->nro_comprobante =1;
+            $this->nro_devengado =1;
         }else{
-            $compUltimo= $compUltimo->first()->nro_comprobante;
-            $this->nro_comprobante = 1 + (int)$compUltimo;
-        }
-    }
-
-    public function calcLiquidoPagable(){
-        if( $this->total_autorizado>=0){
-            if($this->emite_factura == 'SI'){
-                $this->iue = 0;
-                $this->it = 0;
-                $this->total_retencion = 0;
-            }else{
-                $this->iue = round(($this->total_autorizado)* 0.125,2);
-                $this->it  = round(($this->total_autorizado)* 0.03,2);
-                $this->total_retencion = round(($this->iue) + ($this->it),2);
-            }
-
-            if($this->total_retencion>=0 && $this->total_multas>=0 && $this->total_garantia>=0){
-                $this->liquido_pagable = round(($this->total_autorizado) + ($this->total_garantia) - ($this->total_retencion) - ($this->total_multas),2);
-            }
+            $compUltimo= $compUltimo->first()->nro_devengado;
+            $this->nro_devengado = 1 + (int)$compUltimo;
         }
     }
 
     public function store()
     {
         $this->validate();
-        $compGasto= new GastoConImputacion([
+        $compGasto= new GastoSinImputacion([
             'id_gestion'        => $this->id_gestion,
             'id_unidad'         => $this->id_unidad,
-            'nro_comprobante'   => $this->nro_comprobante,
-            'nro_preventivo'    => $this->nro_preventivo,
-            'fecha_comprobante' => $this->fecha_comprobante,
+            'nro_devengado'     => $this->nro_devengado,
+            'fecha_devengado'   => $this->fecha_devengado,
             'sello'             => $this->sello,
             'nro_hojas'         => $this->nro_hojas,
             'beneficiario'      => $this->beneficiario,
             'detalle'           => $this->detalle,
             'nro_cheque'        => $this-> nro_cheque,
             'fecha_cheque'      => $this-> fecha_cheque,
-            'total_autorizado'  => $this->total_autorizado,
             'emite_factura'     => $this->emite_factura,
-            'iue'               => $this->iue,
-            'it'                => $this->it,
-            'total_retencion'   => $this->total_retencion,
-            'total_multas'      => $this->total_multas,
-            'total_garantia'    => $this->total_garantia,
             'liquido_pagable'   => $this->liquido_pagable,
             'enviado_caja'      => $this->enviado_caja == 1 ? 'SI' : 'NO',
             'ult_usuario'       => Auth::User()->username,
@@ -205,22 +161,15 @@ class GastosConImp extends Component
 
     public function show($id)
     {
-        $gci = DB::table('view_gastos_con_imputacion')->where('id',$id)->first();
-        $this->nro_comprobante = $gci->nro_comprobante;
-        $this->nro_preventivo        = $gci->nro_preventivo;
-        $this->fecha_comprobante     = $gci->fecha_comprobante;
+        $gci = DB::table('view_gastos_sin_imputacion')->where('id',$id)->first();
+        $this->nro_devengado         = $gci->nro_devengado;
+        $this->fecha_devengado       = $gci->fecha_devengado;
         $this->sello                 = $gci->sello;
         $this->beneficiario          = $gci->beneficiario;
         $this->detalle               = $gci->detalle;
         $this->nro_cheque            = $gci->nro_cheque;
         $this->fecha_cheque          = $gci->fecha_cheque;
-        $this->total_autorizado      = $gci->total_autorizado;
-        $this->iue                   = $gci->iue;
-        $this->it                    = $gci->it;
-        $this->total_retencion       = $gci->total_retencion;
-        $this->total_multas          = $gci->total_multas;
         $this->liquido_pagable       = $gci->liquido_pagable;
-        $this->total_garantia        = $gci->total_garantia;
         $this->nro_hojas             = $gci->nro_hojas;
         $this->nro_tomo              = $gci->nro_tomo;
         $this->observacion_pago      = $gci->observacion_pago;
@@ -236,23 +185,16 @@ class GastosConImp extends Component
     }
 
     public function edit($id){
-        $gci =  DB::table('view_gastos_con_imputacion')->where('id', $id)->first();
+        $gci =  DB::table('view_gastos_sin_imputacion')->where('id', $id)->first();
         $this->id_gasto              = $gci->id;
-        $this->nro_comprobante       = $gci->nro_comprobante;
-        $this->nro_preventivo        = $gci->nro_preventivo;
-        $this->fecha_comprobante     = $gci->fecha_comprobante;
+        $this->nro_devengado         = $gci->nro_devengado;
+        $this->fecha_devengado       = $gci->fecha_devengado;
         $this->sello                 = $gci->sello;
         $this->beneficiario          = $gci->beneficiario;
         $this->detalle               = $gci->detalle;
         $this->nro_cheque            = $gci->nro_cheque;
         $this->fecha_cheque          = $gci->fecha_cheque;
-        $this->total_autorizado      = $gci->total_autorizado;
-        $this->iue                   = $gci->iue;
-        $this->it                    = $gci->it;
-        $this->total_retencion       = $gci->total_retencion;
-        $this->total_multas          = $gci->total_multas;
         $this->liquido_pagable       = $gci->liquido_pagable;
-        $this->total_garantia        = $gci->total_garantia;
         $this->nro_hojas             = $gci->nro_hojas;
         $this->nro_tomo              = $gci->nro_tomo;
         $this->observacion_pago      = $gci->observacion_pago;
@@ -264,7 +206,6 @@ class GastosConImp extends Component
         $this->fecha_entrega_pago    = $gci->fecha_entrega_pago;
         $this->fecha_archivado       = $gci->fecha_archivado;
         $this->unidad                = $gci->nombre_unidad;
-        $this->emite_factura         = $gci->emite_factura;
         $this->id_unidad             = $gci->id_unidad;
 
     }
@@ -273,11 +214,10 @@ class GastosConImp extends Component
     {
         $validatedData = $this->validate();
 
-        GastoConImputacion::where('id', $this->id_gasto)->update([
+        GastoSinImputacion::where('id', $this->id_gasto)->update([
             // edit tesoreria
-            'nro_comprobante'   => $validatedData['nro_comprobante'],
-            'nro_preventivo'    => $validatedData['nro_preventivo'],
-            'fecha_comprobante' => $validatedData['fecha_comprobante'],
+            'nro_devengado'   => $validatedData['nro_devengado'],
+            'fecha_devengado' => $validatedData['fecha_devengado'],
             'sello'             => $validatedData['sello'],
             'nro_hojas'         => $validatedData['nro_hojas'],
             'id_unidad'         => $validatedData['id_unidad'],
@@ -285,13 +225,6 @@ class GastosConImp extends Component
             'detalle'           => $validatedData['detalle'],
             'nro_cheque'        => $validatedData['nro_cheque'],
             'fecha_cheque'      => $validatedData['fecha_cheque'],
-            'total_autorizado'  => $validatedData['total_autorizado'],
-            'emite_factura'     => $validatedData['emite_factura'],
-            'iue'               => $validatedData['iue'],
-            'it'                => $validatedData['it'],
-            'total_retencion'   => $validatedData['total_retencion'],
-            'total_multas'      => $validatedData['total_multas'],
-            'total_garantia'    => $validatedData['total_garantia'],
             'liquido_pagable'   => $validatedData['liquido_pagable'],
             'enviado_caja'      => $this->enviado_caja == 0 ? 'NO' : 'SI',
 
@@ -306,12 +239,12 @@ class GastosConImp extends Component
 
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
-        $this->dispatchBrowserEvent('alert',['message'=>'Comprobante '.$this->nro_comprobante.' actualizado con exito ...!!!']);
+        $this->dispatchBrowserEvent('alert',['message'=>'Comprobante '.$this->nro_devengado.' actualizado con exito ...!!!']);
     }
 
     public function destroy()
     {
-        GastoConImputacion::find($this->id_gasto)->delete();
+        GastoSinImputacion::find($this->id_gasto)->delete();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->dispatchBrowserEvent('alert',['message'=>'Comprobante Eliminado con exito ...!!!']);
@@ -320,21 +253,15 @@ class GastosConImp extends Component
     public function resetInput()
     {
         $this->id_unidad             ='';
-        $this->fecha_comprobante     ='';
-        $this->nro_preventivo        ='';
+        $this->nro_devengado         ='';
+        $this->fecha_devengado       ='';
         $this->sello                 ='';
         $this->beneficiario          ='';
         $this->detalle               ='';
         $this->nro_cheque            = null;
         $this->fecha_cheque          = null;
-        $this->total_autorizado      = 0;
         $this->emite_factura         ='NO';
-        $this->iue                   = 0;
-        $this->it                    = 0;
-        $this->total_retencion       = 0;
-        $this->total_multas          = 0;
         $this->liquido_pagable       = 0;
-        $this->total_garantia        = 0;
         $this->nro_hojas             ='';
         $this->nro_tomo              ='';
         $this->observacion_pago      ='';
