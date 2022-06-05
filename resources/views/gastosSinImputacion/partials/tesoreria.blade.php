@@ -45,7 +45,7 @@
     <div class="form-group col-md-4">
         <span class="material-icons" style="font-size: 15px;">monetization_on</span>
         <label for="liquidoP">Liquido Pagable:</label>
-        <input type="text" class="form-control" id="liquidoP" wire:model="liquido_pagable">
+        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="liquidoP"  wire:model="liquido_pagable">
         @error('liquidoP')
 	        <span class="text-danger">{{$message}}</span>
         @enderror

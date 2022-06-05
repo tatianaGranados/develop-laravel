@@ -76,10 +76,10 @@
 @if( in_array(20, $permisos))
     @include('gastosSinImputacion.show') 
 @endif	
-@if( (in_array(22, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(23, $permisos) && $gasto->pagado =='NO' ))
+@if(in_array(22, $permisos))
     @include('gastosSinImputacion.edit') 
 @endif
-@if (in_array(19, $permisos) && $gasto->enviado_caja =='NO')
+@if (in_array(19, $permisos))
     @include('errors.modalDelete',['nota'=>'Comprobante: '.$this->nro_devengado]) 
 
 @endif  
