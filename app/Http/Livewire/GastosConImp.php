@@ -33,6 +33,7 @@ class GastosConImp extends Component
     public $total_multas = 0;
     public $liquido_pagable = 0;
     public $total_garantia = 0;
+    
     public $emite_factura = 'NO';
     public $enviado_caja = 0;
 
@@ -92,6 +93,7 @@ class GastosConImp extends Component
                         ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
                         ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
                     })
+                    ->orderBy('nro_comprobante','desc')
                     ->paginate(50);
 
                 break; 
@@ -107,6 +109,7 @@ class GastosConImp extends Component
                         ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
                         ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
                     })
+                    ->orderBy('nro_comprobante','desc')
                     ->paginate(50);
 
                 break;
@@ -122,6 +125,7 @@ class GastosConImp extends Component
                         ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
                         ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
                     })
+                    ->orderBy('nro_comprobante','desc')
                     ->paginate(50);
                 break;
         }
@@ -164,7 +168,7 @@ class GastosConImp extends Component
             }
 
             if($this->total_retencion>=0 && $this->total_multas>=0 && $this->total_garantia>=0){
-                $this->liquido_pagable = round(($this->total_autorizado) + ($this->total_garantia) - ($this->total_retencion) - ($this->total_multas),2);
+                $this->liquido_pagable = round(($this->total_autorizado) - ($this->total_garantia) - ($this->total_retencion) - ($this->total_multas),2);
             }
         }
     }

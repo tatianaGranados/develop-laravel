@@ -28,12 +28,12 @@ class HomeController extends Controller
             $gastos = DB::table('view_gastos_con_imputacion')
                     ->where('id_gestion', $id_gestion)
                     ->where('id_unidad', $id_unidad)
-                    ->where('cheque_listo', 'SI ')
+                    ->where([['cheque_listo', 'SI '],['pagado','NO']])
                     ->get();
         }else{
             $gastos = DB::table('view_gastos_con_imputacion')
                     ->where('id_gestion', $id_gestion)
-                    ->where('cheque_listo', 'SI ')
+                    ->where([['cheque_listo', 'SI '],['pagado','NO']])
                     ->get();
         }
         

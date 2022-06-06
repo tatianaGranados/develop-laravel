@@ -12,9 +12,9 @@
 					@if(in_array(22, $permisos))
 						@include('gastosSinImputacion.partials.tesoreria')
 					@endif
-					{{-- @if(in_array(18, $permisos)) --}}
-                    	{{-- @include('gastosSinImputacion.partials.caja') --}}
-					{{-- @endif --}}
+					@if(in_array(23, $permisos))
+                    	@include('gastosSinImputacion.partials.caja')
+					@endif
 
 					<div class="card-footer justify-content-center">
 						<button type="submit" class="btn btn-info">{{ __('EDITAR COMPROBANTE') }}</button>

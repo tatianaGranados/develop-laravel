@@ -76,7 +76,7 @@
 @if( in_array(20, $permisos))
     @include('gastosSinImputacion.show') 
 @endif	
-@if(in_array(22, $permisos))
+@if(in_array(22, $permisos) || in_array(23, $permisos))
     @include('gastosSinImputacion.edit') 
 @endif
 @if (in_array(19, $permisos))

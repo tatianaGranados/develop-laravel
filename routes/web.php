@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnviarCompAlmacenController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GastosConImpController;
@@ -34,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('gastosConImp',[ GastosConImpController::class,'index'])->name('gastosConImp');
 	Route::get('gastosSinImp',[ GastosSinImpController::class,'index'])->name('gastosSinImp');
 	Route::get('pagosExterior',[ PagoExteriorController::class,'index'])->name('pagosExterior');
+
+	Route::get('enviarAlmacen',[ EnviarCompAlmacenController::class,'index'])->name('enviarAlmacen');
 
 });
 

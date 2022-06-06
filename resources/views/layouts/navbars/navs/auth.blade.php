@@ -24,12 +24,12 @@
               <li><a href="{{ route('pagosExterior') }}"><i class="material-icons">grading</i> PAGOS EXTERIOR</a></li>
             @endif
             
-            <li><a href=""><i class="material-icons">widgets</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
+            {{-- <li><a href=""><i class="material-icons">widgets</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
               <ul class="dropdown-default">
                 <li><a href="">Gastos Con Imputación</a></li>
                 <li><a  href="#0">Gastos Sin Imputación</a></li>
               </ul>
-            </li>
+            </li> --}}
            
             
             @if(in_array(1, $per) || in_array(2, $per) || in_array(3, $per) || in_array(4, $per) || in_array(5, $per) || in_array(6, $per) || in_array(7, $per) ||
@@ -46,13 +46,20 @@
               </li>
             @endif
 
-            <li><a href=""><i class="material-icons">archive</i> ARCHIVAR</a></li>
-            <li><a href="javascript:void(0)" ><i class="material-icons">discount</i>MIGRACIONES <span class="arrow-down"></span></a>
+            <li><a href=""><i class="material-icons">archive</i> ARCHIVADOS</a>
+              <ul class="dropdown-default">
+                <li style="width: 200px;"><a href="{{ route('enviarAlmacen') }}">Enviar Comprobantes - Almacen</a></li>
+                <li style="width: 200px;"><a href="">Archivar Comprobantes</a></li>
+              </ul>  
+            </li>
+
+            {{-- <li><a href="javascript:void(0)" ><i class="material-icons">discount</i>MIGRACIONES <span class="arrow-down"></span></a>
               <ul class="dropdown-default">
                 <li><a href="">Gastos Con Imputación</a></li>
                 <li><a href="">Gastos Sin Imputación</a></li>
               </ul>
-            </li>
+            </li> --}}
+
             <div style="float: right;">
               <li>
                 <a href="#" id="navbarDropdownProfile" >

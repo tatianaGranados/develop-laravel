@@ -86,7 +86,7 @@
 @if( in_array(15, $permisos))
  	@include('gastosConImputacion.show') 
 @endif	
-@if(in_array(17, $permisos))
+@if(in_array(17, $permisos) || in_array(18, $permisos))
  	@include('gastosConImputacion.edit') 
 @endif
 @if (in_array(19, $permisos))
