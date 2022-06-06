@@ -6,7 +6,7 @@
 
     <div class="nav-fostrap" >
         <ul>
-            <li><a href=""><img width="50" height="30" src="{{ asset('img') }}/logo_eupg.png"></a></li>
+            <li><a href="{{ route('home') }}"><img width="50" height="30" src="{{ asset('img') }}/logo_eupg.png"></a></li>
 
             @if(in_array(15, $per) || in_array(16, $per) || in_array(17, $per) || in_array(18, $per) || in_array(19, $per))
               <li><a href="{{ route('gastosConImp') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
@@ -20,6 +20,10 @@
               <li><a href="{{ route('gestiones') }}"><i class="material-icons">article</i> ADM. GESTIONES</a></li>
             @endif
 
+            @if(in_array(25, $per) || in_array(26, $per) || in_array(27, $per)|| in_array(28, $per))
+              <li><a href="{{ route('pagosExterior') }}"><i class="material-icons">grading</i> PAGOS EXTERIOR</a></li>
+            @endif
+            
             <li><a href=""><i class="material-icons">widgets</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
               <ul class="dropdown-default">
                 <li><a href="">Gastos Con Imputación</a></li>

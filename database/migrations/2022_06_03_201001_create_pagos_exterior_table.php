@@ -23,8 +23,8 @@ class CreatePagosExteriorTable extends Migration
             $table->decimal('liquido_pagable')->default(0);
             $table->decimal('pago_comision')->default(0);
             $table->enum('pagado',['SI','NO'])->default('NO');
-            $table->date('fecha_entrega_pago')->nullable();
-            $table->string('observacion_pago')->nullable();
+            // $table->date('fecha_entrega_pago')->nullable();
+            // $table->string('observacion_pago')->nullable();
             $table->enum('enviado_archivo',['SI','NO'])->default('NO');
             
             $table->integer('nro_hojas')->nullable();

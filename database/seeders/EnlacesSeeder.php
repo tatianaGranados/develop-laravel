@@ -204,6 +204,35 @@ class EnlacesSeeder extends Seeder
             'tipo_acceso'=>5
         ]);
         
+    //6 pagos al exterior
+    DB::table('enlaces')->insert([
+        'nombre_enlace'  => 'Ver Pagos al exterior',
+        'ruta'=>'',
+        'icono'=>'view_list',
+        'descripcion'=>'Lista pagos al exterior para el sistema y su detalle',
+        'tipo_acceso'=>6
+    ]);
+    DB::table('enlaces')->insert([
+        'nombre_enlace'  => 'Crear Nuevo Pago al exterior',
+        'ruta'=>'',
+        'icono'=>'note_add',
+        'descripcion'=>'Crear nuevo pago al exterior',
+        'tipo_acceso'=>6
+    ]);
+    DB::table('enlaces')->insert([
+        'nombre_enlace'  => 'Editar Pago al exterior',
+        'ruta'=>'',
+        'icono'=>'note_add',
+        'descripcion'=>'Editar comprobante pago al exterior',
+        'tipo_acceso'=>6
+    ]);
+    DB::table('enlaces')->insert([
+        'nombre_enlace'  => 'Eliminar Pago al exterior',
+        'ruta'=>'',
+        'icono'=>'delete_forever',
+        'descripcion'=>'Eliminar comprobante pago al exterior',
+        'tipo_acceso'=>6
+    ]);
 
 
     // //5 prestamos y devoluciones

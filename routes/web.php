@@ -7,14 +7,13 @@ use App\Http\Controllers\GastosSinImpController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\GestionController;
+use App\Http\Controllers\PagoExteriorController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard',[App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -34,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('permisos',[PermisoController::class,'index'])->name('permisos');
 	Route::get('gastosConImp',[ GastosConImpController::class,'index'])->name('gastosConImp');
 	Route::get('gastosSinImp',[ GastosSinImpController::class,'index'])->name('gastosSinImp');
+	Route::get('pagosExterior',[ PagoExteriorController::class,'index'])->name('pagosExterior');
 
 });
 
