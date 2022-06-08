@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\GestionController;
 use App\Http\Controllers\PagoExteriorController;
+use App\Http\Livewire\EnviarCompAlmacen;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +38,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('pagosExterior',[ PagoExteriorController::class,'index'])->name('pagosExterior');
 
 	Route::get('enviarAlmacen',[ EnviarCompAlmacenController::class,'index'])->name('enviarAlmacen');
+	
+	Route::post('reporte',[ EnviarCompAlmacenController::class,'generarReporte'])->name('reporte');
+	// Route::get('reporte',[ EnviarCompAlmacen::class,'generarReporte'])->name('reporte');
 
 });
 

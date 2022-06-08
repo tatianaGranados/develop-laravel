@@ -10,13 +10,14 @@
 			</div>
 			<div class="modal-body">
                 <div class="container">
-                    <form wire:submit.prevent="generarReporte">
-
+                    <form name="generarReporte" id="generarReporte" method="post" action="{{url('reporte')}}">
+                        {{-- <form name="generarReporte" id="generarReporte" method="post" action="{{url('reporte')}}" target="_blank"> --}}
+                        @csrf
                         <div class="form_group row form-blue">
                             <div class="form-group col-md-6">
                                 <span class="material-icons" style="font-size: 15px;">description</span>
                                 <label for="nro_cheque">Nro Informe:</label>
-                                <input type="text" class="form-control" id="nro_informe" placeholder="nro cheque" wire:model="nro_informe">
+                                <input type="text" wire:model="nro_informe" class="form-control" id="nro_informe" placeholder="nro cheque" name="nro_informe" required>
                                 @error('nro_informe')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -25,7 +26,7 @@
                             <div class="form-group col-md-6">
                                 <span class="material-icons" style="font-size: 15px;">event</span>
                                 <label for="fecha_entrega_informe">Fecha entrega:</label>
-                                <input type="date" class="form-control" id="fecha_entrega_informe" wire:model="fecha_entrega_informe">
+                                <input type="date" wire:model="fecha_entrega_informe" value="<?php echo date("Y-m-d");?>" class="form-control" id="fecha_entrega_informe" name="fecha_entrega_informe" required>
                                 @error('fecha_entrega_informe')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -47,23 +48,55 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($reporteGci as $gasto)
-                                    <tr style="font-size: 13px;">
-                                        <td class="text-center">{{$loop->iteration}}</td>
-                                        <td>{{ $gasto->beneficiario}} 	   </td>
-                                        <td>{{ $gasto->nro_cheque}} 	   </td>
-                                        <td>{{ $gasto->liquido_pagable}}   </td>
-                                        <td>{{ $gasto->fecha_entrega_pago}}</td>
-                                        <td>{{ $gasto->nombre_unidad}} 	   </td>
-                                        <td>{{ $gasto->observacion_pago}}  </td>
-                                        <td>{{ $gasto->sello}} 			   </td>
-                                    </tr>
-				@endforeach --}}
+                                    @foreach ($repAgrupadosGci as $gasto)
+                                        <tr style="font-size: 13px;">
+                                            <input name="agrupadoGi[]" value="{{ $gasto->id }}" hidden>
+                                            <td class="text-center">{{$loop->iteration}}</td>
+                                            <td>{{ $gasto->beneficiario}} 	   </td>
+                                            <td>{{ $gasto->nro_cheque}} 	   </td>
+                                            <td>{{ $gasto->liquido_pagable}}   </td>
+                                            <td>{{ $gasto->fecha_entrega_pago}}</td>
+                                            <td>{{ $gasto->nombre_unidad}} 	   </td>
+                                            <td>{{ $gasto->observacion_pago}}  </td>
+                                            <td>{{ $gasto->sello}} 			   </td> 
+                                        </tr>
+                                        @php
+                                            $iter= $loop->count;
+                                        @endphp
+                                        
+                                    @endforeach
+
+                                    @foreach ($repAgrupadosGsi as $gasto)
+                                        <tr style="font-size: 13px;">
+                                            <input name="agrupadoSi[]" value="{{ $gasto->id }}" hidden>
+                                            <td class="text-center">{{$loop->iteration + $iter }}</td>
+                                            <td>{{ $gasto->beneficiario}} 	   </td>
+                                            <td>{{ $gasto->nro_cheque}} 	   </td>
+                                            <td>{{ $gasto->liquido_pagable}}   </td>
+                                            <td>{{ $gasto->fecha_entrega_pago}}</td>
+                                            <td>{{ $gasto->nombre_unidad}} 	   </td>
+                                            <td>{{ $gasto->observacion_pago}}  </td>
+                                            <td>{{ $gasto->sello}} 			   </td>
+                                        </tr>
+                                    @endforeach
+
+                                    @if($repAgrupadosGci->isEmpty() && $repAgrupadosGsi->isEmpty() )
+                                        <tr>
+                                            <td colspan="8" class="text-center">
+                                                <p style="color: red; font-weight: 800;">No existe ningun archivo seleccionado * DEBE SELECCIONAR AL MENOS UNO *</p> 
+                                            </td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
+                            <div class="shadow-lg mb-3 rounded text-center" style="background-color: #2a50a647 !important;">
+                                <h4><strong>*Revise bien el listado que entregará a almacen antes de generar Reporte</strong></h4> 
+                            </div>
 
 						<div class="card-footer justify-content-center">
-							<button type="submit" class="btn btn-info">{{ __('GENERAR REPORTE') }}</button>
+                            <div class="text-center container">
+                                <button type="submit" class="btn btn-info" wire:click="generarReporte">{{ __('GENERAR REPORTE') }}</button>
+                            </div>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeModal">Cerrar</button>
 						</div>
                     </form>

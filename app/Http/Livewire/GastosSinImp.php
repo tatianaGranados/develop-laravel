@@ -31,7 +31,7 @@ class GastosSinImp extends Component
     public $enviado_caja = 0;
 
     public $cheque_listo = 0;
-    public $observacion_pago, $fecha_entrega_pago, $nro_agrupado_entrega;
+    public $observacion_pago, $fecha_entrega_pago, $nro_informe;
     public $pagado = 0;
 
     public $archivado ='NO';
@@ -179,7 +179,7 @@ class GastosSinImp extends Component
         $this->pagado                = $gci->pagado;
         $this->archivado             = $gci->archivado;
         $this->fecha_entrega_pago    = $gci->fecha_entrega_pago;
-        $this->nro_agrupado_entrega  = $gci->nro_agrupado_entrega;
+        $this->nro_informe  = $gci->nro_informe;
         $this->fecha_archivado       = $gci->fecha_archivado;
         $this->unidad                = $gci->nombre_unidad;
     }
@@ -271,7 +271,7 @@ class GastosSinImp extends Component
         $this->pagado                = 0;
         $this->archivado             = 'NO';
         $this->fecha_entrega_pago    ='';
-        $this->nro_agrupado_entrega  ='';
+        $this->nro_informe  ='';
         $this->fecha_archivado       ='';
         $this->ult_usuario           ='';
     }

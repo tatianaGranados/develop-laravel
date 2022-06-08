@@ -16,8 +16,8 @@
 					<th style="font-size: 13px;"><strong>Fecha Pago </strong></th>
                     <th style="font-size: 13px;"><strong>Unidad 	</strong></th>
                     <th style="font-size: 13px;"><strong>Observación</strong></th>
-					<th style="font-size: 13px;"><strong>Sello   	</strong></th>				
-					<th style="font-size: 13px;"><strong>Seleccionar</strong></th>
+					<th style="font-size: 13px;"><strong>Sello   	</strong></th>
+					<th style="font-size: 13px;"><strong>Agrupar   	</strong></th>				
 				</tr>
 			</thead>
 			<tbody>
@@ -31,14 +31,18 @@
 						<td>{{ $gasto->nombre_unidad}} 	   </td>
                         <td>{{ $gasto->observacion_pago}}  </td>
 						<td>{{ $gasto->sello}} 			   </td>
-						<td class="td-actions text-center">
-                            <input class="form-check-input" style="width: 18px; height: 18px; position: relative;" name="agrupadoGci" type="checkbox" value="{{ $gasto->id }}" id="{{ $gasto->id }}" wire:model ="agrupadoGci">
+						<td class="text-center no-padding">
+							<input class="form-check-input" style="width: 18px; height: 18px; position: relative;" type="checkbox" value="{{ $gasto->id }}" id="{{ $gasto->id }}" wire:model="agrupadoGci">
 						</td>
 					</tr>
+					@php
+						$iter= $loop->count;
+					@endphp
 				@endforeach
+
                 @foreach ($gastosSi as $gasto)
 					<tr style="font-size: 13px;">
-                        <td class="text-center">{{$loop->iteration}}</td>
+                        <td class="text-center">{{$loop->iteration + $iter }}</td>
                         <td>{{ $gasto->beneficiario}} 	   </td>
                         <td>{{ $gasto->nro_cheque}} 	   </td>
                         <td>{{ $gasto->liquido_pagable}}   </td>
@@ -46,8 +50,8 @@
 						<td>{{ $gasto->nombre_unidad}} 	   </td>
                         <td>{{ $gasto->observacion_pago}}  </td>
 						<td>{{ $gasto->sello}} 			   </td>
-						<td class="td-actions text-center">
-                            <input class="form-check-input" style="width: 18px; height: 18px; position: relative;" name="agrupadoGsi" type="checkbox" value="{{ $gasto->id }}" id="{{ $gasto->id }}" wire:model ="agrupadoSci">
+						<td class="text-center no-padding">
+							<input class="form-check-input" style="width: 18px; height: 18px; position: relative;" type="checkbox" value="{{ $gasto->id }}" id="{{ $gasto->id }}" wire:model="agrupadoGsi">
 						</td>
 					</tr>
 				@endforeach

@@ -38,8 +38,8 @@ class CreateGastosConImputacionTable extends Migration
             $table->enum('cheque_listo',['SI','NO'])->default('NO');
             $table->enum('pagado',['SI','NO'])->default('NO');
             $table->date('fecha_entrega_pago')->nullable();
-            $table->string('nro_agrupado_entrega')->nullable();
-            $table->date('fecha_entrega_agrupado')->nullable();
+            $table->string('nro_informe')->nullable();
+            $table->date('fecha_entrega_informe')->nullable();
             $table->enum('enviado_archivo',['SI','NO'])->default('NO');
             $table->enum('archivado',['SI','NO'])->default('NO');
             $table->date('fecha_archivado')->nullable();
