@@ -24,14 +24,6 @@
               <li><a href="{{ route('pagosExterior') }}"><i class="material-icons">grading</i> PAGOS EXTERIOR</a></li>
             @endif
             
-            {{-- <li><a href=""><i class="material-icons">widgets</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
-              <ul class="dropdown-default">
-                <li><a href="">Gastos Con Imputación</a></li>
-                <li><a  href="#0">Gastos Sin Imputación</a></li>
-              </ul>
-            </li> --}}
-           
-            
             @if(in_array(1, $per) || in_array(2, $per) || in_array(3, $per) || in_array(4, $per) || in_array(5, $per) || in_array(6, $per) || in_array(7, $per) ||
                 in_array(8, $per) || in_array(9, $per) || in_array(10, $per) || in_array(11, $per))
               <li><a href=""><i class="material-icons">group</i> ADM. USUARIOS<span class="arrow-down"></span></a>
@@ -46,14 +38,33 @@
               </li>
             @endif
 
-            <li><a href=""><i class="material-icons">archive</i> ARCHIVADOS</a>
+            @if(in_array(29, $per) || in_array(30, $per) || in_array(31, $per)|| in_array(32, $per))
+            <li><a href=""><i class="material-icons">archive</i> ARCHIVAR</a>
               <ul class="dropdown-default">
-                <li style="width: 200px;"><a href="{{ route('enviarAlmacen') }}">Enviar Comprobantes - Almacen</a></li>
-                <li style="width: 200px;"><a href="{{ route('archivarTomoGci') }}">Archivar Gastos con Imputación</a></li>
-                <li style="width: 200px;"><a href="{{ route('archivarTomoGsi') }}">Archivar Gastos sin Imputación</a></li>
-                <li style="width: 200px;"><a href="{{ route('archivarTomoPe') }}">Archivar Pagos Exterior</a></li>
+                @if(in_array(29, $per))
+                  <li style="width: 200px;"><a href="{{ route('enviarAlmacen') }}">Enviar Comprobantes - Almacen</a></li>
+                @endif
+                @if(in_array(30, $per))
+                  <li style="width: 200px;"><a href="{{ route('archivarTomoGci') }}">Archivar Gastos con Imputación</a></li>
+                @endif
+                @if(in_array(31, $per))
+                  <li style="width: 200px;"><a href="{{ route('archivarTomoGsi') }}">Archivar Gastos sin Imputación</a></li>
+                @endif
+                @if(in_array(32, $per))
+                  <li style="width: 200px;"><a href="{{ route('archivarTomoPe') }}">Archivar Pagos Exterior</a></li>
+                @endif
               </ul>  
             </li>
+            @endif
+
+
+            {{-- <li><a href=""><i class="material-icons">widgets</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
+              <ul class="dropdown-default">
+                <li><a href="">Gastos Con Imputación</a></li>
+                <li><a href="">Gastos Sin Imputación</a></li>
+                <li><a href="">Pagos Exterior</a></li>
+              </ul>
+            </li> --}}
 
             {{-- <li><a href="javascript:void(0)" ><i class="material-icons">discount</i>MIGRACIONES <span class="arrow-down"></span></a>
               <ul class="dropdown-default">

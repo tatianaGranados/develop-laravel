@@ -205,66 +205,66 @@ class EnlacesSeeder extends Seeder
         ]);
         
     //6 pagos al exterior
-    DB::table('enlaces')->insert([
-        'nombre_enlace'  => 'Ver Pagos al exterior',
-        'ruta'=>'',
-        'icono'=>'view_list',
-        'descripcion'=>'Lista pagos al exterior para el sistema y su detalle',
-        'tipo_acceso'=>6
-    ]);
-    DB::table('enlaces')->insert([
-        'nombre_enlace'  => 'Crear Nuevo Pago al exterior',
-        'ruta'=>'',
-        'icono'=>'note_add',
-        'descripcion'=>'Crear nuevo pago al exterior',
-        'tipo_acceso'=>6
-    ]);
-    DB::table('enlaces')->insert([
-        'nombre_enlace'  => 'Editar Pago al exterior',
-        'ruta'=>'',
-        'icono'=>'note_add',
-        'descripcion'=>'Editar comprobante pago al exterior',
-        'tipo_acceso'=>6
-    ]);
-    DB::table('enlaces')->insert([
-        'nombre_enlace'  => 'Eliminar Pago al exterior',
-        'ruta'=>'',
-        'icono'=>'delete_forever',
-        'descripcion'=>'Eliminar comprobante pago al exterior',
-        'tipo_acceso'=>6
-    ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Ver Pagos al exterior',
+            'ruta'=>'',
+            'icono'=>'view_list',
+            'descripcion'=>'Lista pagos al exterior para el sistema y su detalle',
+            'tipo_acceso'=>6
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Crear Nuevo Pago al exterior',
+            'ruta'=>'',
+            'icono'=>'note_add',
+            'descripcion'=>'Crear nuevo pago al exterior',
+            'tipo_acceso'=>6
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Editar Pago al exterior',
+            'ruta'=>'',
+            'icono'=>'note_add',
+            'descripcion'=>'Editar comprobante pago al exterior',
+            'tipo_acceso'=>6
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Eliminar Pago al exterior',
+            'ruta'=>'',
+            'icono'=>'delete_forever',
+            'descripcion'=>'Eliminar comprobante pago al exterior',
+            'tipo_acceso'=>6
+        ]);
 
     //7 Reporte caja a almacen
-    DB::table('enlaces')->insert([
-        'nombre_enlace'  => 'Enviar Comprobantes a Almacen',
-        'ruta'=>'',
-        'icono'=>'toc',
-        'descripcion'=>'Agrupa por numero de informe que caja enviara a almacen',
-        'tipo_acceso'=>7
-    ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Enviar Comprobantes a Almacen',
+            'ruta'=>'',
+            'icono'=>'toc',
+            'descripcion'=>'Agrupa por numero de informe que caja enviara a almacen',
+            'tipo_acceso'=>7
+        ]);
 
     //8 Archivado de tomos
-    DB::table('enlaces')->insert([
-        'nombre_enlace'  => 'Añadir tomo Comprobantes Gastos con Imputación',
-        'ruta'=>'',
-        'icono'=>'grading',
-        'descripcion'=>'Añade tomo de archivado al gasto con imputacion',
-        'tipo_acceso'=>8
-    ]);
-    DB::table('enlaces')->insert([
-        'nombre_enlace'  => 'Añadir tomo Comprobantes Gastos sin Imputación',
-        'ruta'=>'',
-        'icono'=>'grading',
-        'descripcion'=>'Añade tomo de archivado al gasto sin imputacion',
-        'tipo_acceso'=>8
-    ]);
-    DB::table('enlaces')->insert([
-        'nombre_enlace'  => 'Añadir tomo Pagos al exterior',
-        'ruta'=>'',
-        'icono'=>'grading',
-        'descripcion'=>'Añade tomo de archivado al gasto con imputacion',
-        'tipo_acceso'=>8
-    ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Añadir tomo Comprobantes Gastos con Imputación',
+            'ruta'=>'',
+            'icono'=>'grading',
+            'descripcion'=>'Añade tomo de archivado al gasto con imputacion',
+            'tipo_acceso'=>8
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Añadir tomo Comprobantes Gastos sin Imputación',
+            'ruta'=>'',
+            'icono'=>'grading',
+            'descripcion'=>'Añade tomo de archivado al gasto sin imputacion',
+            'tipo_acceso'=>8
+        ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Añadir tomo Pagos al exterior',
+            'ruta'=>'',
+            'icono'=>'grading',
+            'descripcion'=>'Añade tomo de archivado al gasto con imputacion',
+            'tipo_acceso'=>8
+        ]);
 
     // //5 prestamos y devoluciones
     //     DB::table('enlaces')->insert([
