@@ -29,7 +29,7 @@ class PagosExterior extends Component
     public $total_retencion = 0;
     public $liquido_pagable = 0;
     public $pago_comision = 0;
-    public $enviado_archivo ='NO';
+    public $enviado_archivo = 0;
 
     protected function rules()
     {

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\GastoConImputacion;
 use App\Models\GastoSinImputacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
 use PDF;
@@ -25,6 +26,7 @@ class EnviarCompAlmacenController extends Controller
             'nro_informe'           => $request->nro_informe,
             'fecha_entrega_informe' => $request->fecha_entrega_informe,
             'enviado_archivo'       =>'SI',
+            'ult_usuario'           => Auth::User()->username,
         ];
         
         $agrupadoGi = $request->agrupadoGi;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArchivadoTomoController;
 use App\Http\Controllers\EnviarCompAlmacenController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,10 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::post('reporte',[ EnviarCompAlmacenController::class,'generarReporte'])->name('reporte');
 	// Route::get('reporte',[ EnviarCompAlmacen::class,'generarReporte'])->name('reporte');
+
+	Route::get('archivarTomoGci',[ArchivadoTomoController::class,'indexConImputacion'])->name('archivarTomoGci');
+	Route::get('archivarTomoGsi',[ArchivadoTomoController::class,'indexSinImputacion'])->name('archivarTomoGsi');
+	Route::get('archivarTomoPe',[ArchivadoTomoController::class,'indexPagosExterior'])->name('archivarTomoPe');
 
 });
 

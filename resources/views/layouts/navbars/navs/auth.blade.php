@@ -49,7 +49,9 @@
             <li><a href=""><i class="material-icons">archive</i> ARCHIVADOS</a>
               <ul class="dropdown-default">
                 <li style="width: 200px;"><a href="{{ route('enviarAlmacen') }}">Enviar Comprobantes - Almacen</a></li>
-                <li style="width: 200px;"><a href="">Archivar Comprobantes</a></li>
+                <li style="width: 200px;"><a href="{{ route('archivarTomoGci') }}">Archivar Gastos con Imputación</a></li>
+                <li style="width: 200px;"><a href="{{ route('archivarTomoGsi') }}">Archivar Gastos sin Imputación</a></li>
+                <li style="width: 200px;"><a href="{{ route('archivarTomoPe') }}">Archivar Pagos Exterior</a></li>
               </ul>  
             </li>
 
