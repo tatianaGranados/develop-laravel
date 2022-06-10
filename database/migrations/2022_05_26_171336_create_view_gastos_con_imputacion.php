@@ -45,7 +45,8 @@ class CreateViewGastosConImputacion extends Migration
                         gi.enviado_archivo,
                         gi.archivado,
                         gi.fecha_archivado,
-                        gi.ult_usuario
+                        gi.ult_usuario,
+                        gi.updated_at
                 FROM gastos_con_imputacion gi, gestiones g, unidades u
                 WHERE gi.id_gestion=g.id
                 AND gi.id_unidad = u.id

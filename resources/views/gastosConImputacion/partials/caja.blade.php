@@ -50,6 +50,11 @@
             <span class="text-danger">{{$message}}</span>
          @enderror
     </div>
+
+    @if($this->cheque_listo != 'NO' || $this->cheque_listo != 1 )
+        <button wire:click="devComprobante()" class="btn btn-danger" data-toggle="modal" data-target="#devComprobante">{{ __('Devolver Comprobante') }}</button>
+    @endif
+
     @if($this->cheque_listo == 'SI' || $this->cheque_listo == 1 )
         <div class="form_group row form-blue">
             <div class="form-group col-md-6">

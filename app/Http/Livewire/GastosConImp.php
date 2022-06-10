@@ -161,12 +161,12 @@ class GastosConImp extends Component
 
     public function store($formData)
     {
-        
+       
         $this->iue = $formData['iue'];
         $this->it  = $formData['it'];
         $this->total_retencion = $formData['total_retencion'];
         $this->liquido_pagable = $formData['liquido_pagable'];
-
+      
         $this->validate();
 
         $compGasto= new GastoConImputacion([
@@ -188,7 +188,7 @@ class GastosConImp extends Component
             'total_retencion'   => $this->total_retencion,
             'total_multas'      => $this->total_multas,
             'total_garantia'    => $this->total_garantia,
-            'liquido_pagable'   => $formData['liquido_pagable'],
+            'liquido_pagable'   => $this->liquido_pagable,
             'enviado_caja'      => $this->enviado_caja == 1 ? 'SI' : 'NO',
             'ult_usuario'       => Auth::User()->username,
         ]);
@@ -233,6 +233,7 @@ class GastosConImp extends Component
     }
 
     public function edit($id){
+
         $gci =  DB::table('view_gastos_con_imputacion')->where('id', $id)->first();
         $this->id_gasto              = $gci->id;
         $this->nro_comprobante       = $gci->nro_comprobante;
@@ -268,10 +269,12 @@ class GastosConImp extends Component
 
     public function updateTesoreria($formData)
     {
-        $this->iue = $formData['iue'];
-        $this->it  = $formData['it'];
-        $this->total_retencion = $formData['total_retencion'];
-        $this->liquido_pagable = $formData['liquido_pagable'];
+        if(in_array(17, Auth::user()->AccesosUserAuth)){
+            $this->iue = $formData['iue'];
+            $this->it  = $formData['it'];
+            $this->total_retencion = $formData['total_retencion'];
+            $this->liquido_pagable = $formData['liquido_pagable'];
+        }
         
         $validatedData = $this->validate();
 
@@ -323,6 +326,13 @@ class GastosConImp extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->dispatchBrowserEvent('alert',['message'=>'Comprobante Eliminado con exito ...!!!']);
+    }
+
+    public function devComprobante(){
+
+        GastoConImputacion::where('id', $this->id_gasto)->update([
+            'enviado_caja'   => 'NO' ]);
+        $this->dispatchBrowserEvent('close-modal');
     }
 
     public function resetInput()

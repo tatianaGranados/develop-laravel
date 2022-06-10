@@ -21,6 +21,7 @@
                      <th><strong>Beneficiario   </strong></th>
                      <th><strong>Detalle        </strong></th>
                      <th><strong>Nro Cheque     </strong></th>
+                     <th><strong>Cheque listo desde </strong></th>
                      <th><strong>Unidad         </strong></th>
 
                   </tr>
@@ -35,6 +36,7 @@
                      <td>{{ $gasto->beneficiario}}   </td>
                      <td>{{ $gasto->detalle}} 		  </td>
                      <td>{{ $gasto->nro_cheque}} 	  </td>
+                     <td>{{ \Carbon\Carbon::parse($gasto->updated_at)->format('d-m-Y') }} </td>
                      <td>{{ $gasto->nombre_unidad}}  </td>
                   </tr>
                @empty

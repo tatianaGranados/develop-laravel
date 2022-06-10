@@ -29,6 +29,7 @@ class HomeController extends Controller
                     ->where('id_gestion', $id_gestion)
                     ->where('id_unidad', $id_unidad)
                     ->where([['cheque_listo', 'SI '],['pagado','NO']])
+                    ->orderBy('updated_at','asc')
                     ->get();
         }else{
             $gastos = DB::table('view_gastos_con_imputacion')
