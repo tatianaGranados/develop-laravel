@@ -43,7 +43,7 @@
 					<th style="font-size: 13px;"><strong>Total Multas 	</strong></th>
 					<th style="font-size: 13px;"><strong>Total Garantia </strong></th>
 					<th style="font-size: 13px;"><strong>Factura		</strong></th>
-					<th style="font-size: 13px; width: 120px;"><strong>Acciones		</strong></th>
+					<th style="font-size: 13px; width: 130px;"><strong>Acciones		</strong></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -70,6 +70,10 @@
 							@if( (in_array(17, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(18, $permisos) && $gasto->pagado =='NO' ))
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
 							@endif
+							@if (in_array(18, $permisos) && $gasto->pagado =='NO' && $gasto->cheque_listo =='NO')
+								<button wire:click="delete({{$gasto->id}})" class="btn btn-warning btn-simple" data-toggle="modal" data-target="#devComprobante"><span class="material-icons">undo</span></button>
+							@endif
+
 							@if (in_array(19, $permisos) && $gasto->enviado_caja =='NO')
 								<button wire:click="delete({{$gasto->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
 							@endif
@@ -91,7 +95,9 @@
 @if(in_array(17, $permisos) || in_array(18, $permisos))
  	@include('gastosConImputacion.edit') 
 @endif
+
 @if (in_array(19, $permisos))
  	@include('errors.modalDelete',['nota'=>'Comprobante: '.$this->nro_comprobante])
 @endif 
+@include('errors.devolverComprobante',['nota'=>'Comprobante: '.$this->nro_comprobante]) 
 </div>

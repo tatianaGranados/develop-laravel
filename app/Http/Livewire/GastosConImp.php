@@ -332,7 +332,9 @@ class GastosConImp extends Component
 
         GastoConImputacion::where('id', $this->id_gasto)->update([
             'enviado_caja'   => 'NO' ]);
+
         $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('alert',['message'=>'Comprobante Devuelto con exito ...!!!']);
     }
 
     public function resetInput()

@@ -16,6 +16,7 @@
         $('#create').modal('hide');
         $('#edit').modal('hide');
         $('#delete').modal('hide');
+        $('#devComprobante').modal('hide');
     })
 </script>
 
