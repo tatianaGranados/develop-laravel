@@ -9,6 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class GastosConImp extends Component
 {
@@ -26,12 +27,10 @@ class GastosConImp extends Component
     public $nro_comprobante, $fecha_comprobante, $nro_preventivo, $sello,$nro_hojas, $beneficiario, $detalle;
     public $nro_cheque = null;
     public $fecha_cheque = null;
-    public $total_autorizado = 0;
-    public $iue = 0;
-    public $it = 0;
-    public $total_retencion = 0;
+    public $total_autorizado=0;
+    public $total_retencion =0;
     public $total_multas = 0;
-    public $liquido_pagable = 0;
+    public $liquido_pagable;
     public $total_garantia = 0;
     
     public $emite_factura = 'NO';
@@ -44,6 +43,12 @@ class GastosConImp extends Component
     public $archivado ='NO';
     public $nro_tomo, $observacion_archivado; 
     public $fecha_archivado;
+    public $iue = 0;
+    public $it = 0;
+
+
+
+    public $total_g;
 
     protected function rules()
     {
@@ -51,7 +56,7 @@ class GastosConImp extends Component
                 'nro_preventivo'    => ['required','max:8000','integer'],
                 'fecha_comprobante' => ['date','required'],
                 'sello'             => ['required','max:15','regex:/[1-9]/'],
-                'nro_hojas'         => ['integer','max:900','required'],
+                'nro_hojas'         => ['integer','max:9999','required'],
                 'id_unidad'         => 'required',
                 'beneficiario'      => ['required','string','max:200'],
                 'detalle'           => ['required','string','max:900'],
@@ -133,8 +138,6 @@ class GastosConImp extends Component
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
         $this->unidades  = Unidad::all()->pluck('nombre_unidad','id');
 
-        $this->calcLiquidoPagable();
-
         return view('gastosConImputacion.list',['gastos'=> $gastos]);
     }
 
@@ -155,27 +158,17 @@ class GastosConImp extends Component
         }
     }
 
-    public function calcLiquidoPagable(){
-        if( $this->total_autorizado>=0){
-            if($this->emite_factura == 'SI'){
-                $this->iue = 0;
-                $this->it = 0;
-                $this->total_retencion = 0;
-            }else{
-                $this->iue = round(($this->total_autorizado)* 0.125,2);
-                $this->it  = round(($this->total_autorizado)* 0.03,2);
-                $this->total_retencion = round(($this->iue) + ($this->it),2);
-            }
 
-            if($this->total_retencion>=0 && $this->total_multas>=0 && $this->total_garantia>=0){
-                $this->liquido_pagable = round(($this->total_autorizado) - ($this->total_garantia) - ($this->total_retencion) - ($this->total_multas),2);
-            }
-        }
-    }
-
-    public function store()
+    public function store($formData)
     {
+        
+        $this->iue = $formData['iue'];
+        $this->it  = $formData['it'];
+        $this->total_retencion = $formData['total_retencion'];
+        $this->liquido_pagable = $formData['liquido_pagable'];
+
         $this->validate();
+
         $compGasto= new GastoConImputacion([
             'id_gestion'        => $this->id_gestion,
             'id_unidad'         => $this->id_unidad,
@@ -195,7 +188,7 @@ class GastosConImp extends Component
             'total_retencion'   => $this->total_retencion,
             'total_multas'      => $this->total_multas,
             'total_garantia'    => $this->total_garantia,
-            'liquido_pagable'   => $this->liquido_pagable,
+            'liquido_pagable'   => $formData['liquido_pagable'],
             'enviado_caja'      => $this->enviado_caja == 1 ? 'SI' : 'NO',
             'ult_usuario'       => Auth::User()->username,
         ]);
@@ -255,8 +248,8 @@ class GastosConImp extends Component
         $this->it                    = $gci->it;
         $this->total_retencion       = $gci->total_retencion;
         $this->total_multas          = $gci->total_multas;
-        $this->liquido_pagable       = $gci->liquido_pagable;
         $this->total_garantia        = $gci->total_garantia;
+        $this->liquido_pagable       = $gci->liquido_pagable;
         $this->nro_hojas             = $gci->nro_hojas;
         $this->nro_tomo              = $gci->nro_tomo;
         $this->observacion_pago      = $gci->observacion_pago;
@@ -273,8 +266,13 @@ class GastosConImp extends Component
 
     }
 
-    public function updateTesoreria()
+    public function updateTesoreria($formData)
     {
+        $this->iue = $formData['iue'];
+        $this->it  = $formData['it'];
+        $this->total_retencion = $formData['total_retencion'];
+        $this->liquido_pagable = $formData['liquido_pagable'];
+        
         $validatedData = $this->validate();
 
         GastoConImputacion::where('id', $this->id_gasto)->update([
@@ -313,6 +311,12 @@ class GastosConImp extends Component
         $this->dispatchBrowserEvent('alert',['message'=>'Comprobante '.$this->nro_comprobante.' actualizado con exito ...!!!']);
     }
 
+    public function delete($id){
+        $gci =  DB::table('view_gastos_con_imputacion')->where('id', $id)->first();
+        $this->id_gasto              = $gci->id;
+        $this->nro_comprobante       = $gci->nro_comprobante;
+    }
+
     public function destroy()
     {
         GastoConImputacion::find($this->id_gasto)->delete();
@@ -348,7 +352,7 @@ class GastosConImp extends Component
         $this->pagado                = 0;
         $this->archivado             = 'NO';
         $this->fecha_entrega_pago    ='';
-        $this->nro_informe  ='';
+        $this->nro_informe           ='';
         $this->fecha_archivado       ='';
         $this->ult_usuario           ='';
     }

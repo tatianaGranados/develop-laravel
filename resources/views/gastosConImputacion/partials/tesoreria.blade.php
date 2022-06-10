@@ -1,3 +1,4 @@
+
 <div class="form_group row form-blue">
     <div class="form-group col-md-4">
         <span class="material-icons" style="font-size: 15px;">description</span>
@@ -36,7 +37,7 @@
     </div>
     <div class="form-group col-md-4">
         <span class="material-icons" style="font-size: 15px;">grading</span>
-        <label for="nro_hojas">Nro Hoja:</label>
+        <label for="nro_hojas">Nro Fojas:</label>
         <input type="number" class="form-control" id="nro_hojas" placeholder="nro hojas" wire:model="nro_hojas">
         @error('nro_hojas')
 	        <span class="text-danger">{{$message}}</span>
@@ -58,10 +59,10 @@
         <label for="beneficiario"> Beneficiario: </label>
     </div>
     <input type="text" class="form-control" id="beneficiario" placeholder="Escribe el beneficiario....." wire:model="beneficiario">
-</div>
-@error('beneficiario')
+    @error('beneficiario')
 	    <span class="text-danger">{{$message}}</span>
-@enderror
+    @enderror
+</div>
 
 <div class="form-group form-blue">
     <span class="material-icons" style="font-size: 15px;">web_stories</span>
@@ -95,57 +96,56 @@
     <div class="form-group col-md-2">
         <span class="material-icons" style="font-size: 15px;">monetization_on</span>
         <label for="t_autorizado">Total Autorizado:</label>
-        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="t_autorizado" data-toggle="tooltip"  title="####.##" wire:model="total_autorizado">
-        @error('t_autorizado')
+        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" onkeyup="liquidoPagable();" id="t_autorizado" value="0" data-toggle="tooltip"  title="####.##" wire:model="total_autorizado">
+        @error('total_autorizado')
+            <span class="text-danger">{{$message}}</span>
+         @enderror
+    </div>
+    <div class="form-group col-md-2">
+        <label for="factura">Factura:</label>
+        <select name="factura" class="form-control" id="factura" onchange="liquidoPagable();" onkeyup="liquidoPagable();" wire:model="emite_factura">
+            <option value="NO">NO</option>
+            <option value="SI">SI</option>
+        </select>
+        @error('factura')
 	        <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
     <div class="form-group col-md-2">
-        <label for="emite_factura">Factura:</label>
-        {!! form::select('emite_factura',['NO'=>'NO','SI'=>'SI'],null,['class'=>'form-control','id'=>'factura','wire:model'=>'emite_factura']) !!}
-        @error('emite_factura')
-	        <span class="text-danger">{{$message}}</span>
-        @enderror
-    </div>
-    <div class="form-group col-md-2">
-        <span class="material-icons" style="font-size: 15px;">monetization_on</span>
         <label for="iue">IUE(12,5%):</label>
-        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="iue" wire:model="iue">
+        <input type="number" step="0.01" name="iue" pattern="^\d+(?:\.\d{1,2})?$" value="{{$this->iue}}" class="form-control" id="iue">
         @error('iue')
 	        <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
     <div class="form-group col-md-2">
-        <span class="material-icons" style="font-size: 15px;">monetization_on</span>
         <label for="it">IT(3%):</label>
-        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="it"  wire:model="it">
+        <input type="number" step="0.01" name="it" pattern="^\d+(?:\.\d{1,2})?$" value="{{$this->it}}" class="form-control" id="it">
         @error('it')
 	        <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
     <div class="form-group col-md-2">
-        <span class="material-icons" style="font-size: 15px;">monetization_on</span>
         <label for="t_retencion">Total Retención:</label>
-        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="t_retencion"  wire:model="total_retencion">
-        @error('t_retencion')
+        <input type="number" step="0.01" name="total_retencion" pattern="^\d+(?:\.\d{1,2})?$" value="{{$this->total_retencion}}" class="form-control" id="t_retencion">
+        @error('total_retencion')
 	        <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
     <div class="form-group col-md-2">
-        <span class="material-icons" style="font-size: 15px;">monetization_on</span>
         <label for="t_multas">Total Multas:</label>
-        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="t_multas" onkeyup="liquidoPagable();"  wire:model="total_multas">
+        <input type="number" name="t_multas" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="t_multas" onkeyup="liquidoPagable();" value="0" wire:model = "total_multas">
         @error('total_multas')
 	        <span class="text-danger">{{$message}}</span>
         @enderror
-    </div>
+    </div>  
 </div>
 
 <div class="form_group row form-blue">
     <div class="form-group col-md-4">
         <span class="material-icons" style="font-size: 15px;">monetization_on</span>
         <label for="total_garantia">Total Garantia:</label>
-        <input type="number" class="form-control" id="total_garantia" placeholder="total garantia" wire:model="total_garantia">
+        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="t_garantia" value="0" onkeyup="liquidoPagable();" wire:model="total_garantia">
         @error('total_garantia')
 	        <span class="text-danger">{{$message}}</span>
         @enderror
@@ -153,9 +153,9 @@
     <div class="form-group col-md-4">
         <span class="material-icons" style="font-size: 15px;">monetization_on</span>
         <label for="liquidoP">Liquido Pagable:</label>
-        <input type="text" class="form-control" id="liquidoP" wire:model="liquido_pagable">
-        @error('liquidoP')
-	        <span class="text-danger">{{$message}}</span>
+        <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" name="liquido_pagable" value="{{$this->liquido_pagable}}" class="form-control" id="liquidoP">
+        @error('liquido_pagable')
+            <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
     

@@ -1,4 +1,5 @@
 <div>
+	<div class="card-body">
 	<div class="form-group row text-center" style="padding-bottom: 1px;">
 		<label for="id_gestion" class="col-sm-4 text-right" >Gestión:</label>
 		<div class="col-sm-4" >
@@ -70,7 +71,7 @@
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
 							@endif
 							@if (in_array(19, $permisos) && $gasto->enviado_caja =='NO')
-								<button wire:click="edit({{$gasto->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
+								<button wire:click="delete({{$gasto->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
 							@endif
 						</td>
 					</tr>
@@ -83,6 +84,7 @@
 		</table>
 	</div>
  {{$gastos->links()}}
+
 @if( in_array(15, $permisos))
  	@include('gastosConImputacion.show') 
 @endif	

@@ -8,7 +8,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form wire:submit.prevent="updateTesoreria">
+				<form wire:submit.prevent="updateTesoreria(Object.fromEntries(new FormData($event.target)))">
 					@if(in_array(17, $permisos))
 						@include('gastosConImputacion.partials.tesoreria')
 					@endif

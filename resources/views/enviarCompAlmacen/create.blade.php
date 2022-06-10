@@ -26,7 +26,7 @@
                             <div class="form-group col-md-6">
                                 <span class="material-icons" style="font-size: 15px;">event</span>
                                 <label for="fecha_entrega_informe">Fecha entrega:</label>
-                                <input type="date" wire:model="fecha_entrega_informe" value="<?php echo date("Y-m-d");?>" class="form-control" id="fecha_entrega_informe" name="fecha_entrega_informe" required>
+                                <input type="date" wire:model="fecha_entrega_informe"  class="form-control" id="fecha_entrega_informe" name="fecha_entrega_informe" required>
                                 @error('fecha_entrega_informe')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
