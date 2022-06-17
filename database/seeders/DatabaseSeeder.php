@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call([TipoRolesSeeder::class]);
         $this->call([EnlacesSeeder::class]);
 
-        GastoConImputacion::factory(1000)->create();
+        // GastoConImputacion::factory(10)->create();
     }
 }

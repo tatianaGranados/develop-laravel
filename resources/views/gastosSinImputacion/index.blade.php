@@ -17,6 +17,7 @@
         $('#createGsi').modal('hide');
         $('#editGsi').modal('hide');
         $('#delete').modal('hide');
+        $('#devComprobante').modal('hide');
     })
 </script>
 @endsection

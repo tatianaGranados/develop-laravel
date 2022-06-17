@@ -6,6 +6,10 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use App\Models\Gestion;
 use Carbon\Carbon;
+use App\Models\GastoConImputacion;
+use App\Models\GastoSinImputacion;
+use Illuminate\Validation\Rule;
+use PDF;
 
 class EnviarCompAlmacen extends Component
 {
@@ -19,10 +23,12 @@ class EnviarCompAlmacen extends Component
     
     public $nro_informe;
     public $fecha_entrega_informe;
+
+    public $informes;
     
     protected function rules()
     {
-        return ['nro_informe' => 'required',
+        return ['nro_informe' => ['required',Rule::unique('gastos_con_imputacion')->where('id_gestion','=', Gestion::orderBy('gestion','desc')->value('id'))],
                 'fecha_entrega_informe' =>'required|date',
             ];
     }
@@ -45,6 +51,15 @@ class EnviarCompAlmacen extends Component
 
         $this->repAgrupadosGci = DB::table('view_gastos_con_imputacion')->whereIn('id', $this->agrupadoGci)->get();
         $this->repAgrupadosGsi = DB::table('view_gastos_sin_imputacion')->whereIn('id', $this->agrupadoGsi)->get();
+
+        $this->informes = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', Gestion::orderBy('gestion','desc')->value('id'))
+                                                                ->orderBy('fecha_entrega_informe','asc')
+                                                                ->groupBy('nro_informe', 'fecha_entrega_informe')
+                                                                ->where('nro_informe','!=','')
+                                                                ->select('nro_informe','fecha_entrega_informe')
+                                                                ->get();
+
+        $this->gastosInf = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', Gestion::orderBy('gestion','desc')->value('id'))->get();                                                       
        
         return view('enviarCompAlmacen.list');
     }
@@ -60,6 +75,19 @@ class EnviarCompAlmacen extends Component
         
     }
 
+    public function reimpresion($id){
+        $nro_informe        = $id;
+
+        $fecha_entrega_informe = Carbon::createFromFormat('Y-m-d', $this->fecha_entrega_informe)->format('d/m/Y');
+
+        
+        $repAgrupadosGci = GastoConImputacion::where('nro_informe', $id)->get();
+        
+        $repAgrupadosGsi = GastoSinImputacion::where('nro_informe', $id)->get();
+
+        $pdf = PDF::loadView('enviarCompAlmacen.reporte', compact('repAgrupadosGci', 'repAgrupadosGsi', 'nro_informe','fecha_entrega_informe'));
+        $pdf->setPaper("letter", "portrait")->download('document.pdf');
+    }
 
     public function resetInput()
     {

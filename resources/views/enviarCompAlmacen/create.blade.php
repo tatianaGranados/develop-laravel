@@ -92,6 +92,7 @@
                             <div class="shadow-lg mb-3 rounded text-center" style="background-color: #2a50a647 !important;">
                                 <h4><strong>*Revise bien el listado que entregará a almacen antes de generar Reporte</strong></h4> 
                             </div>
+                        </div>
 
 						<div class="card-footer justify-content-center">
                             <div class="text-center container">

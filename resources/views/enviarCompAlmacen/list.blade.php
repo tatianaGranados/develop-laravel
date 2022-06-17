@@ -4,6 +4,12 @@
 				<span class="material-icons">note_add</span> Enviar Agrupado de Cheques
 			</button>	
 		</div>
+
+		<div class="container">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#informes">
+				<span class="material-icons">list</span> Ver reporte generados
+			</button>	
+		</div>
 	<br>
 	<div class="table-responsive">
 		<table class="table table-condensed table-bordered table-striped">
@@ -60,5 +66,5 @@
 	</div>
 
 @include('enviarCompAlmacen.create') 
-	
+@include('enviarCompAlmacen.informes') 	
 </div>

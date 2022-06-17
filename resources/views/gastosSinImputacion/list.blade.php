@@ -59,6 +59,9 @@
 							@if( (in_array(22, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(23, $permisos) && $gasto->pagado =='NO' ))
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editGsi"><span class="material-icons">create</span></button>
 							@endif
+							@if (in_array(23, $permisos) && $gasto->pagado =='NO' && $gasto->cheque_listo =='NO')
+								<button wire:click="edit({{$gasto->id}})" class="btn btn-warning btn-simple" data-toggle="modal" data-target="#devComprobante"><span class="material-icons">undo</span></button>
+							@endif
 							@if (in_array(24, $permisos) && $gasto->enviado_caja =='NO')
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#delete"><span class="material-icons">close</span></button>
 							@endif
@@ -82,5 +85,6 @@
 @if (in_array(19, $permisos))
     @include('errors.modalDelete',['nota'=>'Comprobante: '.$this->nro_devengado]) 
 
-@endif  
+@endif
+@include('errors.devolverComprobante',['nota'=>'Devengado: '.$this->nro_devengado])   
 </div>

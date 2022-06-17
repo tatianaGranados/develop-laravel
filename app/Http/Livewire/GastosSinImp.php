@@ -250,6 +250,15 @@ class GastosSinImp extends Component
         $this->dispatchBrowserEvent('alert',['message'=>'Comprobante Eliminado con exito ...!!!']);
     }
 
+    public function devComprobante(){
+
+        GastoSinImputacion::where('id', $this->id_gasto)->update([
+            'enviado_caja'   => 'NO' ]);
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('alert',['message'=>'Devengado Devuelto con exito ...!!!']);
+    }
+
     public function resetInput()
     {
         $this->id_unidad             ='';
