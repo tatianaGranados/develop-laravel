@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
       <div class="col-lg-8 col-md-8 text-center">
           <h1  style="padding-top:70px;" class="text-white lineUp ">
-            {{ __('Bienvenido al Sistema de Comprobande') }}
+            {{ __('Bienvenido al Sistema de Comprobantes') }}
           </h1>
           <hr class="hr-guest">
           <h2 class="lineUp"> {{ __('Escuela Universitaria de Posgrado') }}</h2>
