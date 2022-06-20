@@ -85,6 +85,7 @@ class GastosConImp extends Component
 
     public function render()
     {
+        $query = "CAST(nro_comprobante AS DECIMAL(10,0)) DESC";
         switch ($this->permisos) {
             case (in_array(17, $this->permisos)):
                 $gastos = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $this->id_gestion)
@@ -98,7 +99,7 @@ class GastosConImp extends Component
                         ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
                         ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
                     })
-                    ->orderBy('nro_comprobante','desc')
+                    ->orderByRaw($query)
                     ->paginate(50);
 
                 break; 
@@ -114,7 +115,7 @@ class GastosConImp extends Component
                         ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
                         ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
                     })
-                    ->orderBy('nro_comprobante','desc')
+                    ->orderByRaw($query)
                     ->paginate(50);
 
                 break;
@@ -130,7 +131,7 @@ class GastosConImp extends Component
                         ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
                         ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
                     })
-                    ->orderBy('nro_comprobante','desc')
+                    ->orderByRaw($query)
                     ->paginate(50);
                 break;
         }
@@ -148,7 +149,8 @@ class GastosConImp extends Component
 
     public function compUtimo($id)
     {
-        $compUltimo   = GastoConImputacion::where('id_gestion',$id)->orderby('nro_comprobante', 'desc')->get();
+        $query = "CAST(nro_comprobante AS DECIMAL(10,0)) DESC";
+        $compUltimo   = GastoConImputacion::where('id_gestion',$id)->orderByRaw($query)->get();
         if($compUltimo->isEmpty())
         {
             $this->nro_comprobante =1;
