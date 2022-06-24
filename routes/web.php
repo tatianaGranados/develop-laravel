@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::post('reporte',[ EnviarCompAlmacenController::class,'generarReporte'])->name('reporte');
 	// Route::get('reporte',[ EnviarCompAlmacen::class,'generarReporte'])->name('reporte');
+	Route::get('reimpresion/{id}',[ EnviarCompAlmacen::class,'reimpresion'])->name('reimpresion');
 
 	Route::get('archivarTomoGci',[ArchivadoTomoController::class,'indexConImputacion'])->name('archivarTomoGci');
 	Route::get('archivarTomoGsi',[ArchivadoTomoController::class,'indexSinImputacion'])->name('archivarTomoGsi');

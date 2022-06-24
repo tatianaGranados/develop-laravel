@@ -261,7 +261,7 @@ class GastosConImp extends Component
         $this->cheque_listo          = $gci->cheque_listo == 'NO' ? 0 : 1;
         $this->pagado                = $gci->pagado == 'NO' ? 0 : 1;
         $this->archivado             = $gci->archivado;
-        $this->fecha_entrega_pago    = $gci->fecha_entrega_pago;
+        $this->fecha_entrega_pago    = $gci->fecha_entrega_pago ==NULL ? Carbon::now()->toDateString() : $gci->fecha_entrega_pago ;
         $this->fecha_archivado       = $gci->fecha_archivado;
         $this->unidad                = $gci->nombre_unidad;
         $this->emite_factura         = $gci->emite_factura;

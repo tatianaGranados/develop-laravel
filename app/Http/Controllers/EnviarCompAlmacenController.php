@@ -50,11 +50,12 @@ class EnviarCompAlmacenController extends Controller
             $repAgrupadosGsi =[];
         }
 
-        
         $pdf = PDF::loadView('enviarCompAlmacen.reporte', compact('repAgrupadosGci', 'repAgrupadosGsi', 'nro_informe','fecha_entrega_informe'));
         $pdf->setPaper("letter", "portrait");
-        return $pdf->stream('document.pdf');
+        return $pdf->stream('informe_nro_'.$nro_informe.'.pdf');
     }
+
+    
 
     public Function downloadPDF()
     {

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Gestion;
 use App\Models\Unidad;
 use App\Models\GastoSinImputacion;
+use Carbon\Carbon;
 
 class GastosSinImp extends Component
 {
@@ -208,7 +209,7 @@ class GastosSinImp extends Component
         $this->cheque_listo          = $gci->cheque_listo == 'NO' ? 0 : 1;
         $this->pagado                = $gci->pagado == 'NO' ? 0 : 1;
         $this->archivado             = $gci->archivado;
-        $this->fecha_entrega_pago    = $gci->fecha_entrega_pago;
+        $this->fecha_entrega_pago    = $gci->fecha_entrega_pago ==NULL ? Carbon::now()->toDateString() : $gci->fecha_entrega_pago ;
         $this->fecha_archivado       = $gci->fecha_archivado;
         $this->unidad                = $gci->nombre_unidad;
         $this->id_unidad             = $gci->id_unidad;

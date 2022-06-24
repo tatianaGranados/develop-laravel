@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Document</title>
+        <title>reporte_caja_nro_{{$nro_informe}}</title>
     </head>
     <style>
         .table{

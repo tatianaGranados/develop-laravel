@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Models\GastoConImputacion;
 use App\Models\GastoSinImputacion;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 use PDF;
 
 class EnviarCompAlmacen extends Component
@@ -77,16 +78,13 @@ class EnviarCompAlmacen extends Component
 
     public function reimpresion($id){
         $nro_informe        = $id;
-
-        $fecha_entrega_informe = Carbon::createFromFormat('Y-m-d', $this->fecha_entrega_informe)->format('d/m/Y');
-
-        
-        $repAgrupadosGci = GastoConImputacion::where('nro_informe', $id)->get();
-        
-        $repAgrupadosGsi = GastoSinImputacion::where('nro_informe', $id)->get();
-
+        $fecha_entrega_informe = GastoConImputacion::where('nro_informe', $id)->value('fecha_entrega_informe');
+        $fecha_entrega_informe = Carbon::createFromFormat('Y-m-d', $fecha_entrega_informe)->format('d/m/Y');
+        $repAgrupadosGci = DB::table('view_gastos_con_imputacion')->where('nro_informe', $id)->get();
+        $repAgrupadosGsi = DB::table('view_gastos_sin_imputacion')->where('nro_informe', $id)->get();    
         $pdf = PDF::loadView('enviarCompAlmacen.reporte', compact('repAgrupadosGci', 'repAgrupadosGsi', 'nro_informe','fecha_entrega_informe'));
-        $pdf->setPaper("letter", "portrait")->download('document.pdf');
+        $pdf->setPaper("letter", "portrait");
+        return $pdf->stream('informe_nro_'.$nro_informe.'.pdf');
     }
 
     public function resetInput()
