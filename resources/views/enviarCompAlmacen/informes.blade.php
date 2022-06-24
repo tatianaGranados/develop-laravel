@@ -34,7 +34,6 @@
                                     </td>
                                     <td class="td-actions text-center">
                                         <a href="{{ route('reimpresion',$informe->nro_informe)}}" class="btn btn-success btn-simple" target="_blank"><span class="material-icons">print</span></a>
-                                        <button class="btn btn-warning btn-simple"><span class="material-icons">undo</span></button>
                                     </td>
                                 </tr>
                                 @empty

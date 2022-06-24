@@ -16,7 +16,7 @@
                             <div class="form-group col-md-6">
                                 <span class="material-icons" style="font-size: 15px;">description</span>
                                 <label for="tomo">Nro Tomo:</label>
-                                <input type="text" class="form-control" id="tomo" placeholder="nro cheque" name="tomo" wire:model="tomo">
+                                <input type="text" class="form-control" id="tomo" placeholder="ingrese nro de tomo" name="tomo" wire:model="tomo">
                                 @error('tomo')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
