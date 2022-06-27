@@ -35,6 +35,7 @@ class PagoExterior extends Model
         'observacion_archivado',
         'archivado',
         'fecha_archivado',
+        'prestado',
         'ult_usuario'
     ];
 

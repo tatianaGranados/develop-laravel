@@ -39,6 +39,7 @@ class GastoSinImputacion extends Model
         'fecha_entrega_informe',
         'archivado',
         'fecha_archivado',
+        'prestado',
         'ult_usuario'
     ];
 

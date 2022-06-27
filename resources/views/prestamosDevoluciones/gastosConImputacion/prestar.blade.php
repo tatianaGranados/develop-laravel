@@ -10,7 +10,6 @@
 			</div>
 			<div class="modal-body">
                 <div class="container">
-                    {{-- <form name="prestar" id="prestar" method="post" action="{{url('prestarGci')}}"> --}}
                         <form wire:submit.prevent="prestar" enctype="multipart/form-data">
                         @csrf
                         <div class="form_group row form-blue">
@@ -70,7 +69,6 @@
                                 <tbody>
                                     @foreach ($repAgrupados as $gasto)
                                         <tr style="font-size: 13px;">
-                                            <input name="agrupado[]" value="{{ $gasto->id }}" hidden>
                                             <td class="text-center">{{$loop->iteration}}</td>
                                             <td>{{ $gasto->nro_comprobante}}  </td>
                                             <td>{{ $gasto->fecha_comprobante}}</td>

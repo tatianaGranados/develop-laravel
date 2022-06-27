@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\GastoConImputacion;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,8 @@ class PrestDevConImputacion extends Component
     public $repAgrupado;
     public $unidad_prestada, $funcionario, $responsable_prestamo, $fecha_prestamo;
     public $fecha_devolucion, $responsable_devolucion, $devuelto;
+
+    public $reporte_prestamo=[];
 
     protected function rules()
     {
@@ -59,6 +62,7 @@ class PrestDevConImputacion extends Component
 
         $this->repAgrupados = DB::table('view_gastos_con_imputacion')->whereIn('id', $this->agrupado)->get();
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
+
         return view('prestamosDevoluciones.gastosConImputacion.list',['gastos'=>$gastos]);
     }
 
@@ -81,6 +85,7 @@ class PrestDevConImputacion extends Component
             $id_agrupado = $prestado->id;
         }
 
+        GastoConImputacion::whereIn('id', $this->agrupado)->update(['prestado' =>'SI']);
         PrestamoDevolucionGci::whereIn('id', $id_agrupados)->update(['id_agrupado' =>$id_agrupado]);
 
         $this->resetInput();
@@ -93,13 +98,11 @@ class PrestDevConImputacion extends Component
     public function generarPdf($id){
 
         $id_agrupados = PrestamoDevolucionGci::select('id_gci')->where('id_agrupado', $id)->get();
-        $prestados = DB::table('view_gastos_con_imputacion')->whereIn('id', $id_agrupados)->get();
+        $prestados = DB::table('view_gastos_con_imputacion')->whereIn('id', $id_agrupados)->orderBy('nro_comprobante','ASC')->get();
 
         $datos = PrestamoDevolucionGci::where('id_agrupado', $id)->first();
 
         $fecha = PrestamoDevolucionGci::where('id_agrupado', $id)->value('fecha_prestamo');
-        // $fecha_prest = Carbon::createFromFormat('Y-m-d', $fecha)->format('j F Y');
-
         $fecha_prest = Carbon::parse($datos->fecha_prestamo)->formatLocalized('%d'. ' de '. '%B'.' del '.' %Y ');
 
         $pdf = PDF::loadView('prestamosDevoluciones.gastosConImputacion.reporte', compact('prestados', 'datos', 'fecha_prest'));
@@ -108,6 +111,10 @@ class PrestDevConImputacion extends Component
         return $pdf->stream('reporte.pdf');
     }
 
+    public function show($id){
+        $reporte = PrestamoDevolucionGci::where('id_gci',$id)->orderBy('fecha_prestamo','DESC')->get();
+        $this->reporte_prestamo = $reporte;
+    }
 
     public function changeEvent($id)
     {

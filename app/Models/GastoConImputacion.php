@@ -49,6 +49,7 @@ class GastoConImputacion extends Model
         'enviado_archivo',
         'archivado',
         'fecha_archivado',
+        'prestado',
         'ult_usuario'
     ];
 

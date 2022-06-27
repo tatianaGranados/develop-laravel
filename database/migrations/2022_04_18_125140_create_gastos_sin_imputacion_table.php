@@ -34,6 +34,7 @@ class CreateGastosSinImputacionTable extends Migration
             $table->enum('enviado_archivo',['SI','NO'])->default('NO');
             $table->enum('archivado',['SI','NO'])->default('NO');
             $table->date('fecha_archivado')->nullable();
+            $table->enum('prestado',['SI','NO'])->default('NO');
             $table->string('ult_usuario');
             $table->timestamps();
 

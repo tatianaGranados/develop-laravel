@@ -9,10 +9,13 @@
 			</select>
 		</div>
 	</div>
-	
-	<div class="text-right container">
+	<br>
+	<div class="text-right">
 		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#prestarGci">
 			<span class="material-icons">undo</span> Prestar documentoS
+		</button>	
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#devolverGci">
+			<span class="material-icons">redo</span> Devolver Documentos
 		</button>	
 	</div>
 
@@ -53,11 +56,12 @@
 						<td>{{ $gasto->detalle}} 		  </td>
 						<td>{{ $gasto->liquido_pagable}}  </td>
 						<td class="text-center no-padding td-actions">
-							<input style="width: 18px; height: 18px;" type="checkbox" value="{{ $gasto->id }}" id="{{ $gasto->id }}" wire:model="agrupado"> 
+							@if ($gasto->prestado == 'NO')
+								<input style="width: 18px; height: 18px;" type="checkbox" value="{{ $gasto->id }}" id="{{ $gasto->id }}" wire:model="agrupado"> 
+							@endif
 						</td>
 						<td class="td-actions text-center">
-							<button wire:click="return({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#return"><span class="material-icons">redo</span></button>
-							<button wire:click="report({{$gasto->id}})" class="btn btn-warning btn-simple" data-toggle="modal" data-target="#report"><span class="material-icons">receipt_long</span></button>	
+							<button wire:click="show({{$gasto->id}})" class="btn btn-warning btn-simple" data-toggle="modal" data-target="#showGci"><span class="material-icons">receipt_long</span></button>	
 						</td>
 					</tr>
 				@empty
@@ -68,9 +72,8 @@
 			</tbody>
 		</table>
 	</div>
- {{$gastos->links()}}
+ 	{{$gastos->links()}}
 
  	@include('prestamosDevoluciones.gastosConImputacion.prestar') 
- 	{{-- @include('gastosConImputacion.edit')  --}}
-
+	@include('prestamosDevoluciones.gastosConImputacion.show') 
 </div>
