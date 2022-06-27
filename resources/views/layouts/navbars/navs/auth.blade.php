@@ -57,21 +57,13 @@
             </li>
             @endif
 
-
-            {{-- <li><a href=""><i class="material-icons">widgets</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
+            <li><a href=""><i class="material-icons">compare_arrows</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
               <ul class="dropdown-default">
-                <li><a href="">Gastos Con Imputación</a></li>
-                <li><a href="">Gastos Sin Imputación</a></li>
-                <li><a href="">Pagos Exterior</a></li>
+                <li><a href="{{route('prestamoDevGci')}}">Gastos Con Imputación</a></li>
+                <li><a href="{{route('prestamoDevGsi')}}">Gastos Sin Imputación</a></li>
+                <li><a href="{{route('prestamoDevPe')}}">Pagos Exterior</a></li>
               </ul>
-            </li> --}}
-
-            {{-- <li><a href="javascript:void(0)" ><i class="material-icons">discount</i>MIGRACIONES <span class="arrow-down"></span></a>
-              <ul class="dropdown-default">
-                <li><a href="">Gastos Con Imputación</a></li>
-                <li><a href="">Gastos Sin Imputación</a></li>
-              </ul>
-            </li> --}}
+            </li>
 
             <div style="float: right;">
               <li>

@@ -10,7 +10,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\GestionController;
 use App\Http\Controllers\PagoExteriorController;
+use App\Http\Controllers\PrestamoDevolucionController;
 use App\Http\Livewire\EnviarCompAlmacen;
+use App\Http\Livewire\PrestDevConImputacion;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,5 +50,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('archivarTomoGsi',[ArchivadoTomoController::class,'indexSinImputacion'])->name('archivarTomoGsi');
 	Route::get('archivarTomoPe',[ArchivadoTomoController::class,'indexPagosExterior'])->name('archivarTomoPe');
 
+	Route::get('prestamoDevGci',[PrestamoDevolucionController::class,'indexConImputacion'])->name('prestamoDevGci');
+	Route::get('prestamoDevGsi',[PrestamoDevolucionController::class,'indexSinImputacion'])->name('prestamoDevGsi');
+	Route::get('prestamoDevPe',[PrestamoDevolucionController::class,'indexPagosExterior'])->name('prestamoDevPe');
+	
+	Route::get('prestarGci/{id}',[ PrestDevConImputacion::class,'generarPdf'])->name('prestarGci');
 });
 

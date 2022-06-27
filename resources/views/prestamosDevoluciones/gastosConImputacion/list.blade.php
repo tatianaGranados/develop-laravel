@@ -9,7 +9,12 @@
 			</select>
 		</div>
 	</div>
-	<br>
+	
+	<div class="text-right container">
+		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#prestarGci">
+			<span class="material-icons">undo</span> Prestar documentoS
+		</button>	
+	</div>
 
 	<div class="input-group">
 		<input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
@@ -30,11 +35,12 @@
 					<th style="font-size: 13px;"><strong>Unidad 		</strong></th>
 					<th style="font-size: 13px;"><strong>Detalle 		</strong></th>
 					<th style="font-size: 13px;"><strong>Liquido Pagable</strong></th>
-					<th style="font-size: 13px; width: 120px;"><strong>Acciones		</strong></th>
+					<th style="font-size: 13px;"><strong>Prestar        </strong></th>
+					<th style="font-size: 13px; width: 120px;"><strong>Acciones</strong></th>
 				</tr>
 			</thead>
 			<tbody>
-				{{-- @forelse ($gastos as $gasto)
+				@forelse ($gastos as $gasto)
 					<tr style="font-size: 13px;">
 						<td>{{ $gasto->nro_comprobante}}  </td>
 						<td>{{ $gasto->nro_preventivo}}   </td>
@@ -46,22 +52,25 @@
 						<td>{{ $gasto->nombre_unidad}} 	  </td>
 						<td>{{ $gasto->detalle}} 		  </td>
 						<td>{{ $gasto->liquido_pagable}}  </td>
+						<td class="text-center no-padding td-actions">
+							<input style="width: 18px; height: 18px;" type="checkbox" value="{{ $gasto->id }}" id="{{ $gasto->id }}" wire:model="agrupado"> 
+						</td>
 						<td class="td-actions text-center">
-							<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#show"><span class="material-icons">insert_drive_file</span></button>
-							<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#edit"><span class="material-icons">create</span></button>
+							<button wire:click="return({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#return"><span class="material-icons">redo</span></button>
+							<button wire:click="report({{$gasto->id}})" class="btn btn-warning btn-simple" data-toggle="modal" data-target="#report"><span class="material-icons">receipt_long</span></button>	
 						</td>
 					</tr>
 				@empty
 					<tr>
 						<td colspan="15" class="text-center">No existen registros</td>
 					</tr>
-				@endforelse --}}
+				@endforelse
 			</tbody>
 		</table>
 	</div>
  {{$gastos->links()}}
 
- 	{{-- @include('gastosConImputacion.show') 
- 	@include('gastosConImputacion.edit')  --}}
+ 	@include('prestamosDevoluciones.gastosConImputacion.prestar') 
+ 	{{-- @include('gastosConImputacion.edit')  --}}
 
 </div>

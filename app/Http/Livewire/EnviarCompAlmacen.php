@@ -71,9 +71,7 @@ class EnviarCompAlmacen extends Component
 
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
-        $this->dispatchBrowserEvent('alert',['message'=>'Reporte Generado con exito ...!!!']); 
-
-        
+        $this->dispatchBrowserEvent('alert',['message'=>'Reporte Generado con exito ...!!!']);     
     }
 
     public function reimpresion($id){

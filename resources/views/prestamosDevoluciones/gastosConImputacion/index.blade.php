@@ -13,8 +13,7 @@
 @section('script')
 <script>
     window.addEventListener('close-modal', event => {
-        $('#show').modal('hide');
-        $('#createPrestGci').modal('hide');
+        $('#prestarGci').modal('hide');
     })
 </script>
 @endsection

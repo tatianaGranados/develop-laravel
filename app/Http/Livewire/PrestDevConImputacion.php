@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\GastoConImputacion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Gestion;
+use App\Models\PrestamoDevolucionGci;
 use Livewire\WithPagination;
+use Carbon\Carbon;
+use PDF;
 
 class PrestDevConImputacion extends Component
 {
@@ -15,17 +17,33 @@ class PrestDevConImputacion extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $gestiones,$id_gestion;
+    public $search = '';
 
+    public array $agrupado=[];
+    public $repAgrupado;
+    public $unidad_prestada, $funcionario, $responsable_prestamo, $fecha_prestamo;
+    public $fecha_devolucion, $responsable_devolucion, $devuelto;
+
+    protected function rules()
+    {
+        return ['unidad_prestada'      => ['required'],
+                'funcionario'          =>'required',
+                'responsable_prestamo' =>'required',
+                'fecha_prestamo'       =>'required',
+                'agrupado'             =>'required'
+            ];
+    }
+    
     public function mount()
     {      
         $this->permisos = Auth::user()->AccesosUserAuth;
         $this->id_gestion = Gestion::orderBy('gestion','desc')->value('id');
+        $this->fecha_prestamo = Carbon::now()->toDateString();
     }
     
     public function render()
-    {
-        
-        $gastos = DB::table('view_gastos_con_imputacion')->where([['id_gestion','=', $this->id_gestion],['enviado_archivo','=','SI']])
+    {    
+        $gastos = DB::table('view_gastos_con_imputacion')->where([['id_gestion','=', $this->id_gestion],['pagado','=','SI']])
                     ->Where(function($sub_query){
                         $sub_query->Where('nro_comprobante','LIKE', '%' . $this->search. '%')
                         ->orWhere('nro_preventivo','LIKE', '%' . $this->search. '%')
@@ -39,28 +57,71 @@ class PrestDevConImputacion extends Component
                     ->orderBy('nro_comprobante','desc')
                     ->paginate(50);
 
+        $this->repAgrupados = DB::table('view_gastos_con_imputacion')->whereIn('id', $this->agrupado)->get();
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
-
-        return view('prestamosDevoluciones.gastosConImputacion.list',['gasto'=>$gastos]);
+        return view('prestamosDevoluciones.gastosConImputacion.list',['gastos'=>$gastos]);
     }
+
+    public function prestar(){
+        $this->validate();  
+
+        $id_agrupados =[];
+
+        foreach ($this->agrupado as $agrup) {
+            $prestado = new PrestamoDevolucionGci();
+            $prestado->id_gci               = (int)$agrup;
+            $prestado->unidad_prestada      = $this->unidad_prestada;
+            $prestado->funcionario          = $this->funcionario;
+            $prestado->responsable_prestamo = $this->responsable_prestamo;
+            $prestado->fecha_prestamo       = $this->fecha_prestamo;
+            $prestado->ult_usuario          = Auth::User()->username;
+            $prestado->save();
+            array_push($id_agrupados,$prestado->id);
+
+            $id_agrupado = $prestado->id;
+        }
+
+        PrestamoDevolucionGci::whereIn('id', $id_agrupados)->update(['id_agrupado' =>$id_agrupado]);
+
+        $this->resetInput();
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('alert',['message'=>'Documento Generado con Exito ...!!!']); 
+
+        return redirect()->route('prestarGci', ['id' => $id_agrupado]);
+    }
+
+    public function generarPdf($id){
+
+        $id_agrupados = PrestamoDevolucionGci::select('id_gci')->where('id_agrupado', $id)->get();
+        $prestados = DB::table('view_gastos_con_imputacion')->whereIn('id', $id_agrupados)->get();
+
+        $datos = PrestamoDevolucionGci::where('id_agrupado', $id)->first();
+
+        $fecha = PrestamoDevolucionGci::where('id_agrupado', $id)->value('fecha_prestamo');
+        // $fecha_prest = Carbon::createFromFormat('Y-m-d', $fecha)->format('j F Y');
+
+        $fecha_prest = Carbon::parse($datos->fecha_prestamo)->formatLocalized('%d'. ' de '. '%B'.' del '.' %Y ');
+
+        $pdf = PDF::loadView('prestamosDevoluciones.gastosConImputacion.reporte', compact('prestados', 'datos', 'fecha_prest'));
+        $pdf->setPaper("letter", "portrait");
+        
+        return $pdf->stream('reporte.pdf');
+    }
+
 
     public function changeEvent($id)
     {
         $this->id_gestion = $id;
-        $this->compUtimo($id);
+        $this->resetInput();
     }
-
 
     public function resetInput()
     {
         $this->unidad_prestada      ='';
         $this->funcionario          ='';
         $this->responsable_prestamo ='';
-        $this->fecha_prestamo       ='';
-        $this->observacion_prestamo ='';
-        $this->observacion_prestamo ='';
-        $this->observacion_prestamo ='';
-       
+        $this->agrupado             =[];
+        $this->fecha_prestamo = Carbon::now()->toDateString();  
     }
 
     public function closeModal()

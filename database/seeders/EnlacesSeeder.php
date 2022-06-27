@@ -266,70 +266,29 @@ class EnlacesSeeder extends Seeder
             'tipo_acceso'=>8
         ]);
 
-    // //5 prestamos y devoluciones
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Listar gastos con imputación p/d',
-    //         'ruta'=>'prestDevConImp.index',
-    //         'icono'=>'fas fa-list-alt',
-    //         'descripcion'=>'',
-    //         'tipo_acceso'=>5
-    //     ]);
+    //9 prestamos y devoluciones
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Prest/dev gastos con Imputacion',
+            'ruta'=>'',
+            'icono'=>'compare_arrows',
+            'descripcion'=>'',
+            'tipo_acceso'=>9
+        ]);
 
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Listar gastos sin imputación p/d',
-    //         'ruta'=>'prestDevSinImp.index',
-    //         'icono'=>'fas fa-list-alt',
-    //         'descripcion'=>'',
-    //         'tipo_acceso'=>5
-    //     ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Prest/dev gastos sin Imputacion',
+            'ruta'=>'',
+            'icono'=>'compare_arrows',
+            'descripcion'=>'',
+            'tipo_acceso'=>9
+        ]);
 
-
-    // // ver cheque listos (gastos con imputacion)
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Ver cheques para cobrar',
-    //         'ruta'=>'gastosConImp.verCheques',
-    //         'icono'=>'fas fa-eye',
-    //         'descripcion'=>'',
-    //         'tipo_acceso'=>3
-    //     ]);
-
-    // //migraciones datos
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Migrar datos',
-    //         'ruta'=>'migrarGci.index',
-    //         'icono'=>'fas fa-eye',
-    //         'descripcion'=>'Migrar datos con imputacion',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Migrar datos asociados',
-    //         'ruta'=>'',
-    //         'icono'=>'fas fa-file',
-    //         'descripcion'=>'Migrar datos asociados con imputacion',
-    //         'tipo_acceso'=>3
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Migrar datos',
-    //         'ruta'=>'migrarGsi.index',
-    //         'icono'=>'fas fa-eye',
-    //         'descripcion'=>'Migrar datos sin imputacion',
-    //         'tipo_acceso'=>4
-    //     ]);
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'migrar datos asociados',
-    //         'ruta'=>'',
-    //         'icono'=>'fas fa-file',
-    //         'descripcion'=>'Migrar datos asociados sin imputacion',
-    //         'tipo_acceso'=>4
-    //     ]);
-
-    // //tomos
-    //     DB::table('enlaces')->insert([
-    //         'nombre_enlace'  => 'Tomos',
-    //         'ruta'=>'',
-    //         'icono'=>'fas fa-list-alt',
-    //         'descripcion'=>'',
-    //         'tipo_acceso'=>5
-    //     ]);
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Prest/dev pagos al exterior',
+            'ruta'=>'',
+            'icono'=>'compare_arrows',
+            'descripcion'=>'',
+            'tipo_acceso'=>9
+        ]);
     }
 }

@@ -25,6 +25,7 @@ class PrestamoDevolucionGsi extends Model
         'responsable_devolucion',
         'devuelto',
         'obs_devolucion',
+        'id_agrupado',
         'ult_usuario'
     ];
 

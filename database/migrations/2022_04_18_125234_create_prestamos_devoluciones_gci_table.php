@@ -23,6 +23,7 @@ class CreatePrestamosDevolucionesGciTable extends Migration
             $table->string('responsable_devolucion')->nullable();
             $table->enum('devuelto',['SI','NO'])->default('NO');
             $table->string('obs_devolucion')->nullable();
+            $table->integer('id_agrupado')->nullable();
             $table->string('ult_usuario');
             $table->timestamps();
 

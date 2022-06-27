@@ -25,7 +25,9 @@ class PrestamoDevolucionExterior extends Model
         'responsable_devolucion',
         'devuelto',
         'obs_devolucion',
+        'id_agrupado',
         'ult_usuario'
+
     ];
     public function pagoExterior():BelongsTo {
     	return $this->belongsTo(PagoExterior::class, 'id_pago_exterior');

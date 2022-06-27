@@ -24,6 +24,7 @@ class CreatePrestamosDevolucionesGsiTable extends Migration
             $table->enum('devuelto',['SI','NO'])->default('NO');
             $table->string('obs_devolucion')->nullable();
             $table->string('ult_usuario');
+            $table->integer('id_agrupado')->nullable();
             $table->timestamps();
 
             $table->foreign('id_gsi')
