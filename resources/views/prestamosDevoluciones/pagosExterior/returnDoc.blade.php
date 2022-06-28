@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="devolverGsi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="devolverPe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header card-header-blue text-center">
@@ -37,24 +37,24 @@
                             <table class="table table-condensed table-bordered table-striped">
                                 <thead class="text-center" style="font-size: 13px;">
                                     <tr class="table-info" style="font-size: 13px;">
-                                        <th style="font-size: 13px;"><strong>N° Prestamo            </strong></th>
-                                        <th style="font-size: 13px;"><strong>Fecha Prestamo         </strong></th>
-                                        <th style="font-size: 13px;"><strong>Unidad Prestada        </strong></th>
+                                        <th style="font-size: 13px;"><strong>N° Prestamo </strong></th>
+                                        <th style="font-size: 13px;"><strong>Fecha Prestamo </strong></th>
+                                        <th style="font-size: 13px;"><strong>Unidad Prestada </strong></th>
                                         <th style="font-size: 13px;"><strong>Comprobantes prestados </strong></th>
-                                        <th style="font-size: 13px;"><strong>Devolver               </strong></th>	
-                                        <th style="font-size: 13px;"><strong>Imprimir               </strong></th>		
+                                        <th style="font-size: 13px;"><strong>Devolver    </strong></th>	
+                                        <th style="font-size: 13px;"><strong>Imprimir    </strong></th>		
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($nro_prestamos as $nro)
                                         <tr style="font-size: 13px;">
-                                            <td>{{ $nro->nro_prestamo}}   </td>
-                                            <td>{{ $nro->fecha_prestamo}} </td>
-                                            <td>{{ $nro->unidad_prestada}}</td>
+                                            <td>{{ $nro->nro_prestamo}}  </td>
+                                            <td>{{ $nro->fecha_prestamo}}  </td>
+                                            <td>{{ $nro->unidad_prestada}}  </td>
                                             <td>
                                                 @foreach ($prestados as $prestado)
                                                     @if ($prestado->nro_prestamo == $nro->nro_prestamo)
-                                                        {{ $prestado->nro_devengado}} <br>
+                                                        {{ $prestado->nro_comprobante}} <br>
                                                     @endif  
                                                 @endforeach
                                             </td>
@@ -62,7 +62,7 @@
                                                 <input style="width: 18px; height: 18px;" type="checkbox" value="{{ $nro->nro_prestamo }}" wire:model="nro_devuelto"> 
                                             </td>
                                             <td class="td-actions text-center">
-                                                <a href="{{ route('prestarGsi', ['id' => $nro->id_agrupado]) }}" class="btn btn-warning" target="_blanck"><span class="material-icons">print</span></a>  
+                                                <a href="{{ route('prestarPe', ['id' => $nro->id_agrupado]) }}" class="btn btn-warning" target="_blanck"><span class="material-icons">print</span></a>  
                                             </td>
                                         </tr> 
                                     @empty
