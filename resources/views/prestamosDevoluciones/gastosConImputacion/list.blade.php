@@ -12,10 +12,10 @@
 	<br>
 	<div class="text-right">
 		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#prestarGci">
-			<span class="material-icons">undo</span> Prestar documentoS
+			<span class="material-icons">undo</span> Prestar documentos
 		</button>	
-		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#devolverGci">
-			<span class="material-icons">redo</span> Devolver Documentos
+		<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#devolverGci">
+			<span class="material-icons">redo</span> Devolver
 		</button>	
 	</div>
 
@@ -61,7 +61,7 @@
 							@endif
 						</td>
 						<td class="td-actions text-center">
-							<button wire:click="show({{$gasto->id}})" class="btn btn-warning btn-simple" data-toggle="modal" data-target="#showGci"><span class="material-icons">receipt_long</span></button>	
+							<button wire:click="show({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#showGci"><span class="material-icons">receipt_long</span></button>	
 						</td>
 					</tr>
 				@empty
@@ -75,5 +75,6 @@
  	{{$gastos->links()}}
 
  	@include('prestamosDevoluciones.gastosConImputacion.prestar') 
+	 @include('prestamosDevoluciones.gastosConImputacion.returnDoc') 
 	@include('prestamosDevoluciones.gastosConImputacion.show') 
 </div>

@@ -17,14 +17,13 @@ class CreatePrestamosDevolucionesGsiTable extends Migration
             $table->string('responsable_prestamo');
             $table->date('fecha_prestamo');
             $table->string('observacion_prestamo');
-            $table->string('nro_hojas_prest')->nullable();
-            $table->string('tomo_prestado')->nullable();
             $table->date('fecha_devolucion')->nullable();
             $table->string('responsable_devolucion')->nullable();
             $table->enum('devuelto',['SI','NO'])->default('NO');
             $table->string('obs_devolucion')->nullable();
-            $table->string('ult_usuario');
+            $table->integer('nro_prestamo');
             $table->integer('id_agrupado')->nullable();
+            $table->string('ult_usuario');
             $table->timestamps();
 
             $table->foreign('id_gsi')

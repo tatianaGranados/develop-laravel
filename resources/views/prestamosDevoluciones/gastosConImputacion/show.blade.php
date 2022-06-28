@@ -18,6 +18,8 @@
                                 <th style="font-size: 13px;"><strong>Funcionario	</strong></th>
                                 <th style="font-size: 13px;"><strong>Prestado Por	</strong></th>
                                 <th style="font-size: 13px;"><strong>Fecha Prestamo	</strong></th>
+                                <th style="font-size: 13px;"><strong>Devuelto	    </strong></th>
+                                <th style="font-size: 13px;"><strong>Fecha Devolución</strong></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,6 +30,8 @@
                                     <td>{{ $reporte->funcionario}}              </td>
                                     <td>{{ $reporte->responsable_prestamo}}     </td>
                                     <td>{{ $reporte->fecha_prestamo}}           </td>
+                                    <td>{{ $reporte->devuelto}}                 </td>
+                                    <td>{{ $reporte->fecha_devolucion}}         </td>
                                 </tr>
                             @empty
                                 <tr>

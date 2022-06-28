@@ -14,6 +14,7 @@
 <script>
     window.addEventListener('close-modal', event => {
         $('#prestarGci').modal('hide');
+		$('#devolverGci').modal('hide');
     })
 </script>
 @endsection

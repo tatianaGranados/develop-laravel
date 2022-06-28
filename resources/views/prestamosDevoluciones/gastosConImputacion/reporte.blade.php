@@ -34,6 +34,8 @@
             </tr>
         </table>
         <hr style="color: rgba(18, 18, 134, 0.671);">
+
+        <p style="text-align:right">Nro Prest: {{$datos->nro_prestamo}}</p>
         <h4 style="text-align:center">REGISTRO DE PRESTAMO DE DOCUMENTOS DE GASTOS C31</h4>
         <p style="text-align:justify">A requerimiento de la unidad {{$datos->unidad_prestada}} en fecha {{$fecha_prest}} se hace la entrega a {{$datos->funcionario}} , los mismos comprobantes son en calidad de préstamo bajo en siguiente detalle: </p>
 
@@ -69,17 +71,35 @@
 
         <table width= 100%>
             <tr style="font-size: 13px;" align="center">
-                <td style="padding-top: 90px;">
-                    <label>___________________________</label><br>
-                    <label>{{$datos->responsable_prestamo}}</label><br> 
-                    <label>Responsable del Prestamo</label><br>
+                <td width= 100% style="padding-top: 90px;">
+                    <label>___________________________     </label><br>
+                    <label style="text-transform: capitalize;">{{$datos->responsable_prestamo}}</label><br> 
+                    <label>Responsable del Prestamo        </label><br>
                     <label>Escuela Universitaria de Posgrado - UMSS</label>
                 </td>
-                <td style="padding-top: 90px;">
+                <td width= 100% style="padding-top: 90px;">
                     <label>___________________________</label><br>
-                    <label>{{$datos->funcionario}}</label><br> 
-                    <label>Responsable recepción prestamo</label><br>
-                    <label>{{$datos->unidad_prestada}}</label>
+                    <label  style="text-transform: capitalize;">{{$datos->funcionario}}    </label><br> 
+                    <label>Responsable Recepción Prestamo</label><br>
+                    <label style="text-transform: capitalize;">{{$datos->unidad_prestada}}</label>
+                </td>
+            </tr>
+        </table>
+
+        <table width= 100%>
+            <tr style="font-size: 13px;" align="center">
+                <td width= 100% style="padding-top: 90px;">
+                    <label>___________________________   </label><br><br>
+                    <label>..........................................................</label><br> 
+                    <label>Responsable Recepción de Devolucion</label><br>
+                    <label>Escuela Universitaria de Posgrado - UMSS</label>
+                </td>
+                <td width= 100% style="padding-top: 90px;">
+                    <label>___________________________   </label><br><br>
+                    <label>..........................................................</label><br> 
+                    <label>Responsable Devolución</label><br>
+                    <label style="text-transform: capitalize;">{{$datos->unidad_prestada}}</label><br>
+                    <label>Fecha:...............................</label><br>
                 </td>
             </tr>
         </table>

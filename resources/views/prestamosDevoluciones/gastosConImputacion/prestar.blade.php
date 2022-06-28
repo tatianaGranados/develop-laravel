@@ -42,11 +42,19 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 <span class="material-icons" style="font-size: 15px;">event</span>
                                 <label for="fecha_prestamo">Fecha Prestamo:</label>
                                 <input type="date" wire:model="fecha_prestamo"  class="form-control" id="fecha_prestamo" name="fecha_prestamo">
                                 @error('fecha_prestamo')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-3">
+                                <span class="material-icons" style="font-size: 15px;">event</span>
+                                <label for="nro_prestamo">Nro Prestamo:</label>
+                                <input type="number" wire:model="nro_prestamo"  class="form-control" id="nro_prestamo" name="nro_prestamo" readonly>
+                                @error('nro_prestamo')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
