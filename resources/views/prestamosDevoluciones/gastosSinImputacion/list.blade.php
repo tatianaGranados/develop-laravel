@@ -11,10 +11,10 @@
 	</div>
 	<br>
 	<div class="text-right">
-		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#prestarGci">
+		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#prestarGsi">
 			<span class="material-icons">undo</span> Prestar documentos
 		</button>	
-		<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#devolverGci">
+		<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#devolverGsi">
 			<span class="material-icons">redo</span> Devolver
 		</button>	
 	</div>
@@ -28,12 +28,9 @@
 		<table class="table table-condensed table-bordered table-striped">
 			<thead class="text-center" style="font-size: 13px;">
 				<tr class="table-info" style="font-size: 13px;">
-					<th style="font-size: 13px;"><strong>N° Compr 		</strong></th>
-					<th style="font-size: 13px;"><strong>N° Prev		</strong></th>
-					<th style="font-size: 13px;"><strong>Fecha Comp 	</strong></th>
+					<th style="font-size: 13px;"><strong>N° Deveng		</strong></th>
+					<th style="font-size: 13px;"><strong>Fecha Deveng	</strong></th>
 					<th style="font-size: 13px;"><strong>Sello   		</strong></th>
-					<th style="font-size: 13px;"><strong>Nro Cheque 	</strong></th>
-					<th style="font-size: 13px;"><strong>Fecha Cheque 	</strong></th>
 					<th style="font-size: 13px;"><strong>Beneficiario	</strong></th>
 					<th style="font-size: 13px;"><strong>Unidad 		</strong></th>
 					<th style="font-size: 13px;"><strong>Detalle 		</strong></th>
@@ -45,12 +42,9 @@
 			<tbody>
 				@forelse ($gastos as $gasto)
 					<tr style="font-size: 13px;">
-						<td>{{ $gasto->nro_comprobante}}  </td>
-						<td>{{ $gasto->nro_preventivo}}   </td>
-						<td>{{ $gasto->fecha_comprobante}}</td>
+						<td>{{ $gasto->nro_devengado}}  </td>
+						<td>{{ $gasto->fecha_devengado}}</td>
 						<td>{{ $gasto->sello}} 			  </td>
-						<td>{{ $gasto->nro_cheque}} 	  </td>
-						<td>{{ $gasto->fecha_cheque}} 	  </td>
 						<td>{{ $gasto->beneficiario}} 	  </td>
 						<td>{{ $gasto->nombre_unidad}} 	  </td>
 						<td>{{ $gasto->detalle}} 		  </td>
@@ -61,7 +55,7 @@
 							@endif
 						</td>
 						<td class="td-actions text-center">
-							<button wire:click="show({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#showGci"><span class="material-icons">receipt_long</span></button>	
+							<button wire:click="show({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#showGsi"><span class="material-icons">receipt_long</span></button>	
 						</td>
 					</tr>
 				@empty
@@ -74,7 +68,7 @@
 	</div>
  	{{$gastos->links()}}
 
- 	@include('prestamosDevoluciones.gastosConImputacion.prestar') 
-	 @include('prestamosDevoluciones.gastosConImputacion.returnDoc') 
-	@include('prestamosDevoluciones.gastosConImputacion.show') 
+ 	@include('prestamosDevoluciones.gastosSinImputacion.prestar') 
+	 @include('prestamosDevoluciones.gastosSinImputacion.returnDoc') 
+	@include('prestamosDevoluciones.gastosSinImputacion.show') 
 </div>

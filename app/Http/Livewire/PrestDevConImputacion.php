@@ -37,13 +37,6 @@ class PrestDevConImputacion extends Component
                 'fecha_prestamo'       =>'required|date',
                 'agrupado'             =>'required',
             ];
-
-        if($this->devolver()){
-            return [
-                'responsable_devolucion' =>'required',
-                'fecha_devolucion'       =>'required|date',
-            ];
-        }
     }
     
     public function mount()

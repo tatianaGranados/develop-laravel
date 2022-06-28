@@ -13,6 +13,7 @@ use App\Http\Controllers\PagoExteriorController;
 use App\Http\Controllers\PrestamoDevolucionController;
 use App\Http\Livewire\EnviarCompAlmacen;
 use App\Http\Livewire\PrestDevConImputacion;
+use App\Http\Livewire\PrestDevSinImputacion;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,5 +56,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('prestamoDevPe',[PrestamoDevolucionController::class,'indexPagosExterior'])->name('prestamoDevPe');
 	
 	Route::get('prestarGci/{id}',[ PrestDevConImputacion::class,'generarPdf'])->name('prestarGci');
+	Route::get('prestarGsi/{id}',[ PrestDevSinImputacion::class,'generarPdf'])->name('prestarGsi');
 });
 
