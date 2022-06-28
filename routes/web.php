@@ -43,10 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('pagosExterior',[ PagoExteriorController::class,'index'])->name('pagosExterior');
 
 	Route::get('enviarAlmacen',[ EnviarCompAlmacenController::class,'index'])->name('enviarAlmacen');
-	
-	Route::post('reporte',[ EnviarCompAlmacenController::class,'generarReporte'])->name('reporte');
-	// Route::get('reporte',[ EnviarCompAlmacen::class,'generarReporte'])->name('reporte');
-	Route::get('reimpresion/{id}',[ EnviarCompAlmacen::class,'reimpresion'])->name('reimpresion');
+	Route::get('reporte/{id}',[ EnviarCompAlmacen::class,'generarPdf'])->name('reporte');
 
 	Route::get('archivarTomoGci',[ArchivadoTomoController::class,'indexConImputacion'])->name('archivarTomoGci');
 	Route::get('archivarTomoGsi',[ArchivadoTomoController::class,'indexSinImputacion'])->name('archivarTomoGsi');

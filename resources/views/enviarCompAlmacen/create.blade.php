@@ -10,8 +10,7 @@
 			</div>
 			<div class="modal-body">
                 <div class="container">
-                    <form name="generarReporte" id="generarReporte" method="post" action="{{url('reporte')}}">
-                        {{-- <form name="generarReporte" id="generarReporte" method="post" action="{{url('reporte')}}" target="_blank"> --}}
+                    <form wire:submit.prevent="generarReporte" enctype="multipart/form-data">
                         @csrf
                         <div class="form_group row form-blue">
                             <div class="form-group col-md-6">
@@ -50,7 +49,6 @@
                                 <tbody>
                                     @foreach ($repAgrupadosGci as $gasto)
                                         <tr style="font-size: 13px;">
-                                            <input name="agrupadoGi[]" value="{{ $gasto->id }}" hidden>
                                             <td class="text-center">{{$loop->iteration}}</td>
                                             <td>{{ $gasto->beneficiario}} 	   </td>
                                             <td>{{ $gasto->nro_cheque}} 	   </td>
@@ -89,6 +87,11 @@
                                     @endif
                                 </tbody>
                             </table>
+                            
+                            @error('agrupadoGci')
+                                    <span class="text-danger">{{$message}}</span>
+                            @enderror
+
                             <div class="shadow-lg mb-3 rounded text-center" style="background-color: #2a50a647 !important;">
                                 <h4><strong>*Revise bien el listado que entregará a almacen antes de generar Reporte</strong></h4> 
                             </div>
@@ -96,7 +99,7 @@
 
 						<div class="card-footer justify-content-center">
                             <div class="text-center container">
-                                <button type="submit" class="btn btn-info" wire:click="generarReporte">{{ __('GENERAR REPORTE') }}</button>
+                                <button type="submit" class="btn btn-info">{{ __('GENERAR REPORTE') }}</button>
                             </div>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="closeModal">Cerrar</button>
 						</div>
