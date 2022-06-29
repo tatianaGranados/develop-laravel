@@ -11,7 +11,10 @@
 				<form wire:submit.prevent="updateTesoreria(Object.fromEntries(new FormData($event.target)))">
 					@if(in_array(17, $permisos))
 						@include('gastosConImputacion.partials.tesoreria')
+						@include('gastosConImputacion.partials.calcLiquidoPEdit')
 					@endif
+
+
 					@if(in_array(18, $permisos))
                     	@include('gastosConImputacion.partials.caja')
 					@endif

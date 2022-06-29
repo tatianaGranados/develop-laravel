@@ -13,6 +13,7 @@
                     <form wire:submit.prevent="store(Object.fromEntries(new FormData($event.target)))">
 
                         @include('gastosConImputacion.partials.tesoreria')
+						@include('gastosConImputacion.partials.calcLiquidoPCreate')
 
 						<div class="card-footer justify-content-center">
 							<button type="submit" class="btn btn-info">{{ __('CREAR COMPROBANTE') }}</button>
