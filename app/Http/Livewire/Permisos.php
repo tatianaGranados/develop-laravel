@@ -28,6 +28,7 @@ class Permisos extends Component
     public $pagosExterior;
     public $reporteCaja;
     public $archivarComp;
+    public $prestamosDevoluc;
 
 
     protected function rules()
@@ -57,7 +58,7 @@ class Permisos extends Component
         $this->pagosExterior      = Enlace::where('tipo_acceso',6)->get();
         $this->reporteCaja        = Enlace::where('tipo_acceso',7)->get();
         $this->archivarComp       = Enlace::where('tipo_acceso',8)->get();
-        // $enlacePresDev      = Enlace::where('tipo_acceso',5)->get();
+        $this->prestamosDevoluc   = Enlace::where('tipo_acceso',9)->get();
         // $enlacePermisos     = Enlace::where('tipo_acceso',7)->get();
 
         return view('permisos.list');

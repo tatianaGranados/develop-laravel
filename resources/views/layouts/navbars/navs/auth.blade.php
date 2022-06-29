@@ -16,14 +16,18 @@
               <li><a href="{{ route('gastosSinImp') }}"><i class="material-icons">grading</i> GASTOS SIN IMPUT(CIERRE)</a></li>
             @endif
 
+            @if(in_array(25, $per) || in_array(26, $per) || in_array(27, $per)|| in_array(28, $per))
+              <li><a href="{{ route('pagosExterior') }}"><i class="material-icons">grading</i> PAGOS EXTERIOR</a></li>
+            @endif
+
             @if(in_array(12, $per) || in_array(13, $per) || in_array(14, $per))
               <li><a href="{{ route('gestiones') }}"><i class="material-icons">article</i> ADM. GESTIONES</a></li>
             @endif
 
-            @if(in_array(25, $per) || in_array(26, $per) || in_array(27, $per)|| in_array(28, $per))
-              <li><a href="{{ route('pagosExterior') }}"><i class="material-icons">grading</i> PAGOS EXTERIOR</a></li>
+            @if(in_array(29, $per))
+              <li><a href="{{ route('enviarAlmacen') }}"><span class="material-icons">double_arrow</span> Enviar Comprobantes - Almacen</a></li>
             @endif
-            
+
             @if(in_array(1, $per) || in_array(2, $per) || in_array(3, $per) || in_array(4, $per) || in_array(5, $per) || in_array(6, $per) || in_array(7, $per) ||
                 in_array(8, $per) || in_array(9, $per) || in_array(10, $per) || in_array(11, $per))
               <li><a href=""><i class="material-icons">group</i> ADM. USUARIOS<span class="arrow-down"></span></a>
@@ -38,12 +42,9 @@
               </li>
             @endif
 
-            @if(in_array(29, $per) || in_array(30, $per) || in_array(31, $per)|| in_array(32, $per))
+            @if(in_array(30, $per) || in_array(31, $per)|| in_array(32, $per))
             <li><a href=""><i class="material-icons">archive</i> ARCHIVAR</a>
               <ul class="dropdown-default">
-                @if(in_array(29, $per))
-                  <li style="width: 200px;"><a href="{{ route('enviarAlmacen') }}">Enviar Comprobantes - Almacen</a></li>
-                @endif
                 @if(in_array(30, $per))
                   <li style="width: 200px;"><a href="{{ route('archivarTomoGci') }}">Archivar Gastos con Imputación</a></li>
                 @endif
@@ -57,13 +58,21 @@
             </li>
             @endif
 
+            @if(in_array(33, $per) || in_array(34, $per)|| in_array(35, $per))
             <li><a href=""><i class="material-icons">compare_arrows</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
               <ul class="dropdown-default">
-                <li><a href="{{route('prestamoDevGci')}}">Gastos Con Imputación</a></li>
-                <li><a href="{{route('prestamoDevGsi')}}">Gastos Sin Imputación</a></li>
-                <li><a href="{{route('prestamoDevPe')}}">Pagos Exterior</a></li>
+                @if(in_array(33, $per))
+                  <li><a href="{{route('prestamoDevGci')}}">Gastos Con Imputación</a></li>
+                @endif
+                @if(in_array(34, $per))
+                  <li><a href="{{route('prestamoDevGsi')}}">Gastos Sin Imputación</a></li>
+                @endif
+                @if(in_array(35, $per))
+                  <li><a href="{{route('prestamoDevPe')}}">Pagos Exterior</a></li>
+                @endif
               </ul>
             </li>
+            @endif
 
             <div style="float: right;">
               <li>
