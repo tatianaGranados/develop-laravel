@@ -58,7 +58,7 @@
 						<td>{{ $gasto->pago_comision}}    </td>
 						<td class="td-actions text-center">
 							@if( in_array(25, $permisos))
-								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showPe"><span class="material-icons">insert_drive_file</span></button>
+								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showPe"><span class="material-icons">visibility</span></button>
 							@endif	
 							@if(in_array(27, $permisos) && $gasto->pagado =='NO' && $gasto->enviado_archivo =='NO')
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editPe"><span class="material-icons">create</span></button>

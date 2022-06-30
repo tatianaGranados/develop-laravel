@@ -54,7 +54,7 @@
 						<td>{{ $gasto->liquido_pagable}}  </td>
 						<td class="td-actions text-center">
 							@if( in_array(20, $permisos))
-								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showGsi"><span class="material-icons">insert_drive_file</span></button>
+								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showGsi"><span class="material-icons">visibility</span></button>
 							@endif	
 							@if( (in_array(22, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(23, $permisos) && $gasto->pagado =='NO' ))
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editGsi"><span class="material-icons">create</span></button>

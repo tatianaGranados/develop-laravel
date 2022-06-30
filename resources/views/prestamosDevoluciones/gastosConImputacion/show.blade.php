@@ -35,7 +35,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No existen registros de prestamos</td>
+                                    <td colspan="7" class="text-center">No existen registros de prestamos</td>
                                 </tr>
                             @endforelse
                         </tbody>
