@@ -6,10 +6,16 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Gestion;
 use App\Models\PagoExterior;
+use Livewire\WithPagination;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ArchivadosTomoPagosExterior extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    public $search = '';
+
     public $gestiones,$id_gestion;
     public $permisos;
 
@@ -42,11 +48,22 @@ class ArchivadosTomoPagosExterior extends Component
     {
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
 
-        $gastos = PagoExterior::leftJoin('unidades','unidades.id','=', 'pagos_exterior.id_unidad')
-                                ->select('pagos_exterior.*', 'unidades.nombre_unidad')                        
-                                ->where([['pagos_exterior.id_gestion', $this->id_gestion],['pagos_exterior.enviado_archivo','SI'],['pagos_exterior.archivado','NO']])
-                                ->orderBy('pagos_exterior.nro_comprobante','asc')
-                                ->get();
+        $query = "CAST(nro_comprobante AS DECIMAL(10,0)) DESC";
+        $gastos = DB::table('view_pagos_exterior')
+                    ->where([['id_gestion', $this->id_gestion],['enviado_archivo','SI'],['archivado','NO']])
+                    ->Where(function($sub_query){
+                        $sub_query->Where('nro_comprobante','LIKE', '%' . $this->search. '%')
+                        ->orWhere('nro_preventivo','LIKE', '%' . $this->search. '%')
+                        ->orWhere('sello','LIKE', '%' . $this->search. '%')
+                        ->orWhere('beneficiario','LIKE', '%' . $this->search. '%')
+                        ->orWhere('detalle','LIKE', '%' . $this->search. '%')
+                        ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
+                        ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
+                })
+                ->where([['enviado_archivo','SI'],['archivado','NO']])
+                ->orderByRaw($query)
+                ->paginate(50);
+
 
         if(is_array($this->agrupadoPe)){
             $gastosSelec = PagoExterior::leftJoin('unidades','unidades.id','=', 'pagos_exterior.id_unidad')

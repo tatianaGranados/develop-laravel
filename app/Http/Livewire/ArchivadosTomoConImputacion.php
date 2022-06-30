@@ -7,10 +7,15 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Gestion;
 use Illuminate\Support\Facades\DB;
+use Livewire\WithPagination;
 use Carbon\Carbon;
 
 class ArchivadosTomoConImputacion extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    public $search = '';
+
     public $gestiones,$id_gestion;
     public $permisos;
 
@@ -41,10 +46,21 @@ class ArchivadosTomoConImputacion extends Component
 
     public function render()
     {
-        $gastos = DB::table('view_gastos_con_imputacion')->where('id_gestion', $this->id_gestion)
+        $query = "CAST(nro_comprobante AS DECIMAL(10,0)) DESC";
+        $gastos = DB::table('view_gastos_con_imputacion')->where('id_gestion','=', $this->id_gestion)
+                    ->Where(function($sub_query){
+                        $sub_query->Where('nro_comprobante','LIKE', '%' . $this->search. '%')
+                        ->orWhere('nro_preventivo','LIKE', '%' . $this->search. '%')
+                        ->orWhere('sello','LIKE', '%' . $this->search. '%')
+                        ->orWhere('beneficiario','LIKE', '%' . $this->search. '%')
+                        ->orWhere('detalle','LIKE', '%' . $this->search. '%')
+                        ->orWhere('nro_cheque','LIKE', '%' . $this->search. '%')
+                        ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
+                        ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
+                    })
                     ->where([['enviado_archivo','SI'],['archivado','NO']])
-                    ->orderBy('nro_comprobante','asc')
-                    ->get();
+                    ->orderByRaw($query)
+                    ->paginate(50);
 
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
 

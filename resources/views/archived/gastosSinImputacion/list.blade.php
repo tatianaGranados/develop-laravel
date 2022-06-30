@@ -16,6 +16,10 @@
 			<span class="material-icons">note_add</span> Enviar Agrupado de Cheques
 		</button>	
 	</div>
+	<div class="input-group">
+		<input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
+		<span class="material-icons input-group-btn">search</span>
+	</div>
 	<br>
 
 	<div class="table-responsive">
@@ -58,6 +62,7 @@
 			</tbody>
 		</table>
 	</div>
+	{{$gastos->links()}}
 
 @include('archived.gastosSinImputacion.create') 
 	

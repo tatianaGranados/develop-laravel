@@ -17,6 +17,10 @@
 		</button>	
 	</div>
 	<br>
+	<div class="input-group">
+		<input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
+		<span class="material-icons input-group-btn">search</span>
+	</div>
 	<div class="table-responsive">
 		<table class="table table-condensed table-bordered table-striped">
 			<thead class="text-center">
@@ -59,7 +63,8 @@
 			</tbody>
 		</table>
 	</div>
-
+	{{$gastos->links()}}
+	
 @include('archived.gastosConImputacion.create') 
 	
 </div>

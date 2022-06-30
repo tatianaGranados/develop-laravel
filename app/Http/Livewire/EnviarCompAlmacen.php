@@ -10,11 +10,10 @@ use App\Models\GastoConImputacion;
 use App\Models\GastoSinImputacion;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use PDF;
 
 class EnviarCompAlmacen extends Component
-{
+{   
     public array $agrupadoGci=[];
     public array $agrupadoGsi=[];
     public $repAgrupadosGci;
