@@ -116,7 +116,7 @@ class GastosSinImp extends Component
         }
         
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
-        $this->unidades  = Unidad::all()->pluck('nombre_unidad','id');
+        $this->unidades  = Unidad::Select('nombre_unidad','id')->orderBy('nombre_unidad','asc')->get();
 
         return view('gastosSinImputacion.list',['gastos'=> $gastos]);
     }

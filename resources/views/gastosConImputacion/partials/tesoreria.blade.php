@@ -46,7 +46,7 @@
     <div class="form-group col-md-4">
         <span class="material-icons" style="font-size: 15px;">domain</span>
         <label for="id_unidad">Unidad:</label>
-        <select id="id_unidad" class="form-control" >
+        <select id="id_unidad" class="form-control" wire:model="id_unidad">
             <option value="">* Seleccion una Unidad...</option>
             @foreach ($unidades as $unidad)
                 <option value="{{$unidad->id}}">{{ $unidad->nombre_unidad}}</option>

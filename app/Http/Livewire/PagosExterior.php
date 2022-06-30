@@ -57,6 +57,7 @@ class PagosExterior extends Component
 
     public function render()
     {
+        $query = "CAST(nro_comprobante AS DECIMAL(10,0)) DESC";
         $gastos = DB::table('view_pagos_exterior')->where('id_gestion',$this->id_gestion)
                     ->Where(function($sub_query){
                         $sub_query->Where('nro_comprobante','LIKE', '%' . $this->search. '%')
@@ -67,10 +68,11 @@ class PagosExterior extends Component
                         ->orWhere('liquido_pagable','LIKE', '%' . $this->search. '%')
                         ->orWhere('nombre_unidad','LIKE', '%' . $this->search. '%');
                     })
+                    ->orderByRaw($query)
                     ->paginate(50);
 
         $this->gestiones = Gestion::orderby('gestion','desc')->get();
-        $this->unidades  = Unidad::all()->pluck('nombre_unidad','id');
+        $this->unidades  = Unidad::Select('nombre_unidad','id')->orderBy('nombre_unidad','asc')->get();
         $this->calcLiquidoPagable();
 
         return view('pagosExterior.list',['gastos'=> $gastos]);
