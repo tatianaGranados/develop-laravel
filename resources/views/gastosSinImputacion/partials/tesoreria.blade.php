@@ -28,7 +28,7 @@
 <div class="form_group row form-blue">
     <div class="form-group col-md-4">
         <span class="material-icons" style="font-size: 15px;">grading</span>
-        <label for="nro_hojas">Nro Hoja:</label>
+        <label for="nro_hojas">Nro Fojas:</label>
         <input type="number" class="form-control" id="nro_hojas" placeholder="nro hojas" wire:model="nro_hojas">
         @error('nro_hojas')
 	        <span class="text-danger">{{$message}}</span>
