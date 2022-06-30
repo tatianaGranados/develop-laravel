@@ -46,7 +46,12 @@
     <div class="form-group col-md-4">
         <span class="material-icons" style="font-size: 15px;">domain</span>
         <label for="id_unidad">Unidad:</label>
-        {!! Form::select('id_unidad',$unidades,null,['class'=>'form-control form-control-sm','placeholder' =>'*Seleccione la Unidad...','wire:model'=>'id_unidad'] )!!}
+        <select id="id_unidad" class="form-control" >
+            <option value="">* Seleccion una Unidad...</option>
+            @foreach ($unidades as $unidad)
+                <option value="{{$unidad->id}}">{{ $unidad->nombre_unidad}}</option>
+            @endforeach
+        </select>
         @error('id_unidad')
 	        <span class="text-danger">{{$message}}</span>
         @enderror

@@ -33,7 +33,8 @@ class CreateViewPagosExterior extends Migration
                         p.observacion_archivado,
                         p.archivado,
                         p.fecha_archivado,
-                        p.ult_usuario
+                        p.ult_usuario,
+                        p.prestado
 
                 FROM pagos_exterior p, gestiones g, unidades u
                 WHERE p.id_gestion=g.id
