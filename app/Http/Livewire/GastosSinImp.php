@@ -24,11 +24,10 @@ class GastosSinImp extends Component
     public $search = '';
 
     public $id_unidad, $unidad, $unidades; 
-    public $nro_devengado, $fecha_devengado, $sello, $nro_hojas, $beneficiario, $detalle;
+    public $nro_comprobante, $nro_devengado, $fecha_devengado, $sello, $nro_hojas, $beneficiario, $detalle;
     public $nro_cheque = null;
     public $fecha_cheque = null;
     public $liquido_pagable = 0;
-    public $emite_factura = 'NO';
     public $enviado_caja = 0;
 
     public $cheque_listo = 0;
@@ -41,14 +40,14 @@ class GastosSinImp extends Component
 
     protected function rules()
     {
-        return ['nro_devengado'   => ['required','max:9000'],
-                'fecha_devengado' => ['date','required'],
+        return ['nro_comprobante'   => ['required','max:9000'],
+                'nro_devengado'     => ['required','max:9000'],
+                'fecha_devengado'   => ['date','required'],
                 'sello'             => ['required','max:15','regex:/[1-9]/'],
                 'nro_hojas'         => ['integer','max:900','required'],
                 'id_unidad'         => 'required',
                 'beneficiario'      => ['required','string','max:200'],
                 'detalle'           => ['required','string','max:900'],
-                'emite_factura'     => 'required',
                 'nro_cheque'        => [$this->enviado_caja == 0 || $this->enviado_caja == '' ? 'nullable' : 'required','integer'],
                 'fecha_cheque'      => [$this->enviado_caja == 0 || $this->enviado_caja == '' ? 'nullable' : 'required','date'],
                 'liquido_pagable'   => ['required','numeric','regex:/^[\d]{0,12}(\.[\d]{1,2})?$/'],
@@ -73,6 +72,7 @@ class GastosSinImp extends Component
                 $gastos = DB::table('view_gastos_sin_imputacion')->where('id_gestion','=', $this->id_gestion)
                     ->Where(function($sub_query){
                         $sub_query->Where('nro_devengado','LIKE', '%' . $this->search. '%')
+                        ->orWhere('nro_comprobante','LIKE', '%' . $this->search. '%')
                         ->orWhere('sello','LIKE', '%' . $this->search. '%')
                         ->orWhere('beneficiario','LIKE', '%' . $this->search. '%')
                         ->orWhere('detalle','LIKE', '%' . $this->search. '%')
@@ -88,6 +88,7 @@ class GastosSinImp extends Component
                 $gastos = DB::table('view_gastos_sin_imputacion')->where([['id_gestion','=', $this->id_gestion],['enviado_caja','=','SI']])
                     ->Where(function($sub_query){
                         $sub_query->Where('nro_devengado','LIKE', '%' . $this->search. '%')
+                        ->orWhere('nro_comprobante','LIKE', '%' . $this->search. '%')
                         ->orWhere('sello','LIKE', '%' . $this->search. '%')
                         ->orWhere('beneficiario','LIKE', '%' . $this->search. '%')
                         ->orWhere('detalle','LIKE', '%' . $this->search. '%')
@@ -103,6 +104,7 @@ class GastosSinImp extends Component
                 $gastos = DB::table('view_gastos_sin_imputacion')->where('id_gestion','=', $this->id_gestion)
                     ->Where(function($sub_query){
                         $sub_query->Where('nro_devengado','LIKE', '%' . $this->search. '%')
+                        ->orWhere('nro_comprobante','LIKE', '%' . $this->search. '%')
                         ->orWhere('sello','LIKE', '%' . $this->search. '%')
                         ->orWhere('beneficiario','LIKE', '%' . $this->search. '%')
                         ->orWhere('detalle','LIKE', '%' . $this->search. '%')
@@ -127,14 +129,14 @@ class GastosSinImp extends Component
 
     public function compUtimo($id)
     {
-        $query = "CAST(nro_devengado AS DECIMAL(10,0)) DESC";
+        $query = "CAST(nro_comprobante AS DECIMAL(10,0)) DESC";
         $compUltimo   = GastoSinImputacion::where('id_gestion',$id)->orderByRaw($query)->get();
         if($compUltimo->isEmpty())
         {
-            $this->nro_devengado =1;
+            $this->nro_comprobante =1;
         }else{
-            $compUltimo= $compUltimo->first()->nro_devengado;
-            $this->nro_devengado = 1 + (int)$compUltimo;
+            $compUltimo= $compUltimo->first()->nro_comprobante;
+            $this->nro_comprobante = 1 + (int)$compUltimo;
         }
     }
 
@@ -144,6 +146,7 @@ class GastosSinImp extends Component
         $compGasto= new GastoSinImputacion([
             'id_gestion'        => $this->id_gestion,
             'id_unidad'         => $this->id_unidad,
+            'nro_comprobante'   => $this->nro_comprobante,
             'nro_devengado'     => $this->nro_devengado,
             'fecha_devengado'   => $this->fecha_devengado,
             'sello'             => $this->sello,
@@ -152,7 +155,6 @@ class GastosSinImp extends Component
             'detalle'           => $this->detalle,
             'nro_cheque'        => $this-> nro_cheque,
             'fecha_cheque'      => $this-> fecha_cheque,
-            'emite_factura'     => $this->emite_factura,
             'liquido_pagable'   => $this->liquido_pagable,
             'enviado_caja'      => $this->enviado_caja == 1 ? 'SI' : 'NO',
             'ult_usuario'       => Auth::User()->username,
@@ -168,6 +170,7 @@ class GastosSinImp extends Component
     public function show($id)
     {
         $gci = DB::table('view_gastos_sin_imputacion')->where('id',$id)->first();
+        $this->nro_comprobante       = $gci->nro_comprobante;
         $this->nro_devengado         = $gci->nro_devengado;
         $this->fecha_devengado       = $gci->fecha_devengado;
         $this->sello                 = $gci->sello;
@@ -193,6 +196,7 @@ class GastosSinImp extends Component
     public function edit($id){
         $gci =  DB::table('view_gastos_sin_imputacion')->where('id', $id)->first();
         $this->id_gasto              = $gci->id;
+        $this->nro_comprobante       = $gci->nro_comprobante;
         $this->nro_devengado         = $gci->nro_devengado;
         $this->fecha_devengado       = $gci->fecha_devengado;
         $this->sello                 = $gci->sello;
@@ -222,22 +226,23 @@ class GastosSinImp extends Component
 
         GastoSinImputacion::where('id', $this->id_gasto)->update([
             // edit tesoreria
+            'nro_comprobante' => $validatedData['nro_comprobante'],
             'nro_devengado'   => $validatedData['nro_devengado'],
             'fecha_devengado' => $validatedData['fecha_devengado'],
-            'sello'             => $validatedData['sello'],
-            'nro_hojas'         => $validatedData['nro_hojas'],
-            'id_unidad'         => $validatedData['id_unidad'],
-            'beneficiario'      => $validatedData['beneficiario'],
-            'detalle'           => $validatedData['detalle'],
-            'nro_cheque'        => $validatedData['nro_cheque'],
-            'fecha_cheque'      => $validatedData['fecha_cheque'],
-            'liquido_pagable'   => $validatedData['liquido_pagable'],
-            'enviado_caja'      => $this->enviado_caja == 0 ? 'NO' : 'SI',
+            'sello'           => $validatedData['sello'],
+            'nro_hojas'       => $validatedData['nro_hojas'],
+            'id_unidad'       => $validatedData['id_unidad'],
+            'beneficiario'    => $validatedData['beneficiario'],
+            'detalle'         => $validatedData['detalle'],
+            'nro_cheque'      => $validatedData['nro_cheque'],
+            'fecha_cheque'    => $validatedData['fecha_cheque'],
+            'liquido_pagable' => $validatedData['liquido_pagable'],
+            'enviado_caja'    => $this->enviado_caja == 0 ? 'NO' : 'SI',
 
             // edit cajero
-            'cheque_listo'      => $this->cheque_listo == 0 ? 'NO': 'SI',
-            'observacion_pago'  => $this->observacion_pago == null ? null : $this->observacion_pago,
-            'pagado'            => $this->pagado == 0 ? 'NO' : 'SI',
+            'cheque_listo'    => $this->cheque_listo == 0 ? 'NO': 'SI',
+            'observacion_pago'=> $this->observacion_pago == null ? null : $this->observacion_pago,
+            'pagado'          => $this->pagado == 0 ? 'NO' : 'SI',
             'fecha_entrega_pago' => $validatedData['fecha_entrega_pago'],
         
             'ult_usuario'       => Auth::User()->username

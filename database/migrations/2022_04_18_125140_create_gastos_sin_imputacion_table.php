@@ -13,6 +13,7 @@ class CreateGastosSinImputacionTable extends Migration
             $table->increments('id');
             $table->integer('id_unidad');
             $table->integer('id_gestion')->unsigned();
+            $table->string('nro_comprobante');
             $table->string('nro_devengado');
             $table->date('fecha_devengado');
             $table->string('sello');

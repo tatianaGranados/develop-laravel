@@ -18,6 +18,7 @@ class GastoSinImputacion extends Model
     protected $fillable = [
         'id_unidad',
         'id_gestion',
+        'nro_comprobante',
         'nro_devengado',
         'fecha_devengado',
         'sello',

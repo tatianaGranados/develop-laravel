@@ -1,8 +1,16 @@
 <div class="form_group row form-blue">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-2">
+        <span class="material-icons" style="font-size: 15px;">description</span>
+        <label for="nro_comprobante">Nro Comprob:</label>
+        <input type="text" class="form-control" id="nro_comprobante" wire:model="nro_comprobante">
+        @error('nro_comprobante')
+            <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
+    <div class="form-group col-md-2">
         <span class="material-icons" style="font-size: 15px;">description</span>
         <label for="nro_devengado">Nro Devengado:</label>
-        <input type="text" class="form-control" id="nro_devengado" placeholder="nro compro" wire:model="nro_devengado">
+        <input type="text" class="form-control" id="nro_devengado" placeholder="nro devengado" wire:model="nro_devengado">
         @error('nro_devengado')
             <span class="text-danger">{{$message}}</span>
         @enderror

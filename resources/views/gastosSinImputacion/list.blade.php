@@ -28,6 +28,7 @@
 		<table class="table table-condensed table-bordered table-striped">
 			<thead class="text-center" style="font-size: 13px;">
 				<tr class="table-info" style="font-size: 13px;">
+					<th style="font-size: 13px;"><strong>N° Comp        </strong></th>
 					<th style="font-size: 13px;"><strong>N° Dev 		</strong></th>
                     <th style="font-size: 13px;"><strong>Fecha Devengado</strong></th>
 					<th style="font-size: 13px;"><strong>Sello   		</strong></th>
@@ -37,21 +38,22 @@
 					<th style="font-size: 13px;"><strong>Unidad 		</strong></th>
 					<th style="font-size: 13px;"><strong>Detalle 		</strong></th>
 					<th style="font-size: 13px;"><strong>Liquido Pagable</strong></th>
-					<th style="font-size: 13px; width: 120px;"><strong>Acciones		</strong></th>
+					<th style="font-size: 13px; width: 120px;"><strong>Acciones</strong></th>
 				</tr>
 			</thead>
 			<tbody>
 				@forelse ($gastos as $gasto)
 					<tr style="font-size: 13px;">
-						<td>{{ $gasto->nro_devengado}}    </td>
+						<td>{{ $gasto->nro_comprobante}}</td>
+						<td>{{ $gasto->nro_devengado}}  </td>
 						<td>{{ $gasto->fecha_devengado}}</td>
-						<td>{{ $gasto->sello}} 			  </td>
-						<td>{{ $gasto->nro_cheque}} 	  </td>
-						<td>{{ $gasto->fecha_cheque}} 	  </td>
-						<td>{{ $gasto->beneficiario}} 	  </td>
-						<td>{{ $gasto->nombre_unidad}} 	  </td>
-						<td>{{ $gasto->detalle}} 		  </td>
-						<td>{{ $gasto->liquido_pagable}}  </td>
+						<td>{{ $gasto->sello}} 			</td>
+						<td>{{ $gasto->nro_cheque}} 	</td>
+						<td>{{ $gasto->fecha_cheque}} 	</td>
+						<td>{{ $gasto->beneficiario}} 	</td>
+						<td>{{ $gasto->nombre_unidad}} 	</td>
+						<td>{{ $gasto->detalle}} 		</td>
+						<td>{{ $gasto->liquido_pagable}}</td>
 						<td class="td-actions text-center">
 							@if( in_array(20, $permisos))
 								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showGsi"><span class="material-icons">visibility</span></button>

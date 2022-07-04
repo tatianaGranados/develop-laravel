@@ -15,6 +15,7 @@ class CreateViewGastosSinImputacion extends Migration
                         u.nombre_unidad,
                         gi.id_gestion,
                         g.gestion,
+                        gi.nro_comprobante,
                         gi.nro_devengado,
                         gi.fecha_devengado,
                         gi.sello,
