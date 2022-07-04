@@ -152,6 +152,20 @@
                 </tr>
             @endforeach
 
+            <th colspan="3" class="text-center table-success no-padding">BUSQUEDA PARA UNIDADES</th>
+            @foreach( $datosUnidades as $enlace)
+                <tr>
+                    <td class="text-center no-padding" >{{ $enlace->id }}</td>
+                    <td class="no-padding">
+                        <span class="material-icons">{{ $enlace->icono }}</span>
+                        <label for="{{ $enlace->id }}"> {{ $enlace->nombre_enlace }}</label>
+                    </td>
+                    <td class="text-center no-padding">
+                        <input class="form-check-input" style="width: 18px; height: 18px; position: relative;" name="permiso[]" type="checkbox" value="{{ $enlace->id }}" id="{{ $enlace->id }}" wire:model ="permisos">
+                    </td>
+                </tr>
+            @endforeach
+
         <tbody>
     </table>
 </div>

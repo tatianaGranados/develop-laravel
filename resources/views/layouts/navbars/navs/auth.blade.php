@@ -12,8 +12,16 @@
               <li><a href="{{ route('gastosConImp') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
             @endif
 
+            @if(in_array(36, $per))
+              <li><a href="{{ route('reportesGciUnid') }}"><i class="material-icons">search</i>BUSCAR COMP CON IMPUTACIÓN</a></li>
+            @endif
+
             @if(in_array(20, $per) || in_array(21, $per) || in_array(22, $per) || in_array(23, $per) || in_array(24, $per))
               <li><a href="{{ route('gastosSinImp') }}"><i class="material-icons">grading</i> GASTOS SIN IMPUT(CIERRE)</a></li>
+            @endif
+
+            @if(in_array(37, $per))
+            <li><a href="{{ route('reportesGsiUnid') }}"><i class="material-icons">search</i>BUSCAR COMP SIN IMPUTACIÓN</a></li>
             @endif
 
             @if(in_array(25, $per) || in_array(26, $per) || in_array(27, $per)|| in_array(28, $per))

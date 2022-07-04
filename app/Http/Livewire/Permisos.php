@@ -29,7 +29,7 @@ class Permisos extends Component
     public $reporteCaja;
     public $archivarComp;
     public $prestamosDevoluc;
-
+    public $datosUnidades;
 
     protected function rules()
     {
@@ -59,6 +59,7 @@ class Permisos extends Component
         $this->reporteCaja        = Enlace::where('tipo_acceso',7)->get();
         $this->archivarComp       = Enlace::where('tipo_acceso',8)->get();
         $this->prestamosDevoluc   = Enlace::where('tipo_acceso',9)->get();
+        $this->datosUnidades      = Enlace::where('tipo_acceso',10)->get();
         // $enlacePermisos     = Enlace::where('tipo_acceso',7)->get();
 
         return view('permisos.list');
