@@ -290,5 +290,51 @@ class EnlacesSeeder extends Seeder
             'descripcion'=>'',
             'tipo_acceso'=>9
         ]);
+    
+    //10 Busqueda unidades
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Ver tramite Gastos Con Imputación',
+            'ruta'=>'',
+            'icono'=>'search',
+            'descripcion'=>'Muestra el detalle de los comprobante con imputación ya pagos',
+            'tipo_acceso'=>10
+        ]);
+
+        DB::table('enlaces')->insert([
+            'nombre_enlace'  => 'Ver tramite Gastos Sin Imputación',
+            'ruta'=>'',
+            'icono'=>'search',
+            'descripcion'=>'Muestra el detalle de los comprobante sin imputación ya pagos',
+            'tipo_acceso'=>10
+        ]);
+
+    //recien añadidos
+    //4 Gastos con imputacion
+    DB::table('enlaces')->insert([
+        'nombre_enlace'  => 'Editar Comprobantes con Imputación migrados o pagados',
+        'ruta'=>'',
+        'icono'=>'edit',
+        'descripcion'=>'editar comprobantes aun si estos ya estan pagados o archivados',
+        'tipo_acceso'=>4
+    ]);
+
+    //5 Gastos sin imputacion
+    DB::table('enlaces')->insert([
+        'nombre_enlace'  => 'Editar Comprobantes sin Imputación migrados o pagados',
+        'ruta'=>'',
+        'icono'=>'edit',
+        'descripcion'=>'editar comprobantes aun si estos ya estan pagados o archivados',
+        'tipo_acceso'=>5
+    ]);
+
+    //6 Gastos sin imputacion
+    DB::table('enlaces')->insert([
+        'nombre_enlace'  => 'Editar Pagos al Exterior migrados o pagados',
+        'ruta'=>'',
+        'icono'=>'edit',
+        'descripcion'=>'editar pagos al exterior aun si estos ya estan pagados o archivados',
+        'tipo_acceso'=>6
+    ]);
+
     }
 }

@@ -41,7 +41,7 @@
                   </tr>
                @empty
                   <tr>
-                     <td colspan="15" class="text-center">No existen registros</td>
+                     <td colspan="15" class="text-center">NO EXISTEN CHEQUES PENDIENTE DE COBRO</td>
                   </tr>
                @endforelse
                     

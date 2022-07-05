@@ -48,7 +48,7 @@ class Permisos extends Component
     public function render()
     {
         $this->roles = TipoRol::all(); 
-        $this->enlaces  = Enlace::all();
+        $this->enlaces  = Enlace::orderBy('tipo_acceso','asc')->get();
 
         $this->enlaceUsuarios  = Enlace::where('tipo_acceso',1)->get();
         $this->enlacePermisos  = Enlace::where('tipo_acceso',2)->get();

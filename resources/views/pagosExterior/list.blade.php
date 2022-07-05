@@ -60,7 +60,7 @@
 							@if( in_array(25, $permisos))
 								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showPe"><span class="material-icons">visibility</span></button>
 							@endif	
-							@if(in_array(27, $permisos) && $gasto->pagado =='NO' && $gasto->enviado_archivo =='NO')
+							@if((in_array(27, $permisos) && $gasto->pagado =='NO' && $gasto->enviado_archivo =='NO')|| in_array(40, $permisos))
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editPe"><span class="material-icons">create</span></button>
 							@endif
 							@if (in_array(28, $permisos) && $gasto->enviado_archivo =='NO'  &&  $gasto->pagado =='NO')
@@ -80,7 +80,7 @@
 @if( in_array(25, $permisos))
  	@include('pagosExterior.show') 
 @endif	
-@if(in_array(27, $permisos)) 
+@if(in_array(27, $permisos) || in_array(40, $permisos)) 
  	@include('pagosExterior.edit') 
 @endif
 @if (in_array(28, $permisos))

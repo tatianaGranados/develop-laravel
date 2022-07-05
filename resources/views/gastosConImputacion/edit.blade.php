@@ -9,13 +9,13 @@
 			</div>
 			<div class="modal-body">
 				<form wire:submit.prevent="updateTesoreria(Object.fromEntries(new FormData($event.target)))">
-					@if(in_array(17, $permisos))
+					@if(in_array(17, $permisos) || in_array(38, $permisos))
 						@include('gastosConImputacion.partials.tesoreria')
 						@include('gastosConImputacion.partials.calcLiquidoPEdit')
 					@endif
 
 
-					@if(in_array(18, $permisos))
+					@if(in_array(18, $permisos) || in_array(38, $permisos) )
                     	@include('gastosConImputacion.partials.caja')
 					@endif
 

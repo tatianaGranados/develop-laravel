@@ -35,21 +35,23 @@
                     <td>{{ $user->nombres}} 				    </td>
                     <td>{{ $user->nombre_unidad}} 				</td>
                     <td class="td-actions">
-                        @foreach ($tipo_roles as $rol)
                         <table class="table">
+                        @foreach ($tipo_roles as $rol)
                             @if ($rol->id_usuario == $user->id_usuario)
-                                <td>{{$rol->tipo_rol}}</td>
-                                <td class="td-actions text-center" style="width: 80px;">
-                                    @if(in_array(6, $permisos))
-                                        <button wire:click="editRol({{$rol->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editRol"><span class="material-icons">create</span></button>
-                                    @endif
-                                    @if(in_array(7, $permisos))
-                                        <button wire:click="editRol({{$rol->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#deleteRol"><span class="material-icons">close</span></button>
-                                    @endif
-                                </td>
-                            @endif
-                         </table>
-                         @endforeach
+                                <tr>
+                                    <td>{{$rol->tipo_rol}}</td>
+                                    <td class="td-actions text-center" style="width: 80px;">
+                                        @if(in_array(6, $permisos))
+                                            <button wire:click="editRol({{$rol->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editRol"><span class="material-icons">create</span></button>
+                                        @endif
+                                        @if(in_array(7, $permisos))
+                                            <button wire:click="editRol({{$rol->id}})" class="btn btn-danger btn-simple" data-toggle="modal" data-target="#deleteRol"><span class="material-icons">close</span></button>
+                                        @endif
+                                    </td> 
+                                </tr>
+                            @endif 
+                        @endforeach
+                        </table>
                     </td>
                     <td class="td-actions text-center">
                         @if(in_array(1, $permisos))

@@ -164,7 +164,7 @@ class PrestDevPagosExterior extends Component
 
     public function prestamoUtimo($id)
     {
-        $nro_prestamo = PrestamoDevolucionExterior::join('pagos_Exterior as pe','pe.id','=','prestamos_devoluciones_exterior.id_pago_exterior')
+        $nro_prestamo = PrestamoDevolucionExterior::join('pagos_exterior as pe','pe.id','=','prestamos_devoluciones_exterior.id_pago_exterior')
                                             ->where('pe.id_gestion','=', $id)
                                             ->orderBy('prestamos_devoluciones_exterior.nro_prestamo','desc')
                                             ->get();

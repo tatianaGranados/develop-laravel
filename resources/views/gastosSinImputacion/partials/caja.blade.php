@@ -1,5 +1,5 @@
 <div class="container">
-    @if(in_array(22, $permisos) &&  in_array(23, $permisos))
+    @if((in_array(22, $permisos) &&  in_array(23, $permisos)) || in_array(39, $permisos))
         <hr>
     @else
         <table class="table table-bordered">

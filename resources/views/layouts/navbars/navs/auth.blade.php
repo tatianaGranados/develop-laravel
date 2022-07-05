@@ -8,7 +8,7 @@
         <ul>
             <li><a href="{{ route('home') }}"><img width="50" height="30" src="{{ asset('img') }}/logo_eupg.png"></a></li>
 
-            @if(in_array(15, $per) || in_array(16, $per) || in_array(17, $per) || in_array(18, $per) || in_array(19, $per))
+            @if(in_array(15, $per) || in_array(16, $per) || in_array(17, $per) || in_array(18, $per) || in_array(19, $per) || in_array(38, $per))
               <li><a href="{{ route('gastosConImp') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
             @endif
 
@@ -16,7 +16,7 @@
               <li><a href="{{ route('reportesGciUnid') }}"><i class="material-icons">search</i>BUSCAR COMP CON IMPUTACIÓN</a></li>
             @endif
 
-            @if(in_array(20, $per) || in_array(21, $per) || in_array(22, $per) || in_array(23, $per) || in_array(24, $per))
+            @if(in_array(20, $per) || in_array(21, $per) || in_array(22, $per) || in_array(23, $per) || in_array(24, $per) || in_array(39, $per))
               <li><a href="{{ route('gastosSinImp') }}"><i class="material-icons">grading</i> GASTOS SIN IMPUT(CIERRE)</a></li>
             @endif
 
@@ -24,7 +24,7 @@
             <li><a href="{{ route('reportesGsiUnid') }}"><i class="material-icons">search</i>BUSCAR COMP SIN IMPUTACIÓN</a></li>
             @endif
 
-            @if(in_array(25, $per) || in_array(26, $per) || in_array(27, $per)|| in_array(28, $per))
+            @if(in_array(25, $per) || in_array(26, $per) || in_array(27, $per)|| in_array(28, $per) || in_array(40, $per))
               <li><a href="{{ route('pagosExterior') }}"><i class="material-icons">grading</i> PAGOS EXTERIOR</a></li>
             @endif
 

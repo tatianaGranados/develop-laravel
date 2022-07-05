@@ -58,7 +58,7 @@
 							@if( in_array(20, $permisos))
 								<button wire:click="show({{$gasto->id}})" class="btn btn-info btn-simple" data-toggle="modal" data-target="#showGsi"><span class="material-icons">visibility</span></button>
 							@endif	
-							@if( (in_array(22, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(23, $permisos) && $gasto->pagado =='NO' ))
+							@if( (in_array(22, $permisos) && $gasto->enviado_caja =='NO'  ) || (in_array(23, $permisos) && $gasto->pagado =='NO' ) || in_array(39, $permisos))
 								<button wire:click="edit({{$gasto->id}})" class="btn btn-success btn-simple" data-toggle="modal" data-target="#editGsi"><span class="material-icons">create</span></button>
 							@endif
 							@if (in_array(23, $permisos) && $gasto->pagado =='NO' && $gasto->cheque_listo =='NO')
@@ -81,7 +81,7 @@
 @if( in_array(20, $permisos))
     @include('gastosSinImputacion.show') 
 @endif	
-@if(in_array(22, $permisos) || in_array(23, $permisos))
+@if(in_array(22, $permisos) || in_array(23, $permisos) || in_array(39, $permisos))
     @include('gastosSinImputacion.edit') 
 @endif
 @if (in_array(19, $permisos))

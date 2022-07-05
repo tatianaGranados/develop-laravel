@@ -9,10 +9,10 @@
 			</div>
 			<div class="modal-body">
 				<form wire:submit.prevent="updateTesoreria">
-					@if(in_array(22, $permisos))
+					@if(in_array(22, $permisos)|| in_array(39, $permisos))
 						@include('gastosSinImputacion.partials.tesoreria')
 					@endif
-					@if(in_array(23, $permisos))
+					@if(in_array(23, $permisos)|| in_array(39, $permisos))
                     	@include('gastosSinImputacion.partials.caja')
 					@endif
 
