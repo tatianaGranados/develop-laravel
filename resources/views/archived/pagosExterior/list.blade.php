@@ -17,7 +17,7 @@
 		</button>	
 	</div>
 	<div class="input-group">
-		<input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introdusca nombre persona..."/>
+		<input type="search" wire:model="search" class="form-control" style="width: 240px; background-color: #efefef; flex: 0 1 auto;" placeholder=" Introduzca valor buscado..."/>
 		<span class="material-icons input-group-btn">search</span>
 	</div>
 	<br>

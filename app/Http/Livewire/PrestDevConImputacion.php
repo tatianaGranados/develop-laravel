@@ -121,7 +121,8 @@ class PrestDevConImputacion extends Component
         $datos = PrestamoDevolucionGci::where('id_agrupado', $id)->first();
  
         $fecha = PrestamoDevolucionGci::where('id_agrupado', $id)->value('fecha_prestamo');
-        $fecha_prest = Carbon::parse($datos->fecha_prestamo)->formatLocalized('%d'. ' de '. '%B'.' del '.' %Y ');
+	$mes =Carbon::parse($datos->fecha_prestamo)->translatedFormat('F');
+        $fecha_prest = Carbon::parse($datos->fecha_prestamo)->formatLocalized('%d'.' de '.$mes.' del '.'%Y');
 
         $pdf = PDF::loadView('prestamosDevoluciones.gastosConImputacion.reporte', compact('prestados', 'datos', 'fecha_prest'));
         $pdf->setPaper("letter", "portrait");
