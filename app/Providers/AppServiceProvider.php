@@ -16,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        Carbon::setLocale(config('app.locale'));
-        setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
+        //Carbon::setLocale(config('app.locale'));
+	Carbon::setLocale('es');
+	setlocale(LC_TIME,'es_ES');
+        //setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
     }
 }

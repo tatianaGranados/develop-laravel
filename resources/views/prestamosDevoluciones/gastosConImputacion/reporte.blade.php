@@ -42,9 +42,9 @@
         <table class="table" width= 100%>
             <thead>
                 <tr class="table-tr">
-                    <th style="font-size: 13px;"><strong>N°		     </strong></th>
-                    <th style="font-size: 13px;"><strong>N° Compr    </strong></th>
-                    <th style="font-size: 13px;"><strong>Fecha Comprob</strong></th>
+                    <th style="font-size: 13px;"><strong>N°		  </strong></th>
+                    <th style="font-size: 13px;"><strong>N° Compr         </strong></th>
+                    <th style="font-size: 13px;"><strong>Fecha Comprobante</strong></th>
                     <th style="font-size: 13px;"><strong>N° Prevet   </strong></th>
                     <th style="font-size: 13px;"><strong>Sello       </strong></th>
                     <th style="font-size: 13px;"><strong>Unidad      </strong></th>
@@ -61,8 +61,8 @@
                         <td style="text-align:center">{{ $gasto->nro_preventivo}}   </td>
                         <td style="text-align:center">{{ $gasto->sello}}            </td>
                         <td>{{ $gasto->nombre_unidad}} 	  </td>
-                        <td>{{ $gasto->beneficiario}} 	  </td>
-                        <td>{{ $gasto->detalle}} 	      </td> 
+                        <td style="text-transform: uppercase;">{{ $gasto->beneficiario}} 	  </td>
+                        <td style="text-transform: uppercase;">{{ $gasto->detalle}} 	      </td> 
                     </tr>                 
                 @endforeach
             </tbody>
