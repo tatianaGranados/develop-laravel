@@ -129,5 +129,17 @@ class UnidadSeeder extends Seeder
             'created_at'=>now(),
             'updated_at'=>now()
         ]);
+        DB::table('unidades')->insert([
+            'nombre_unidad'  => 'Desarrollo De Programas - EUPG',
+            'cod_unidad'  => 'ddpp',
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
+        DB::table('unidades')->insert([
+            'nombre_unidad'  => 'Otros',
+            'cod_unidad'  => 'otros',
+            'created_at'=>now(),
+            'updated_at'=>now()
+        ]);
     }
 }

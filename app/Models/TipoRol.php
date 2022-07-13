@@ -14,7 +14,7 @@ class TipoRol extends Model
     protected  $table = 'tipos_roles';
     
     protected  $fillable = [
-        'nombre_tipo_usuario',
+        'tipo_rol',
         'desc_tipo_usuario'
     ];
 

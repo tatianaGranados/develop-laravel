@@ -13,6 +13,7 @@ class CreateGastosSinImputacionTable extends Migration
             $table->increments('id');
             $table->integer('id_unidad');
             $table->integer('id_gestion')->unsigned();
+            $table->string('nro_comprobante');
             $table->string('nro_devengado');
             $table->date('fecha_devengado');
             $table->string('sello');
@@ -28,7 +29,13 @@ class CreateGastosSinImputacionTable extends Migration
             $table->enum('enviado_caja',['SI','NO'])->default('NO');
             $table->enum('cheque_listo',['SI','NO'])->default('NO');
             $table->enum('pagado',['SI','NO'])->default('NO');
+            $table->date('fecha_entrega_pago')->nullable();
+            $table->string('nro_informe')->nullable();
+            $table->date('fecha_entrega_informe')->nullable();
+            $table->enum('enviado_archivo',['SI','NO'])->default('NO');
             $table->enum('archivado',['SI','NO'])->default('NO');
+            $table->date('fecha_archivado')->nullable();
+            $table->enum('prestado',['SI','NO'])->default('NO');
             $table->string('ult_usuario');
             $table->timestamps();
 

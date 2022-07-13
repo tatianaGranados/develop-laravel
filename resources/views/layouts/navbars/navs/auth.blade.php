@@ -1,0 +1,107 @@
+<nav>
+  @php
+    $per = Auth::user()->AccesosUserAuth;
+    // variable permisos del usuario
+  @endphp
+
+    <div class="nav-fostrap" >
+        <ul>
+            <li><a href="{{ route('home') }}"><img width="50" height="30" src="{{ asset('img') }}/logo_eupg.png"></a></li>
+
+            @if(in_array(15, $per) || in_array(16, $per) || in_array(17, $per) || in_array(18, $per) || in_array(19, $per) || in_array(38, $per))
+              <li><a href="{{ route('gastosConImp') }}"><i class="material-icons">grading</i> GASTOS CON IMPUTACION</a></li>
+            @endif
+
+            @if(in_array(36, $per))
+              <li><a href="{{ route('reportesGciUnid') }}"><i class="material-icons">search</i>BUSCAR COMP CON IMPUTACIÓN</a></li>
+            @endif
+
+            @if(in_array(20, $per) || in_array(21, $per) || in_array(22, $per) || in_array(23, $per) || in_array(24, $per) || in_array(39, $per))
+              <li><a href="{{ route('gastosSinImp') }}"><i class="material-icons">grading</i> GASTOS SIN IMPUT(CIERRE)</a></li>
+            @endif
+
+            @if(in_array(37, $per))
+            <li><a href="{{ route('reportesGsiUnid') }}"><i class="material-icons">search</i>BUSCAR COMP SIN IMPUTACIÓN</a></li>
+            @endif
+
+            @if(in_array(25, $per) || in_array(26, $per) || in_array(27, $per)|| in_array(28, $per) || in_array(40, $per))
+              <li><a href="{{ route('pagosExterior') }}"><i class="material-icons">grading</i> PAGOS EXTERIOR</a></li>
+            @endif
+
+            @if(in_array(12, $per) || in_array(13, $per) || in_array(14, $per))
+              <li><a href="{{ route('gestiones') }}"><i class="material-icons">article</i> ADM. GESTIONES</a></li>
+            @endif
+
+            @if(in_array(29, $per))
+              <li><a href="{{ route('enviarAlmacen') }}"><span class="material-icons">double_arrow</span> Enviar Comprobantes - Almacen</a></li>
+            @endif
+
+            @if(in_array(1, $per) || in_array(2, $per) || in_array(3, $per) || in_array(4, $per) || in_array(5, $per) || in_array(6, $per) || in_array(7, $per) ||
+                in_array(8, $per) || in_array(9, $per) || in_array(10, $per) || in_array(11, $per))
+              <li><a href=""><i class="material-icons">group</i> ADM. USUARIOS<span class="arrow-down"></span></a>
+                <ul class="dropdown-default">
+                  @if(in_array(1, $per) || in_array(2, $per) || in_array(3, $per) || in_array(4, $per) || in_array(5, $per) || in_array(6, $per) || in_array(7, $per))
+                    <li><a href="{{ route('users') }}">Usuarios</a></li>
+                  @endif
+                  @if(in_array(8, $per) || in_array(9, $per) || in_array(10, $per) || in_array(11, $per))
+                    <li><a  href="{{ route('permisos') }}">Permisos</a></li>
+                  @endif
+                </ul>
+              </li>
+            @endif
+
+            @if(in_array(30, $per) || in_array(31, $per)|| in_array(32, $per))
+            <li><a href=""><i class="material-icons">archive</i> ARCHIVAR</a>
+              <ul class="dropdown-default">
+                @if(in_array(30, $per))
+                  <li style="width: 200px;"><a href="{{ route('archivarTomoGci') }}">Archivar Gastos con Imputación</a></li>
+                @endif
+                @if(in_array(31, $per))
+                  <li style="width: 200px;"><a href="{{ route('archivarTomoGsi') }}">Archivar Gastos sin Imputación</a></li>
+                @endif
+                @if(in_array(32, $per))
+                  <li style="width: 200px;"><a href="{{ route('archivarTomoPe') }}">Archivar Pagos Exterior</a></li>
+                @endif
+              </ul>  
+            </li>
+            @endif
+
+            @if(in_array(33, $per) || in_array(34, $per)|| in_array(35, $per))
+            <li><a href=""><i class="material-icons">compare_arrows</i> PRESTAMOS/DEVOLUCIONES<span class="arrow-down"></span></a>
+              <ul class="dropdown-default">
+                @if(in_array(33, $per))
+                  <li><a href="{{route('prestamoDevGci')}}">Gastos Con Imputación</a></li>
+                @endif
+                @if(in_array(34, $per))
+                  <li><a href="{{route('prestamoDevGsi')}}">Gastos Sin Imputación</a></li>
+                @endif
+                @if(in_array(35, $per))
+                  <li><a href="{{route('prestamoDevPe')}}">Pagos Exterior</a></li>
+                @endif
+              </ul>
+            </li>
+            @endif
+
+            <div style="float: right;">
+              <li>
+                <a href="#" id="navbarDropdownProfile" >
+                  <i class="material-icons">person</i> {{ Auth::user()->nombres }}
+                  <p class="d-lg-none d-md-block">{{ __('Cuenta') }}</p>
+                </a>
+                <ul class="dropdown-default">
+                  <li><a href="{{ route('profile.edit') }}">Cambiar Contraseña</a></li>
+                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Cerrar sesion') }}</a></li>
+                </ul>
+              </li>
+            </div>
+        </ul>
+    </div>
+    <div class="nav-bg-fostrap">
+        <div class="navbar-fostrap"> <span></span> <span></span> <span></span> </div>
+          <a href="" class="title-mobile">{{ __('Comprobantes EUPG') }}</a>
+        </div>
+</nav>
+<script src="{{ asset('js') }}/jquery.min.js"></script>
+
+
+

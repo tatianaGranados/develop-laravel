@@ -18,6 +18,7 @@ class GastoSinImputacion extends Model
     protected $fillable = [
         'id_unidad',
         'id_gestion',
+        'nro_comprobante',
         'nro_devengado',
         'fecha_devengado',
         'sello',
@@ -33,7 +34,13 @@ class GastoSinImputacion extends Model
         'enviado_caja',
         'cheque_listo',
         'pagado',
+        'fecha_entrega_pago',
+        'nro_informe',
+        'enviado_archivo',
+        'fecha_entrega_informe',
         'archivado',
+        'fecha_archivado',
+        'prestado',
         'ult_usuario'
     ];
 
