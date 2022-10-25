@@ -79,7 +79,7 @@
 </div>
 
 <div class="form_group row form-blue">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-3">
         <span class="material-icons" style="font-size: 15px;">payments</span>
         <label for="nro_cheque">Nro Cheque:</label>
         <input type="text" class="form-control" id="nro_cheque" placeholder="nro cheque" wire:model="nro_cheque">
@@ -87,11 +87,27 @@
 	        <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-3">
         <span class="material-icons" style="font-size: 15px;">event</span>
         <label for="fecha_cheque">Fecha cheque:</label>
         <input type="date" class="form-control" id="fecha_cheque" wire:model="fecha_cheque">
         @error('fecha_cheque')
+	        <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
+    <div class="form-group col-md-3">
+        <span class="material-icons" style="font-size: 15px;">payments</span>
+        <label for="nro_pago">Nro Pago:</label>
+        <input type="text" class="form-control" id="nro_pago" placeholder="nro pago" wire:model="nro_pago">
+        @error('nro_pago')
+	        <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
+    <div class="form-group col-md-3">
+        <span class="material-icons" style="font-size: 15px;">event</span>
+        <label for="fecha_envio_pago">Fecha envio:</label>
+        <input type="date" class="form-control" id="fecha_envio_pago" wire:model="fecha_envio_pago">
+        @error('fecha_envio_pago')
 	        <span class="text-danger">{{$message}}</span>
         @enderror
     </div>

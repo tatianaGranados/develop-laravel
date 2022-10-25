@@ -67,7 +67,13 @@
     
     <div class="form-group form-check form-check-inline col-md-4" style="justify-content: center; background-color: #00bcd45e; ">
         <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" style="font-weight:800" wire:model="enviado_caja"> ENVIAR COMPROBANTE A CAJA
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" style="font-weight:800" wire:model="enviado_caja">
+                @if ($this->nro_pago != null || $this->fecha_envio_pago !=null)
+                    ENVIAR COMPROBANTE A ARCHIVO
+                @else
+                    ENVIAR COMPROBANTE A CAJA
+                @endif
+          
           <span class="form-check-sign">
               <span class="check"></span>
           </span>

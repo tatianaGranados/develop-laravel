@@ -8,6 +8,8 @@ use App\Models\UserUnidad;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use Carbon\Carbon;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -22,22 +24,35 @@ class HomeController extends Controller
         
 
         $id_unidad = UserUnidad::where('id_usuario',Auth::user()->id)->value('id_unidad');
+        // $date =Carbon::now()->toDateString();
 
         if( $id_unidad != 12)
         {
             $gastos = DB::table('view_gastos_con_imputacion')
                     ->where('id_gestion', $id_gestion)
                     ->where('id_unidad', $id_unidad)
-                    ->where([['cheque_listo', 'SI '],['pagado','NO']])
+                    ->where([['cheque_listo', 'SI '],['pagado','NO'], ['nro_pago',NULL]])
                     ->orderBy('updated_at','asc')
                     ->get();
+            
+            $gastosElec = DB::table('view_gastos_con_imputacion')
+                    ->where('id_gestion', $id_gestion)
+                    ->where('id_unidad', $id_unidad)
+                    ->where([['cheque_listo', 'SI '],['fecha_envio_pago','<>',NULL]])
+                    ->get();
+
         }else{
             $gastos = DB::table('view_gastos_con_imputacion')
                     ->where('id_gestion', $id_gestion)
-                    ->where([['cheque_listo', 'SI '],['pagado','NO']])
+                    ->where([['cheque_listo', 'SI '],['pagado','NO'], ['nro_pago',NULL]])
+                    ->get();
+
+            $gastosElec = DB::table('view_gastos_con_imputacion')
+                    ->where('id_gestion', $id_gestion)
+                    ->where([['cheque_listo', 'SI '],['fecha_envio_pago','<>',NULL]])
                     ->get();
         }
         
-        return view('dashboard', compact('gastos', 'gestion'));
+        return view('dashboard', compact('gastos', 'gestion','gastosElec'));
     }
 }

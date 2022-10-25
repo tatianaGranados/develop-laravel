@@ -27,6 +27,8 @@ class GastosConImp extends Component
     public $nro_comprobante, $fecha_comprobante, $nro_preventivo, $sello,$nro_hojas, $beneficiario, $detalle;
     public $nro_cheque = null;
     public $fecha_cheque = null;
+    public $nro_pago = null;
+    public $fecha_envio_pago = null;
     public $total_autorizado=0;
     public $total_retencion =0;
     public $total_multas = 0;
@@ -61,8 +63,10 @@ class GastosConImp extends Component
                 'beneficiario'      => ['required','string','max:200'],
                 'detalle'           => ['required','string','max:900'],
                 'emite_factura'     => 'required',
-                'nro_cheque'        => [$this->enviado_caja == 0 || $this->enviado_caja == '' ? 'nullable' : 'required','integer'],
-                'fecha_cheque'      => [$this->enviado_caja == 0 || $this->enviado_caja == '' ? 'nullable' : 'required','date'],
+                'nro_cheque'        => [$this->enviado_caja == 1 && $this->nro_pago == '' && $this->fecha_envio_pago == ''? ['required','integer'] : 'nullable'],
+                'fecha_cheque'      => [$this->enviado_caja == 1 && $this->nro_pago == '' && $this->fecha_envio_pago == ''? ['required','date']: 'nullable'],
+                'nro_pago'          => [$this->enviado_caja == 1 && $this->nro_cheque == '' && $this->fecha_cheque == '' ? ['required','integer'] : 'nullable'],
+                'fecha_envio_pago'  => [$this->enviado_caja == 1 && $this->nro_cheque == '' && $this->fecha_cheque == '' ? ['required','date']: 'nullable'],
                 'total_autorizado'  => ['required','numeric','regex:/^[\d]{0,12}(\.[\d]{1,2})?$/'],
                 'iue'               => ['required','numeric','regex:/^[\d]{0,11}(\.[\d]{1,2})?$/'],
                 'it'                => ['required','numeric','regex:/^[\d]{0,8}(\.[\d]{1,2})?$/'],
@@ -181,8 +185,10 @@ class GastosConImp extends Component
             'nro_hojas'         => $this->nro_hojas,
             'beneficiario'      => $this->beneficiario,
             'detalle'           => $this->detalle,
-            'nro_cheque'        => $this-> nro_cheque,
-            'fecha_cheque'      => $this-> fecha_cheque,
+            'nro_cheque'        => $this->nro_cheque,
+            'fecha_cheque'      => $this->fecha_cheque,
+            'nro_pago'          => $this->nro_pago,
+            'fecha_envio_pago'  => $this->fecha_envio_pago,
             'total_autorizado'  => $this->total_autorizado,
             'emite_factura'     => $this->emite_factura,
             'iue'               => $this->iue,
@@ -191,7 +197,13 @@ class GastosConImp extends Component
             'total_multas'      => $this->total_multas,
             'total_garantia'    => $this->total_garantia,
             'liquido_pagable'   => $this->liquido_pagable,
-            'enviado_caja'      => $this->enviado_caja == 1 ? 'SI' : 'NO',
+            'enviado_caja'      => $this->enviado_caja == 1? 'SI' : 'NO',
+
+            'fecha_entrega_pago'=> $this-> fecha_envio_pago,
+            'cheque_listo'      => $this->fecha_envio_pago != null ? 'SI' : 'NO',
+            'pagado'            => $this->fecha_envio_pago != null ? 'SI' : 'NO',
+            'enviado_archivo'   => $this->fecha_envio_pago != null ? 'SI' : 'NO',
+
             'ult_usuario'       => Auth::User()->username,
         ]);
         $compGasto->save();
@@ -246,6 +258,8 @@ class GastosConImp extends Component
         $this->detalle               = $gci->detalle;
         $this->nro_cheque            = $gci->nro_cheque;
         $this->fecha_cheque          = $gci->fecha_cheque;
+        $this->nro_pago              = $gci->nro_pago;
+        $this->fecha_envio_pago      = $gci->fecha_envio_pago;
         $this->total_autorizado      = $gci->total_autorizado;
         $this->iue                   = $gci->iue;
         $this->it                    = $gci->it;
@@ -349,6 +363,8 @@ class GastosConImp extends Component
         $this->detalle               ='';
         $this->nro_cheque            = null;
         $this->fecha_cheque          = null;
+        $this->nro_pago              = null;
+        $this->fecha_envio_pago      = null;
         $this->total_autorizado      = 0;
         $this->emite_factura         ='NO';
         $this->iue                   = 0;

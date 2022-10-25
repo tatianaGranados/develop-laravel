@@ -27,6 +27,8 @@ class GastoConImputacion extends Model
         'detalle',
         'nro_cheque',
         'fecha_cheque',
+        'nro_pago',
+        'fecha_envio_pago',
         // 'monto_total_cheque',
         'total_autorizado',
         'emite_factura',
